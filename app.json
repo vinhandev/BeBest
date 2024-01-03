@@ -12,26 +12,36 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.vinhandev.BeBest"
+      "bundleIdentifier": "com.vinhandev.BeBest",
+      "googleServicesFile": "./google-services.json"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.vinhandev.BeBest"
+      "package": "com.vinhandev.BeBest",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "@react-native-firebase/app",
+      "@react-native-firebase/perf",
+      "@react-native-firebase/crashlytics",
+      "expo-build-properties",
+      {
+        "ios": {
+          "useFrameworks": "static"
+        }
+      }
     ],
+
     "experiments": {
       "tsconfigPaths": true
     }
