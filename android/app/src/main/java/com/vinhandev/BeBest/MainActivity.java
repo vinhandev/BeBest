@@ -1,4 +1,4 @@
-package com.bebest;
+package com.vinhandev.BeBest;
 
 import android.os.Build;
 import android.os.Bundle;

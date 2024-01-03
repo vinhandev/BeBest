@@ -1,14 +1,14 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { logError } from '~/utils';
+import auth from '@react-native-firebase/auth';
+
 export const useSignIn = () => {
-  const auth = getAuth();
   const [isLoading, setLoading] = useState(false);
 
   async function signIn(email: string, password: string) {
     setLoading(true);
     try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
+      const response = await auth().signInWithEmailAndPassword(email, password);
       setLoading(false);
       return response.user;
     } catch (error) {

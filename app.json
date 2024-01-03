@@ -12,11 +12,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.vinhandev.BeBest",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
@@ -24,7 +26,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.vinhandev.BeBest",
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -41,9 +43,16 @@
         }
       ]
     ],
-
     "experiments": {
       "tsconfigPaths": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "db00b650-e8a1-488a-b19d-53beffcff1d0"
+      }
     }
   }
 }

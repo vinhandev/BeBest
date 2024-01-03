@@ -1,9 +1,8 @@
-import '~/services/firebase/config';
 import { Redirect } from 'expo-router';
 import React from 'react';
-import { useInitializeApp } from '~/hooks';
+import { useWatchAuth } from '~/hooks';
 
 export default function App() {
-  useInitializeApp();
+  useWatchAuth();
   return <Redirect href={'/sign-in'} />;
 }

@@ -1,3 +1,3 @@
 export * from './firebase/useSignIn';
 export * from './firebase/useSignUp';
-export * from './firebase/useInitializeApp';
+export * from './firebase/useWatchAuth';
