@@ -1,8 +1,7 @@
-import { Redirect } from 'expo-router';
 import React from 'react';
-import { useWatchAuth } from '~/hooks';
+import { Redirect } from 'expo-router';
+import { PublicLinks } from '~/constants';
 
-export default function App() {
-  useWatchAuth();
-  return <Redirect href={'/sign-in'} />;
+export default function StartPage() {
+  return <Redirect href={PublicLinks.SIGN_IN} />;
 }

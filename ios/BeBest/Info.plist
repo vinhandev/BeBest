@@ -28,7 +28,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>com.vinhandev.bebest</string>
-          <string>com.vinhandev.BeBest</string>
+          <string>com.vinhandev.bebest</string>
         </array>
       </dict>
     </array>

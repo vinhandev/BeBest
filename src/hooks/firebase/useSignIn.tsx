@@ -9,6 +9,7 @@ export const useSignIn = () => {
     setLoading(true);
     try {
       const response = await auth().signInWithEmailAndPassword(email, password);
+
       setLoading(false);
       return response.user;
     } catch (error) {

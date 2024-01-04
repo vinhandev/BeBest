@@ -81,9 +81,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.vinhandev.BeBest'
+    namespace 'com.vinhandev.bebest'
     defaultConfig {
-        applicationId 'com.vinhandev.BeBest'
+        applicationId 'com.vinhandev.bebest'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

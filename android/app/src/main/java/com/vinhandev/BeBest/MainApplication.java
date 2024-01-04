@@ -1,4 +1,4 @@
-package com.vinhandev.BeBest;
+package com.vinhandev.bebest;
 
 import android.app.Application;
 import android.content.res.Configuration;
