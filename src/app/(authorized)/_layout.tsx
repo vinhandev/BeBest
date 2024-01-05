@@ -3,6 +3,8 @@ import { Tabs } from 'expo-router/tabs';
 
 import React from 'react';
 import { Pressable, Text } from 'react-native';
+import { useTheme } from 'react-native-paper';
+import { Icon } from '~/components/atoms';
 import { useSignOut } from '~/hooks';
 import { useUserStore } from '~/stores/useUserStore';
 
@@ -19,23 +21,27 @@ export const LogoutButton = () => {
     </Pressable>
   );
 };
+
 export default function AppLayout() {
+  const { colors } = useTheme();
   const user = useUserStore((state) => state.user);
 
   return (
     <Tabs
       screenOptions={{
-        headerStyle: {
-          backgroundColor: '#6c47ff',
-        },
-        headerTintColor: '#fff',
+        headerShown: false,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.quaternary,
       }}
     >
       <Tabs.Screen
         name="run"
         options={{
           headerTitle: 'Run',
-          tabBarLabel: 'Run',
+          tabBarShowLabel: false,
+          tabBarIcon(props) {
+            return <Icon variant="run" {...props} />;
+          },
         }}
         redirect={!user}
       />
@@ -43,7 +49,10 @@ export default function AppLayout() {
         name="water"
         options={{
           headerTitle: 'Water',
-          tabBarLabel: 'Water',
+          tabBarShowLabel: false,
+          tabBarIcon(props) {
+            return <Icon variant="water" {...props} />;
+          },
         }}
         redirect={!user}
       />
@@ -51,7 +60,10 @@ export default function AppLayout() {
         name="home"
         options={{
           headerTitle: 'Home',
-          tabBarLabel: 'Home',
+          tabBarShowLabel: false,
+          tabBarIcon(props) {
+            return <Icon variant="home" {...props} />;
+          },
         }}
         redirect={!user}
       />
@@ -59,7 +71,10 @@ export default function AppLayout() {
         name="analyst"
         options={{
           headerTitle: 'Analyst',
-          tabBarLabel: 'Analyst',
+          tabBarShowLabel: false,
+          tabBarIcon(props) {
+            return <Icon variant="analyst" {...props} />;
+          },
         }}
         redirect={!user}
       />
@@ -67,8 +82,12 @@ export default function AppLayout() {
         name="profile"
         options={{
           headerTitle: 'My Profile',
-          tabBarLabel: 'My Profile',
+          headerShown: true,
+          tabBarShowLabel: false,
           headerRight: () => <LogoutButton />,
+          tabBarIcon(props) {
+            return <Icon variant="profile" {...props} />;
+          },
         }}
         redirect={!user}
       />

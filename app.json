@@ -12,7 +12,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.vinhandev.bebest",
@@ -39,7 +41,8 @@
             "useFrameworks": "static"
           }
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "tsconfigPaths": true

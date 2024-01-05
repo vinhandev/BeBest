@@ -1,7 +1,10 @@
 import { Redirect, Slot, router } from 'expo-router';
 import React, { useEffect } from 'react';
-import { HomeLinks, PublicLinks } from '~/constants';
+import { DarkTheme, HomeLinks, LightTheme, PublicLinks } from '~/constants';
 import { useWatchAuth } from '~/hooks';
+
+import { useColorScheme } from 'react-native';
+import { Provider } from 'react-native-paper';
 
 export default function App() {
   const { initializing, user } = useWatchAuth();
@@ -13,5 +16,12 @@ export default function App() {
       router.replace(HomeLinks.HOME);
     }
   }, [initializing, user]);
-  return <Slot />;
+
+  const colorScheme = useColorScheme();
+
+  return (
+    <Provider theme={colorScheme === 'dark' ? DarkTheme : LightTheme}>
+      <Slot />
+    </Provider>
+  );
 }
