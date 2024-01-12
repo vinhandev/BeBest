@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "bebest-410301",
+  "private_key_id": "3ef3b29767b4c5b8a42db892c0472e4050b72a25",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDJ1j4Ao/Ck7/YC\ncTZFDkuLr9EkSybRrmYXz2MWUZPlw9R/Jmgohl4trfxmMlSjV1RrVKNbN7Xp7eF+\nykWnyKDj03GGYzJznOsB5zngEyRmiK593HB5oYu7CqouAj3nDrFFVemw9+8IPWJf\nRzggVNCLfwcgFLB2/OTD1iSMnpGiXF5mrnrR6ohP6fbOvI+1ha8B/rXXRcuaWQvu\n7pI9qMOi2aEu7VQUjd9Gh6Pm8A5eq3JQaHhwrDeuo208ECJTszMRWOU/jRAJJpba\nTA1PHl60a5HfvfSYjSBUugGmJ5WWCoeekS403fVtupNkzd96Fhq/0AsC8XYm30ON\nzCEcw+3/AgMBAAECggEAHt0VdxialEYjWsVAFLg2YiJc+01IntipwOtUDhYkZQaY\niGbxl3zQivCnf2Mj4SRaAt2a6zhuJ1raV/6LPzhlLeFn4zJpBRfSMeTPS03yC4HM\nGO/r/RVwXgYn9sgd+iabgew8w3RuR1bHo6Uq1nrRtvsSNlwjjdZnDvFAfoZC484x\ndaf7BhacgyFE/WLQ2ZiQyO9jhAXoJkW3X+Xj+mjeOsRjPpYyYeeOw3CXhLY9V6ck\ncmDPXr0vzO2+VxdGpi5Yv+on/CMF0mUtIg/FK0OvP+uOG8cnWbEflhIadt3vStH/\nviOUtkQf/qSEeDyDWpFopcheWGpVSNpPhU7YIaBVxQKBgQDxiCHkxYjLgNzKPiw3\n8OCG73e+xdzKZu0q2EIJ705Z7DHJE88ZzNmuZnuYkHu1i1ccQ0GlAeIh68+OyxpT\nZYpDNva1IiSMuZZwe4MeoXbUAEeE9FbNKYmiQ/N5LjuL3rrL2fDbuuOVV2twQbZE\n/8i5ywghEv9+4OTypw9YBcZzXQKBgQDV7WRzQRPstmFn6isM8ujQ0rlUF7jHDkG5\n4wCUM9DWHE8tSWG38k7mgDFd4P3a0HtG7ZwVkVZxAU9LvXb4i1oGCEPRQi4hdmRD\nQXLnRPYx2u+eU45p3hjaknNEm9QFgeOmj+fdbs5kkD+NSH2aRXSfjKvpw5TjJt/N\nr51XUBJNCwKBgEuPALtmqFKxb2C9bmvZqQPNajJ+B4IyDMO4f4BIIsSyxShYUBOM\nKBUM7mFd4bV7b7bhu2l5W1qtQHM1SnkIbOZ2DVvA4Jo9fLiXiv9MF7ZemAEZxwXL\nlsjyZPpl4i7xcJJRDa5Pmt6fSHcHt5OCSTMGNvbR0KfKhxT5+izZManpAoGBAK7P\n6I/OFCwQ9RPnZPqV3O4X5F31bIcs/USbXTO+C9+LDqBhILsiBJuTEcQ3QPn392UE\ncdGmDE8X1OZ9kqSTqyLWyiRLwkqR5miXKQAXeF9RGxH0EaItXX3uwsbD18QQWikX\n2081Zu8CeQxIumrAawad+zVxH09nyubXpOlegzX1AoGAci4Uoq+w2sS2bbOV+o6S\nOL+lxHQQ0pfFt2uTf5wnXGwng+6GAm+NCEDV3HnU8umM+1hmZXu3k7eFAyUHKzU2\nUEif4BmirxX+WIAs0gwcVqXCmFqIBL0SxoXOGQar4AY2PytJna7r7YpaWcHhF9Hh\nQaSYeaEX3MN+bvmCr02XXqM=\n-----END PRIVATE KEY-----\n",
+  "client_email": "bebest@bebest-410301.iam.gserviceaccount.com",
+  "client_id": "116894275293214748954",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bebest%40bebest-410301.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
