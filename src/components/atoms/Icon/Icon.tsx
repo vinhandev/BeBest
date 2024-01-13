@@ -1,5 +1,11 @@
 import React from 'react';
-import { Ionicons, Foundation, FontAwesome5, Entypo } from '@expo/vector-icons';
+import {
+  Ionicons,
+  Foundation,
+  FontAwesome5,
+  Entypo,
+  AntDesign,
+} from '@expo/vector-icons';
 
 import { IconType } from '~/types';
 
@@ -20,6 +26,12 @@ export default function Icon({ variant, ...props }: Props) {
       return <FontAwesome5 name="running" {...props} />;
     case 'water':
       return <Entypo name="cup" {...props} />;
+    case 'right':
+      return <AntDesign name="right" {...props} />;
+    case 'left':
+      return <AntDesign name="left" {...props} />;
+    case 'logout':
+      return <AntDesign name="logout" {...props} />;
     default:
       break;
   }

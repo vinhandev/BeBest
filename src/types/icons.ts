@@ -4,4 +4,7 @@ export type IconType =
   | 'water'
   | 'analyst'
   | 'profile'
+  | 'logout'
+  | 'right'
+  | 'left'
   | 'settings';

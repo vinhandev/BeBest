@@ -37,7 +37,6 @@ export default function AppLayout() {
       <Tabs.Screen
         name="run"
         options={{
-          headerTitle: 'Run',
           tabBarShowLabel: false,
           tabBarIcon(props) {
             return <Icon variant="run" {...props} />;
@@ -48,7 +47,6 @@ export default function AppLayout() {
       <Tabs.Screen
         name="water"
         options={{
-          headerTitle: 'Water',
           tabBarShowLabel: false,
           tabBarIcon(props) {
             return <Icon variant="water" {...props} />;
@@ -70,7 +68,6 @@ export default function AppLayout() {
       <Tabs.Screen
         name="analyst"
         options={{
-          headerTitle: 'Analyst',
           tabBarShowLabel: false,
           tabBarIcon(props) {
             return <Icon variant="analyst" {...props} />;
@@ -84,7 +81,6 @@ export default function AppLayout() {
           headerTitle: 'My Profile',
           headerShown: true,
           tabBarShowLabel: false,
-          headerRight: () => <LogoutButton />,
           tabBarIcon(props) {
             return <Icon variant="profile" {...props} />;
           },

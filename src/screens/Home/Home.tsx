@@ -18,10 +18,10 @@ export default function Home() {
   const time = getTime(new Date());
   const notifyMessage = 'Next: Study English with...';
   return (
-    <View style={styles.container}>
-      <RoundedPanel />
-      <Spacer size={insets.top + Metrics.large} />
-      <ScrollView>
+    <ScrollView>
+      <View style={styles.container}>
+        <RoundedPanel />
+        <Spacer size={insets.top + Metrics.large} />
         <Row>
           <View>
             <Text style={[styles.time, styleColor(colors.white)]}>{time}</Text>
@@ -33,7 +33,7 @@ export default function Home() {
             <Image style={[styles.image, styleBackground(colors.quaternary)]} />
           </View>
         </Row>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
