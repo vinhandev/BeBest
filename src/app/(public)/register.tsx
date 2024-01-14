@@ -4,7 +4,7 @@ import { SignUpScreen } from '~/screens';
 
 export default function SignUpRoute() {
   function onNavigateSignIn() {
-    router.push('/sign-in');
+    router.back();
   }
   function onNavigateHome() {
     router.push('/home');

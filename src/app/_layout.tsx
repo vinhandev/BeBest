@@ -7,17 +7,28 @@ import { useColorScheme } from 'react-native';
 import { Provider } from 'react-native-paper';
 import { useUserStore } from '~/stores/useUserStore';
 
+import '~/translations';
+
 export default function App() {
   const { initializing, user } = useWatchAuth();
   const profile = useUserStore((state) => state.profile);
 
   console.log('profile', profile);
+  console.log('user', user, !!initializing);
 
   useEffect(() => {
-    if (initializing) router.replace(PublicLinks.START_UP);
-    if (!user && !initializing) router.replace(PublicLinks.SIGN_IN);
-    if (!profile) router.replace(PublicLinks.INIT_PROFILE);
-    else {
+    if (initializing) {
+      router.replace(PublicLinks.START_UP);
+      return;
+    }
+    if (!user) {
+      router.replace(PublicLinks.SIGN_IN);
+      return;
+    }
+    if (!profile) {
+      router.replace(PublicLinks.INIT_PROFILE);
+      return;
+    } else {
       router.replace(HomeLinks.HOME);
     }
   }, [initializing, user]);

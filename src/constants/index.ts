@@ -3,3 +3,4 @@ export * from './colors';
 export * from './themes';
 export * from './metrics';
 export * from './languages';
+export * from './images';

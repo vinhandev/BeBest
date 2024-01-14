@@ -13,6 +13,7 @@ export const Metrics = {
 
 export const Rounds = {
   small: 6,
+  normal: 10,
   large: 50,
   circle: 1000,
 } as const;
@@ -24,3 +25,7 @@ export const FontSizes = {
   medium: 24,
   big: 40,
 } as const;
+
+export const FixedSizes = {
+  form_input: 50,
+};

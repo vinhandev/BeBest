@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from './styles';
 import { useSignUp } from '~/hooks/firebase/useSignUp';
 import { useForm } from 'react-hook-form';
-import { TextInput } from '~/components/molecules/FormInputs';
+import FormInput from '~/components/molecules/FormInput';
 
 type Props = {
   onSignIn: () => void;
@@ -18,7 +18,7 @@ type FormData = {
   confirm: string;
 };
 
-export default function SignUp({ onSignIn, onHome }: Props) {
+export default function SignUpScreen({ onSignIn, onHome }: Props) {
   const { handleSubmit, register, control } = useForm<FormData>();
   const { signUp, isLoading } = useSignUp();
 
@@ -36,21 +36,24 @@ export default function SignUp({ onSignIn, onHome }: Props) {
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>SignUp</Text>
       <View style={styles.inputGroup}>
-        <TextInput
+        <FormInput
+          variant="text"
           control={control}
           name={'username'}
           style={styles.textInput}
           mode="outlined"
           label="Username"
         />
-        <TextInput
+        <FormInput
+          variant="text"
           control={control}
           name={'password'}
           style={styles.textInput}
           mode="outlined"
           label="Password"
         />
-        <TextInput
+        <FormInput
+          variant="text"
           control={control}
           name={'confirm'}
           style={styles.textInput}

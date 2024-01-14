@@ -1,4 +1,8 @@
-import { Theme, DefaultTheme,DarkTheme as RNPDarkTheme } from 'react-native-paper';
+import {
+  Theme,
+  DefaultTheme,
+  DarkTheme as RNPDarkTheme,
+} from 'react-native-paper';
 import { Colors } from './colors';
 
 declare global {
@@ -27,6 +31,7 @@ export const LightTheme: ReactNativePaper.Theme = {
     black: Colors.black,
     error: Colors.red,
     success: Colors.green,
+    backdrop: Colors.grey_2,
   },
 };
 export const DarkTheme: ReactNativePaper.Theme = {
@@ -41,5 +46,6 @@ export const DarkTheme: ReactNativePaper.Theme = {
     black: Colors.black,
     error: Colors.red,
     success: Colors.green,
+    backdrop: Colors.grey_2,
   },
 };

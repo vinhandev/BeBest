@@ -1,22 +1,21 @@
 import { StyleSheet } from 'react-native';
-import { Sizes } from '~/styles';
+import { Metrics } from '~/constants';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: Sizes.small,
+    paddingHorizontal: Metrics.medium,
   },
   title: {
     fontSize: 40,
     fontWeight: 'bold',
   },
   inputGroup: {
-    paddingVertical: Sizes.large,
+    paddingVertical: Metrics.large,
   },
-  textInput: {},
   buttonGroup: {
-    gap: Sizes.small,
+    gap: Metrics.small,
   },
   button: {},
 });

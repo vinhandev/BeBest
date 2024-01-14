@@ -22,7 +22,7 @@ export const LogoutButton = () => {
   );
 };
 
-export default function AppLayout() {
+export default function HomeNavigator() {
   const { colors } = useTheme();
   const user = useUserStore((state) => state.user);
 

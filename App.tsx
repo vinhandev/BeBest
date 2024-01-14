@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
+
 export function App() {
   return <Text>Hello World</Text>;
 }

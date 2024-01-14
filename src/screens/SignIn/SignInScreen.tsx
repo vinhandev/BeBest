@@ -1,11 +1,14 @@
 import { Alert, Text, View } from 'react-native';
 
-import React from 'react';
-import { Button } from 'react-native-paper';
 import { styles } from './styles';
 import { useForm } from 'react-hook-form';
 import { useSignIn } from '~/hooks';
-import { TextInput } from '~/components/molecules/FormInputs';
+import FormInput from '~/components/molecules/FormInput';
+import { Button, Logo } from '~/components/molecules';
+import { Spacer } from '~/components/atoms';
+import React = require('react');
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
 type Props = {
   onSignUp: () => void;
@@ -17,7 +20,8 @@ type FormData = {
   password: string;
 };
 
-export default function SignIn({ onSignUp, onHome }: Props) {
+export default function SignInScreen({ onSignUp, onHome }: Props) {
+  const { t, i18n } = useTranslation();
   const { control, handleSubmit } = useForm<FormData>();
 
   const { isLoading, signIn } = useSignIn();
@@ -29,24 +33,28 @@ export default function SignIn({ onSignUp, onHome }: Props) {
       Alert.alert((error as Error).message);
     }
   };
+  console.log(i18next);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign In</Text>
+      <Logo size={150} />
       <View style={styles.inputGroup}>
-        <TextInput
+        <FormInput
+          variant="text"
           control={control}
           name="username"
-          style={styles.textInput}
           mode="outlined"
           placeholder="Username"
+          label={'Username'}
         />
-        <TextInput
+        <Spacer size={10} />
+        <FormInput
+          variant="text"
           control={control}
           name="password"
-          style={styles.textInput}
           mode="outlined"
           placeholder="Password"
+          label={'Password'}
         />
       </View>
       <View style={styles.buttonGroup}>
@@ -56,10 +64,10 @@ export default function SignIn({ onSignUp, onHome }: Props) {
           mode="contained"
           style={styles.button}
         >
-          Sign In
+          {t('LOGIN:login_button')}
         </Button>
         <Button onPress={onSignUp} mode="outlined" style={styles.button}>
-          Register
+          {t('LOGIN:register_button')}
         </Button>
       </View>
     </View>

@@ -9,3 +9,8 @@ export const styleColor = (color: string) => {
     color,
   };
 };
+export const styleBorderColor = (borderColor: string) => {
+  return {
+    borderColor,
+  };
+};

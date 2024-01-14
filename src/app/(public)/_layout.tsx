@@ -1,15 +1,11 @@
 import React from 'react';
 import { Stack } from 'expo-router';
 
-const PublicLayout = () => {
+const PublicNavigator = () => {
   return (
     <Stack
       screenOptions={{
-        headerStyle: {
-          backgroundColor: '#6c47ff',
-        },
-        headerTintColor: '#fff',
-        headerBackTitle: 'Back',
+        headerShown: false,
       }}
     >
       <Stack.Screen
@@ -34,4 +30,4 @@ const PublicLayout = () => {
   );
 };
 
-export default PublicLayout;
+export default PublicNavigator;

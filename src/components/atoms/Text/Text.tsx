@@ -1,28 +1,51 @@
 import React from 'react';
 import { Text as RNText, TextProps, StyleProp, TextStyle } from 'react-native';
+import { useTheme } from 'react-native-paper';
 import { FontSizes } from '~/constants';
-import { Sizes } from '~/styles';
 
 type Props = TextProps & {
-  variant?: 'bold_small' | 'content' | 'button';
+  variant?: 'bold_small' | 'content' | 'button' | 'error' | 'label';
+  isHide?: boolean;
 };
-export default function Text({ variant, style, ...props }: Props) {
-  let customStyle: StyleProp<TextStyle> = {};
+export default function Text({
+  variant,
+  isHide = false,
+  style,
+  ...props
+}: Props) {
+  const { colors } = useTheme();
+  if (isHide) return null;
+
+  let custom: StyleProp<TextStyle> = {};
   switch (variant) {
     case 'bold_small':
-      customStyle = {
+      custom = {
         fontWeight: 'bold',
         fontSize: FontSizes.small,
       };
       break;
+    case 'error':
+      custom = {
+        color: colors.error,
+        fontSize: FontSizes.small,
+      };
+      break;
+    case 'label':
+      custom = {
+        color: colors.black,
+        fontSize: FontSizes.small,
+        fontWeight: '300',
+      };
+      break;
     case 'content':
-      customStyle = {};
+      custom = {};
       break;
     case 'button':
-      customStyle = {};
+      custom = {};
       break;
     default:
       break;
   }
-  return <RNText style={[style, customStyle]} {...props} />;
+
+  return <RNText style={[style, custom]} {...props} />;
 }
