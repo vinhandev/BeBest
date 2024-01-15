@@ -1,12 +1,13 @@
+import React from 'react';
+
 import { Alert, Text, View } from 'react-native';
 
 import { styles } from './styles';
 import { useForm } from 'react-hook-form';
-import { useSignIn } from '~/hooks';
+import { SignInSchemaType, useSignIn, useSignInForm } from '~/hooks';
 import FormInput from '~/components/molecules/FormInput';
 import { Button, Logo } from '~/components/molecules';
 import { Spacer } from '~/components/atoms';
-import React = require('react');
 import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 
@@ -15,30 +16,21 @@ type Props = {
   onHome: () => void;
 };
 
-type FormData = {
-  username: string;
-  password: string;
-};
-
 export default function SignInScreen({ onSignUp, onHome }: Props) {
   const { t, i18n } = useTranslation('loginScreen');
-  const { control, handleSubmit } = useForm<FormData>();
+  const { handleSubmit, control } = useSignInForm();
 
   const { isLoading, signIn } = useSignIn();
-  const onValid = async (data: FormData) => {
+  const onValid = async (data: SignInSchemaType) => {
     try {
-      await signIn(data.username, data.password);
-      onHome();
+      if (data.email && data.password) {
+        await signIn(data.email, data.password);
+        onHome();
+      }
     } catch (error) {
       Alert.alert((error as Error).message);
     }
   };
-  console.log(i18next);
-
-  const changeLanguage = () => {
-    i18n.changeLanguage('vi');
-  };
-
   return (
     <View style={styles.container}>
       <Logo size={150} />
@@ -46,7 +38,7 @@ export default function SignInScreen({ onSignUp, onHome }: Props) {
         <FormInput
           variant="text"
           control={control}
-          name="username"
+          name="email"
           mode="outlined"
           placeholder="Username"
           label={'Username'}

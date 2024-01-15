@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Control } from 'react-hook-form';
+import { Control, FieldValues, Path } from 'react-hook-form';
 import TextInput from './TextInput/TextInput';
 import { TextInputProps } from 'react-native-paper';
 
-type Props = {
-  control: Control<any>;
-  name: string;
+type Props<T extends FieldValues> = {
+  control: Control<T>;
+  name: Path<T>;
   label?: string;
   placeholder?: string;
 } & (
@@ -17,7 +17,7 @@ type Props = {
       variant: 'text';
     })
 );
-export default function FormInput(props: Props) {
+export default function FormInput<T extends FieldValues>(props: Props<T>) {
   switch (props.variant) {
     case 'text':
       return <TextInput {...props} />;

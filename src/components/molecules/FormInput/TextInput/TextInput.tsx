@@ -1,18 +1,23 @@
 import React from 'react';
-import { Control, useController } from 'react-hook-form';
+import { Control, FieldValues, Path, useController } from 'react-hook-form';
 import { View, TextInput as RNTextInput } from 'react-native';
 import { TextInputProps, useTheme } from 'react-native-paper';
 import { Spacer, Text } from '~/components/atoms';
 import { styles } from './TextInput.styles';
 import { styleBackground, styleBorderColor } from '~/utils';
 
-type Props = Omit<TextInputProps, 'theme'> & {
-  control: Control<any>;
-  name: string;
+type Props<T extends FieldValues> = Omit<TextInputProps, 'theme'> & {
+  control: Control<T>;
+  name: Path<T>;
   theme?: any;
   label?: string;
 };
-export default function TextInput({ control, name, label, ...props }: Props) {
+export default function TextInput<T extends FieldValues>({
+  control,
+  name,
+  label,
+  ...props
+}: Props<T>) {
   const { colors } = useTheme();
   const { field, fieldState } = useController({
     control,
