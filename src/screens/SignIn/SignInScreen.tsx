@@ -21,7 +21,7 @@ type FormData = {
 };
 
 export default function SignInScreen({ onSignUp, onHome }: Props) {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('loginScreen');
   const { control, handleSubmit } = useForm<FormData>();
 
   const { isLoading, signIn } = useSignIn();
@@ -34,6 +34,10 @@ export default function SignInScreen({ onSignUp, onHome }: Props) {
     }
   };
   console.log(i18next);
+
+  const changeLanguage = () => {
+    i18n.changeLanguage('vi');
+  };
 
   return (
     <View style={styles.container}>
@@ -64,10 +68,10 @@ export default function SignInScreen({ onSignUp, onHome }: Props) {
           mode="contained"
           style={styles.button}
         >
-          {t('LOGIN:login_button')}
+          {t('login_button')}
         </Button>
         <Button onPress={onSignUp} mode="outlined" style={styles.button}>
-          {t('LOGIN:register_button')}
+          {t('register_button')}
         </Button>
       </View>
     </View>
