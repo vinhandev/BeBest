@@ -6,5 +6,7 @@ export type IconType =
   | 'profile'
   | 'logout'
   | 'right'
+  | 'eye'
+  | 'eye-off'
   | 'left'
   | 'settings';

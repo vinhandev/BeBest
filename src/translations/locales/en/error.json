@@ -1,0 +1,5 @@
+{
+  "email_required": "Your email must not empty",
+  "email_invalid": "Your email is not valid",
+  "password_required": "Your password must not empty "
+}

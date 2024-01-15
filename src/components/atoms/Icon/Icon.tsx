@@ -32,6 +32,10 @@ export default function Icon({ variant, ...props }: Props) {
       return <AntDesign name="left" {...props} />;
     case 'logout':
       return <AntDesign name="logout" {...props} />;
+    case 'eye':
+      return <Ionicons name="eye" {...props} />;
+    case 'eye-off':
+      return <Ionicons name="eye-off" {...props} />;
     default:
       break;
   }

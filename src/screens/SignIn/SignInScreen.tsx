@@ -19,8 +19,8 @@ type Props = {
 export default function SignInScreen({ onSignUp, onHome }: Props) {
   const { t, i18n } = useTranslation('loginScreen');
   const { handleSubmit, control } = useSignInForm();
-
   const { isLoading, signIn } = useSignIn();
+
   const onValid = async (data: SignInSchemaType) => {
     try {
       if (data.email && data.password) {
@@ -39,16 +39,14 @@ export default function SignInScreen({ onSignUp, onHome }: Props) {
           variant="text"
           control={control}
           name="email"
-          mode="outlined"
           placeholder="Username"
           label={'Username'}
         />
         <Spacer size={10} />
         <FormInput
-          variant="text"
+          variant="password"
           control={control}
           name="password"
-          mode="outlined"
           placeholder="Password"
           label={'Password'}
         />

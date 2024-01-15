@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Control, FieldValues, Path } from 'react-hook-form';
 import TextInput from './TextInput/TextInput';
-import { TextInputProps } from 'react-native-paper';
+import { TextInputProps } from 'react-native';
+import PasswordInput from './PasswordInput/PasswordInput';
 
 type Props<T extends FieldValues> = {
   control: Control<T>;
@@ -21,6 +22,8 @@ export default function FormInput<T extends FieldValues>(props: Props<T>) {
   switch (props.variant) {
     case 'text':
       return <TextInput {...props} />;
+    case 'password':
+      return <PasswordInput {...props} />;
       break;
     case 'number':
       return <TextInput {...props} />;

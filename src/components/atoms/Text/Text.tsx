@@ -27,7 +27,7 @@ export default function Text({
     case 'error':
       custom = {
         color: colors.error,
-        fontSize: FontSizes.small,
+        fontSize: FontSizes.ex_small,
       };
       break;
     case 'label':
