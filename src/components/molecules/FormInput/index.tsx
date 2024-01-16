@@ -4,6 +4,7 @@ import { Control, FieldValues, Path } from 'react-hook-form';
 import TextInput from './TextInput/TextInput';
 import { TextInputProps } from 'react-native';
 import PasswordInput from './PasswordInput/PasswordInput';
+import NumberInput from './NumberInput/NumberInput';
 
 type Props<T extends FieldValues> = {
   control: Control<T>;
@@ -26,7 +27,7 @@ export default function FormInput<T extends FieldValues>(props: Props<T>) {
       return <PasswordInput {...props} />;
       break;
     case 'number':
-      return <TextInput {...props} />;
+      return <NumberInput {...props} />;
     default:
       return <TextInput {...props} />;
       break;

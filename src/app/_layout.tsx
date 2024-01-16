@@ -31,7 +31,7 @@ export default function App() {
     } else {
       router.replace(HomeLinks.HOME);
     }
-  }, [initializing, user]);
+  }, [initializing, user, profile]);
 
   const colorScheme = useColorScheme();
 
