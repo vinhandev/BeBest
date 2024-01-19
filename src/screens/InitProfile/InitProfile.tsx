@@ -9,7 +9,7 @@ import { HomeLinks } from '~/constants';
 import { useUserStore } from '~/stores/useUserStore';
 
 export default function InitProfile() {
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm({});
   const setProfile = useUserStore((state) => state.setProfile);
   const onValid = (data: any) => {
     console.log(data);
