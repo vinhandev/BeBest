@@ -6,6 +6,7 @@ import { Spacer, Text } from '~/components/atoms';
 import { styles } from './TextInput.styles';
 import { styleBackground, styleBorderColor } from '~/utils';
 import Styles from '~/styles';
+import { FormControlWrapper } from '~/components/HOCs';
 
 type Props<T extends FieldValues> = Omit<TextInputProps, 'theme'> & {
   control: Control<T>;
@@ -25,15 +26,15 @@ export default function TextInput<T extends FieldValues>({
     name,
   });
   return (
-    <View>
-      <Text isHide={!label} variant="label">
-        {label}
-      </Text>
-      <Spacer size={10} />
+    <FormControlWrapper
+      label={label}
+      invalid={fieldState.invalid}
+      error={fieldState.error}
+    >
       <RNTextInput
         style={[
           Styles.formInput,
-          styleBorderColor(colors.backdrop),
+          styleBorderColor(fieldState.invalid ? colors.error : colors.backdrop),
           styleBackground(colors.backdrop),
           props.style,
         ]}
@@ -41,10 +42,6 @@ export default function TextInput<T extends FieldValues>({
         onChangeText={field.onChange}
         {...props}
       />
-      <Spacer size={5} />
-      <Text isHide={!fieldState.invalid} variant="error">
-        {fieldState.error?.message}
-      </Text>
-    </View>
+    </FormControlWrapper>
   );
 }

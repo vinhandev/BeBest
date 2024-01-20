@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text as RNText, TextProps, StyleProp, TextStyle } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { FontSizes } from '~/constants';
+import { FontSizes, FontWeight } from '~/constants';
 
 type Props = TextProps & {
   variant?:
@@ -10,6 +10,7 @@ type Props = TextProps & {
     | 'button'
     | 'error'
     | 'label'
+    | 'medium_title'
     | 'big_title';
   isHide?: boolean;
 };
@@ -48,6 +49,13 @@ export default function Text({
         color: colors.black,
         fontSize: FontSizes.big,
         fontWeight: '300',
+      };
+      break;
+    case 'medium_title':
+      custom = {
+        color: colors.black,
+        fontSize: FontSizes.medium,
+        fontWeight: FontWeight.bold,
       };
       break;
     case 'content':

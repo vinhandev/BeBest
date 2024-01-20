@@ -46,7 +46,7 @@ export default function OptionInput<T extends FieldValues>({
         style={[
           Styles.formInput,
           styleBackground(colors.backdrop),
-          styleBorderColor(colors.backdrop),
+          styleBorderColor(fieldState.invalid ? colors.error : colors.backdrop),
         ]}
         value={value}
         onChange={(pickData) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Control, FieldValues, Path, useController } from 'react-hook-form';
 import { View, TextInput as RNTextInput, TextInputProps } from 'react-native';
 import { useTheme } from 'react-native-paper';
@@ -10,6 +10,7 @@ import {
   NumberInput as RNNumberInput,
 } from 'react-native-ui-lib';
 import Styles from '~/styles';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 type Props<T extends FieldValues> = Omit<NumberInputProps, 'onChangeNumber'> & {
   control: Control<T>;
@@ -28,17 +29,32 @@ export default function NumberInput<T extends FieldValues>({
     control,
     name,
   });
+
+  const [focused, setFocused] = useState(false);
+
   return (
     <View>
       <Text isHide={!label} variant="label">
         {label}
       </Text>
       <Spacer size={10} />
-      <View
+      <TouchableWithoutFeedback
+        onFocus={() => {
+          setFocused(!focused);
+        }}
+        onBlur={() => {
+          setFocused(false);
+        }}
         style={[
           styles.custom,
           Styles.formInput,
-          styleBorderColor(colors.backdrop),
+          styleBorderColor(
+            fieldState.invalid
+              ? colors.error
+              : focused
+              ? colors.disabled
+              : colors.backdrop
+          ),
           styleBackground(colors.backdrop),
           props.leadingTextStyle,
         ]}
@@ -51,7 +67,7 @@ export default function NumberInput<T extends FieldValues>({
             }
           }}
         />
-      </View>
+      </TouchableWithoutFeedback>
 
       <Spacer size={5} />
       <Text isHide={!fieldState.invalid} variant="error">

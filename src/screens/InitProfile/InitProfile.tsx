@@ -9,14 +9,14 @@ import { FormInput } from '~/components/molecules';
 import { HomeLinks, Metrics, ages, genders } from '~/constants';
 import { useUserStore } from '~/stores/useUserStore';
 import { styles } from './InitProfile.styles';
-import { useCreateProfile, useSignOut } from '~/hooks';
+import { useCreateProfile, useInitProfileForm, useSignOut } from '~/hooks';
 import { ProfilePropsType } from '~/types';
 
 export default function InitProfile() {
   const user = useUserStore((state) => state.user);
   const { signOut } = useSignOut();
   const { createProfile } = useCreateProfile();
-  const { control, handleSubmit } = useForm({});
+  const { control, handleSubmit } = useInitProfileForm();
   const onValid = async (data: any) => {
     console.log(data);
 
@@ -46,7 +46,7 @@ export default function InitProfile() {
 
   return (
     <SafeScreen>
-      <SafeKeyboard>
+      <SafeKeyboard scrollEnabled>
         <View style={styles.container}>
           <Text
             style={{
@@ -75,28 +75,32 @@ export default function InitProfile() {
             control={control}
             name="weight"
             label={'Weight'}
-            trailingText=" kg"
+            trailingText="kg"
+            fractionDigits={1}
           />
           <FormInput
             variant="number"
             control={control}
             name="height"
             label={'Height'}
-            trailingText=" cm"
+            trailingText="cm"
+            fractionDigits={0}
           />
           <FormInput
             variant="number"
             control={control}
             name="water"
             label={'WaterPerDay'}
-            trailingText=" ml"
+            trailingText="ml"
+            fractionDigits={0}
           />
           <FormInput
             variant="number"
             control={control}
             name="goal"
             label={'GoalWeight'}
-            trailingText=" kg"
+            trailingText="kg"
+            fractionDigits={1}
           />
           <FormInput
             variant="select"

@@ -11,6 +11,7 @@ import { Image, Row, Text } from '~/components/atoms';
 import { styles } from './HomeHeader.styles';
 import { ImageSource } from 'expo-image';
 import Styles from '~/styles';
+import { BounceWrapper } from '~/components/HOCs';
 
 type Props = {
   time: string;
@@ -27,13 +28,13 @@ export default function HomeHeader({ avatar, message, time }: Props) {
           {message}
         </Text>
       </View>
-      <View>
+      <BounceWrapper>
         <Image
           style={[styles.image, Styles.shadow]}
           defaultImage={Images.defaultUserAvatar}
           source={getUriImage(avatar)}
         />
-      </View>
+      </BounceWrapper>
     </Row>
   );
 }
