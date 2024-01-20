@@ -4,7 +4,13 @@ import { useTheme } from 'react-native-paper';
 import { FontSizes } from '~/constants';
 
 type Props = TextProps & {
-  variant?: 'bold_small' | 'content' | 'button' | 'error' | 'label';
+  variant?:
+    | 'bold_small'
+    | 'content'
+    | 'button'
+    | 'error'
+    | 'label'
+    | 'big_title';
   isHide?: boolean;
 };
 export default function Text({
@@ -34,6 +40,13 @@ export default function Text({
       custom = {
         color: colors.black,
         fontSize: FontSizes.small,
+        fontWeight: '300',
+      };
+      break;
+    case 'big_title':
+      custom = {
+        color: colors.black,
+        fontSize: FontSizes.big,
         fontWeight: '300',
       };
       break;

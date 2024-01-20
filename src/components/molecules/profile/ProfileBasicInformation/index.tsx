@@ -1,16 +1,17 @@
-import { Image } from 'expo-image';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { Icon, Row, Text } from '~/components/atoms';
+import { Icon, Image, Row, Text } from '~/components/atoms';
 import { styles } from './styles';
+import { Images } from '~/constants';
+import { useUserStore } from '~/stores/useUserStore';
 
 type Props = {
   onPress: () => void;
 };
-const defaultAvatar = 'https://i.pravatar.cc/300?u=a042581f4e29026704d';
 export default function ProfileBasicInformation({ onPress }: Props) {
   const { colors } = useTheme();
+  const profile = useUserStore((state) => state.profile);
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -22,7 +23,7 @@ export default function ProfileBasicInformation({ onPress }: Props) {
     >
       <Row justifyContent="flex-start">
         <Image
-          source={{ uri: defaultAvatar }}
+          defaultImage={Images.defaultUserAvatar}
           style={{
             height: 50,
             width: 50,
@@ -36,7 +37,7 @@ export default function ProfileBasicInformation({ onPress }: Props) {
           }}
         >
           <Text variant="bold_small" style={styles.container}>
-            UserName
+            {profile?.name}
           </Text>
           <TouchableOpacity activeOpacity={0.8}>
             <Row style={{ gap: 5 }}>

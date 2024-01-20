@@ -5,6 +5,7 @@ import { useTheme } from 'react-native-paper';
 import { Spacer, Text } from '~/components/atoms';
 import { styles } from './TextInput.styles';
 import { styleBackground, styleBorderColor } from '~/utils';
+import Styles from '~/styles';
 
 type Props<T extends FieldValues> = Omit<TextInputProps, 'theme'> & {
   control: Control<T>;
@@ -31,8 +32,8 @@ export default function TextInput<T extends FieldValues>({
       <Spacer size={10} />
       <RNTextInput
         style={[
-          styles.custom,
-          styleBorderColor(colors.disabled),
+          Styles.formInput,
+          styleBorderColor(colors.backdrop),
           styleBackground(colors.backdrop),
           props.style,
         ]}

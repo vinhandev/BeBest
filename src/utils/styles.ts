@@ -3,7 +3,6 @@ export const styleBackground = (backgroundColor: string) => {
     backgroundColor,
   };
 };
-
 export const styleColor = (color: string) => {
   return {
     color,

@@ -28,4 +28,13 @@ export const FontSizes = {
 
 export const FixedSizes = {
   form_input: 50,
+  avatar: 50,
+  border_width: 1,
 };
+
+export const FontWeight = {
+  light: '300',
+  regular: '400',
+  medium: '500',
+  bold: '700',
+} as const;

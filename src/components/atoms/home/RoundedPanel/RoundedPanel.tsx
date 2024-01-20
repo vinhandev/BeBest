@@ -10,8 +10,8 @@ export default function RoundedPanel() {
   return (
     <MotiView
       from={{ height: 0 }}
-      animate={{ height: Metrics.screenHeight * 0.25 }}
-      style={[styles.container, styleBackground(colors.primary)]}
+      animate={{ height: Metrics.screenHeight * 0.2 }}
+      style={[styles.container, styleBackground(colors.secondary)]}
     />
   );
 }

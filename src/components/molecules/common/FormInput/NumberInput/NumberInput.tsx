@@ -5,8 +5,13 @@ import { useTheme } from 'react-native-paper';
 import { Spacer, Text } from '~/components/atoms';
 import { styleBackground, styleBorderColor } from '~/utils';
 import { styles } from './Number.styles';
+import {
+  NumberInputProps,
+  NumberInput as RNNumberInput,
+} from 'react-native-ui-lib';
+import Styles from '~/styles';
 
-type Props<T extends FieldValues> = Omit<TextInputProps, 'theme'> & {
+type Props<T extends FieldValues> = Omit<NumberInputProps, 'onChangeNumber'> & {
   control: Control<T>;
   name: Path<T>;
   theme?: any;
@@ -29,18 +34,25 @@ export default function NumberInput<T extends FieldValues>({
         {label}
       </Text>
       <Spacer size={10} />
-      <RNTextInput
-        inputMode="numeric"
+      <View
         style={[
           styles.custom,
-          styleBorderColor(colors.disabled),
+          Styles.formInput,
+          styleBorderColor(colors.backdrop),
           styleBackground(colors.backdrop),
-          props.style,
+          props.leadingTextStyle,
         ]}
-        value={field.value}
-        onChangeText={field.onChange}
-        {...props}
-      />
+      >
+        <RNNumberInput
+          {...props}
+          onChangeNumber={(data) => {
+            if (data.type === 'valid') {
+              field.onChange(data.number);
+            }
+          }}
+        />
+      </View>
+
       <Spacer size={5} />
       <Text isHide={!fieldState.invalid} variant="error">
         {fieldState.error?.message}

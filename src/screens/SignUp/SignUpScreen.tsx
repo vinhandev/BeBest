@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from './styles';
 import { useSignUp } from '~/hooks/firebase/useSignUp';
 import { useForm } from 'react-hook-form';
-import FormInput from '~/components/molecules/FormInput';
+import FormInput from '~/components/molecules/common/FormInput';
 
 type Props = {
   onSignIn: () => void;

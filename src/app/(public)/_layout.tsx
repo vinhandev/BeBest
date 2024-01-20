@@ -6,6 +6,7 @@ const PublicNavigator = () => {
     <Stack
       screenOptions={{
         headerShown: false,
+        presentation: 'card',
       }}
     >
       <Stack.Screen
@@ -24,6 +25,12 @@ const PublicNavigator = () => {
         name="start-up"
         options={{
           headerTitle: 'Reset Password',
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="init-profile"
+        options={{
+          headerTitle: 'Init Profile',
         }}
       ></Stack.Screen>
     </Stack>
