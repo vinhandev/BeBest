@@ -33,7 +33,7 @@ export default function PasswordInput<T extends FieldValues>({
 
   return (
     <View>
-      <Text isHide={!label} variant="label">
+      <Text isHide={!label} variant="black_s_light">
         {label}
       </Text>
       <Spacer size={10} />

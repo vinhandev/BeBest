@@ -19,17 +19,20 @@ export const Rounds = {
 } as const;
 
 export const FontSizes = {
-  ex_small: 12,
-  small: 15,
-  regular: 20,
-  medium: 24,
-  big: 40,
+  xs: 12,
+  s: 15,
+  m: 20,
+  l: 24,
+  xl: 40,
 } as const;
 
 export const FixedSizes = {
   form_input: 50,
   avatar: 50,
-  border_width: 1,
+  border_width: 0.3,
+  circle_progress_bar: 50,
+  radio: 20,
+  bottom_bar: 67,
 };
 
 export const FontWeight = {

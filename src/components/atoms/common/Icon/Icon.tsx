@@ -2,9 +2,12 @@ import React from 'react';
 import {
   Ionicons,
   Foundation,
+  FontAwesome,
   FontAwesome5,
   Entypo,
   AntDesign,
+  MaterialIcons,
+  MaterialCommunityIcons,
 } from '@expo/vector-icons';
 
 import { IconType } from '~/types';
@@ -26,12 +29,30 @@ export default function Icon({ variant, ...props }: Props) {
       return <FontAwesome5 name="running" {...props} />;
     case 'water':
       return <Entypo name="cup" {...props} />;
+    case 'face':
+      return <MaterialIcons name="tag-faces" {...props} />;
+    case 'body':
+      return <Ionicons name="body" {...props} />;
+    case 'meal':
+      return <MaterialIcons name="set-meal" {...props} />;
+    case 'weight':
+      return <FontAwesome5 name="weight" {...props} />;
+    case 'checked':
+      return <FontAwesome name="check" {...props} />;
+    case 'height':
+      return <MaterialCommunityIcons name="human-male-height" {...props} />;
+    case 'streak':
+      return <FontAwesome5 name="fire" {...props} />;
     case 'right':
       return <AntDesign name="right" {...props} />;
     case 'left':
       return <AntDesign name="left" {...props} />;
+    case 'list':
+      return <Entypo name="list" {...props} />;
     case 'logout':
       return <AntDesign name="logout" {...props} />;
+    case 'add':
+      return <Ionicons name="add" {...props} size={props.size + 5} />;
     case 'eye':
       return <Ionicons name="eye" {...props} />;
     case 'eye-off':

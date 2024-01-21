@@ -18,23 +18,26 @@ type Props = {
     | 'space-between'
     | 'space-around'
     | 'space-evenly';
+  gap?: number;
   style?: StyleProp<ViewStyle>;
 };
 export default function Row({
   children,
   alignItems = 'center',
   justifyContent = 'space-between',
+  gap = 0,
   style,
 }: Props) {
   return (
     <View
       style={[
-        style,
         {
           flexDirection: 'row',
           alignItems,
           justifyContent,
+          gap,
         },
+        style,
       ]}
     >
       {children}

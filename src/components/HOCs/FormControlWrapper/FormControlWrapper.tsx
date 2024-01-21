@@ -6,20 +6,20 @@ import { View } from 'react-native';
 import { Spacer, Text } from '~/components/atoms';
 
 type Props = {
-  label: string | undefined;
-  invalid: boolean;
-  error: FieldError | undefined;
+  label?: string | undefined;
+  invalid?: boolean;
+  error?: FieldError | undefined;
   children: ReactNode;
 };
 export default function FormControlWrapper({
   error,
-  invalid,
-  label,
+  invalid = false,
+  label = '',
   children,
 }: Props) {
   return (
-    <View>
-      <Text isHide={!label} variant="label">
+    <View style={{ flexGrow: 1 }}>
+      <Text isHide={!label} variant="black_s_light">
         {label}
       </Text>
       <Spacer size={10} />

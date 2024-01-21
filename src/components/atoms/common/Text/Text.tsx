@@ -5,68 +5,138 @@ import { FontSizes, FontWeight } from '~/constants';
 
 type Props = TextProps & {
   variant?:
-    | 'bold_small'
-    | 'content'
+    | 'black_l_bold'
+    | 'black_m_bold'
+    | 'black_s_bold'
+    | 'black_xs_bold'
+    | 'black_s_light'
+    | 'black_s_regular'
+    | 'black_xl_light'
+    | 'black_xs_light'
+    | 'task'
     | 'button'
     | 'error'
-    | 'label'
-    | 'medium_title'
-    | 'big_title';
+    | 'streak';
   isHide?: boolean;
+  center?: boolean;
 };
 export default function Text({
   variant,
   isHide = false,
+  center = false,
   style,
   ...props
 }: Props) {
   const { colors } = useTheme();
   if (isHide) return null;
-
   let custom: StyleProp<TextStyle> = {};
+
+  type ColorsKeys = keyof typeof colors;
+  type FontSizeKeys = keyof typeof FontSizes;
+  type FontWeightKeys = keyof typeof FontWeight;
+
+  const renderText = ({
+    color,
+    fontSize,
+    fontWeight,
+  }: {
+    color: ColorsKeys;
+    fontSize: FontSizeKeys;
+    fontWeight: FontWeightKeys;
+  }) => {
+    return {
+      color: colors[color],
+      fontSize: FontSizes[fontSize],
+      fontWeight: FontWeight[fontWeight],
+    };
+  };
+
   switch (variant) {
-    case 'bold_small':
-      custom = {
+    case 'black_xs_bold':
+      custom = renderText({
+        color: 'black',
+        fontSize: 'xs',
         fontWeight: 'bold',
-        fontSize: FontSizes.small,
-      };
+      });
+      break;
+    case 'black_s_bold':
+      custom = renderText({
+        color: 'black',
+        fontSize: 's',
+        fontWeight: 'bold',
+      });
+      break;
+    case 'black_m_bold':
+      custom = renderText({
+        color: 'black',
+        fontSize: 'm',
+        fontWeight: 'bold',
+      });
+      break;
+    case 'black_xs_light':
+      custom = renderText({
+        color: 'black',
+        fontSize: 'xs',
+        fontWeight: 'light',
+      });
       break;
     case 'error':
-      custom = {
-        color: colors.error,
-        fontSize: FontSizes.ex_small,
-      };
+      custom = renderText({
+        color: 'error',
+        fontSize: 'xs',
+        fontWeight: 'regular',
+      });
       break;
-    case 'label':
-      custom = {
-        color: colors.black,
-        fontSize: FontSizes.small,
-        fontWeight: '300',
-      };
+    case 'streak':
+      custom = renderText({
+        color: 'error',
+        fontSize: 's',
+        fontWeight: 'bold',
+      });
       break;
-    case 'big_title':
-      custom = {
-        color: colors.black,
-        fontSize: FontSizes.big,
-        fontWeight: '300',
-      };
+    case 'black_s_light':
+      custom = renderText({
+        color: 'black',
+        fontSize: 's',
+        fontWeight: 'light',
+      });
       break;
-    case 'medium_title':
-      custom = {
-        color: colors.black,
-        fontSize: FontSizes.medium,
-        fontWeight: FontWeight.bold,
-      };
+    case 'black_xl_light':
+      custom = renderText({
+        color: 'black',
+        fontSize: 'xl',
+        fontWeight: 'light',
+      });
       break;
-    case 'content':
-      custom = {};
+    case 'black_l_bold':
+      custom = renderText({
+        color: 'black',
+        fontSize: 'l',
+        fontWeight: 'bold',
+      });
+      break;
+    case 'black_s_regular':
+      custom = renderText({
+        color: 'black',
+        fontSize: 's',
+        fontWeight: 'regular',
+      });
       break;
     case 'button':
-      custom = {};
+      custom = renderText({
+        color: 'black',
+        fontSize: 'm',
+        fontWeight: 'regular',
+      });
       break;
     default:
       break;
   }
 
-  return <RNText style={[style, custom]} {...props} />;
+  return (
+    <RNText
+      style={[custom, style, { textAlign: center ? 'center' : 'left' }]}
+      {...props}
+    />
+  );
 }

@@ -36,7 +36,7 @@ export default function ProfileBasicInformation({ onPress }: Props) {
             paddingLeft: 10,
           }}
         >
-          <Text variant="bold_small" style={styles.container}>
+          <Text variant="black_s_bold" style={styles.container}>
             {profile?.name}
           </Text>
           <TouchableOpacity activeOpacity={0.8}>

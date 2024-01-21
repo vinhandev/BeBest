@@ -9,7 +9,6 @@ import { getUriImage, styleColor } from '~/utils';
 import { Image, Row, Text } from '~/components/atoms';
 
 import { styles } from './HomeHeader.styles';
-import { ImageSource } from 'expo-image';
 import Styles from '~/styles';
 import { BounceWrapper } from '~/components/HOCs';
 
@@ -20,6 +19,7 @@ type Props = {
 };
 export default function HomeHeader({ avatar, message, time }: Props) {
   const { colors } = useTheme();
+
   return (
     <Row>
       <View>

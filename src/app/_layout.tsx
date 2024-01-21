@@ -9,6 +9,7 @@ import { useUserStore } from '~/stores/useUserStore';
 
 import '~/translations';
 import { log } from '~/utils';
+import { BottomSheet, Loading } from '~/components/molecules';
 
 export default function App() {
   const { initializing, user } = useWatchAuth();
@@ -25,11 +26,11 @@ export default function App() {
       return;
     }
     if (profile === null) {
-      log.debug('profile', typeof profile);
+      log.debug('profile', profile);
       router.push(PublicLinks.INIT_PROFILE);
       return;
     } else {
-      log.debug('user', typeof profile, user);
+      log.debug('user', user);
       router.replace(HomeLinks.HOME);
     }
   }, [initializing, user, profile]);
@@ -39,6 +40,8 @@ export default function App() {
   return (
     <Provider theme={colorScheme === 'dark' ? DarkTheme : LightTheme}>
       <Slot />
+      <BottomSheet />
+      <Loading />
     </Provider>
   );
 }

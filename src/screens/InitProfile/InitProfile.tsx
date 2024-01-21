@@ -39,6 +39,7 @@ export default function InitProfile() {
       name: data.name,
       waterPerDay: data.water,
       weight: data.weight,
+      streak: 0,
     };
 
     await createProfile(user?.uid, param);
@@ -52,7 +53,7 @@ export default function InitProfile() {
             style={{
               textAlign: 'center',
             }}
-            variant="big_title"
+            variant="black_xl_light"
           >
             Init Profile
           </Text>

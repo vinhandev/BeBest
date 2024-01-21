@@ -8,4 +8,5 @@ export type ProfilePropsType = {
   waterPerDay: number;
   goalWeight: number;
   gender: GenderType;
+  streak: number;
 };

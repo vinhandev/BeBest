@@ -13,6 +13,8 @@ export default function BounceWrapper({ children }: Props) {
       scale: [1, 0.9, 1],
       transition: {
         type: 'spring',
+        damping: 2,
+        stiffness: 200,
       },
     },
   });

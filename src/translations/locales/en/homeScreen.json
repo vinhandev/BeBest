@@ -1,0 +1,9 @@
+{
+  "face": "Face",
+  "body": "Body",
+  "meal": "Meal",
+  "weight": "Weight",
+  "height": "Height",
+  "tasks_title": "Tasks",
+  "tasks_status_title":"Completed Activities"
+}

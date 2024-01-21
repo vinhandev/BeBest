@@ -10,3 +10,7 @@ export const genders = [
   { label: 'Male', value: 'MALE' },
   { label: 'Female', value: 'FEMALE' },
 ];
+export const taskTypes = [
+  { label: 'Habit', value: 'HABIT' },
+  { label: 'Task', value: 'TASK' },
+];

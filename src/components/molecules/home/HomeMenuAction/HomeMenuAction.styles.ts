@@ -6,4 +6,7 @@ export const styles = StyleSheet.create({
     borderRadius: Rounds.small,
     padding: Metrics.medium,
   },
+  actions: {
+    flexWrap: 'wrap',
+  },
 });

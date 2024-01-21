@@ -18,6 +18,7 @@ const Styles = StyleSheet.create({
     paddingHorizontal: Metrics.medium,
     borderRadius: Rounds.small,
     borderWidth: FixedSizes.border_width,
+    flexGrow: 1,
   },
 });
 

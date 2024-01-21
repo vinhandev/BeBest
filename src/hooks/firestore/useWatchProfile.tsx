@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
+import { log } from '~/utils';
+
 import { usersCollection } from '~/services';
+
 import { useUserStore } from '~/stores/useUserStore';
+
 import { ProfilePropsType } from '~/types';
 
 export const useWatchProfile = () => {
@@ -12,7 +16,7 @@ export const useWatchProfile = () => {
       .doc(userId)
       .onSnapshot((documentSnapshot) => {
         const data = documentSnapshot?.data();
-        console.log('User data: ', data);
+        log.debug('Watch profile: ', data);
 
         if (data) {
           setProfile(data as ProfilePropsType);

@@ -6,7 +6,12 @@ import { TextInputProps } from 'react-native';
 import PasswordInput from './PasswordInput/PasswordInput';
 import NumberInput from './NumberInput/NumberInput';
 import OptionInput from './OptionInput/OptionInput';
-import { NumberInputProps, PickerProps } from 'react-native-ui-lib';
+import {
+  DateTimePickerProps,
+  NumberInputProps,
+  PickerProps,
+} from 'react-native-ui-lib';
+import DateInput from './DateInput/DateInput';
 
 type Props<T extends FieldValues> = {
   control: Control<T>;
@@ -31,6 +36,9 @@ type Props<T extends FieldValues> = {
       | (Omit<NumberInputProps, 'onChangeNumber'> & {
           variant: 'number';
         })
+      | (DateTimePickerProps & {
+          variant: 'date';
+        })
     )
 );
 export default function FormInput<T extends FieldValues>(props: Props<T>) {
@@ -44,6 +52,8 @@ export default function FormInput<T extends FieldValues>(props: Props<T>) {
       break;
     case 'number':
       return <NumberInput {...props} />;
+    case 'date':
+      return <DateInput {...props} />;
     default:
       return <TextInput {...props} />;
       break;

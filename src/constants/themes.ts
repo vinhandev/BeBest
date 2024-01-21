@@ -15,6 +15,7 @@ declare global {
       black: string;
       error: string;
       success: string;
+      purple: string;
     }
   }
 }
@@ -32,6 +33,7 @@ export const LightTheme: ReactNativePaper.Theme = {
     error: Colors.red,
     success: Colors.green,
     backdrop: Colors.grey_2,
+    purple: Colors.purple,
   },
 };
 export const DarkTheme: ReactNativePaper.Theme = {
@@ -47,5 +49,7 @@ export const DarkTheme: ReactNativePaper.Theme = {
     error: Colors.red,
     success: Colors.green,
     backdrop: Colors.grey_2,
+    purple: Colors.purple,
+
   },
 };
