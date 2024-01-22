@@ -34,17 +34,18 @@ export default function ProfileBasicInformation({ onPress }: Props) {
         <View
           style={{
             paddingLeft: 10,
+            flexGrow: 1,
           }}
         >
-          <Text variant="black_s_bold" style={styles.container}>
-            {profile?.name}
-          </Text>
-          <TouchableOpacity activeOpacity={0.8}>
-            <Row style={{ gap: 5 }}>
-              <Text>Edit Profile</Text>
-              <Icon variant="right" size={15} color={colors.black} />
-            </Row>
-          </TouchableOpacity>
+          <Row alignItems="center">
+            <View>
+              <Text variant="black_s_bold" style={styles.container}>
+                {profile?.name}
+              </Text>
+              <Text variant="black_s_light">Edit Profile</Text>
+            </View>
+            <Icon variant="right" size={25} color={colors.black} />
+          </Row>
         </View>
       </Row>
     </TouchableOpacity>

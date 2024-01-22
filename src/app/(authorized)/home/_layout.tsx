@@ -9,10 +9,12 @@ const ProfileLayout = () => {
         headerShown: false,
         headerTintColor: '#fff',
         headerBackTitle: 'Back',
+        animation: 'slide_from_bottom',
+        animationDuration: 100,
       }}
     >
       <Stack.Screen name="main" />
-      <Stack.Screen name="edit" />
+      <Stack.Screen name="task-list" />
     </Stack>
   );
 };

@@ -4,7 +4,7 @@ import { Alert, View } from 'react-native';
 import { MotiView } from 'moti';
 import { router } from 'expo-router';
 
-import { HomeLinks, PublicLinks } from '~/constants';
+import { PublicLinks } from '~/constants';
 
 import { SignInSchemaType, useSignIn, useSignInForm } from '~/hooks';
 

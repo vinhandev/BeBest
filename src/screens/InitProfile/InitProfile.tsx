@@ -6,7 +6,7 @@ import { Button } from 'react-native-paper';
 import { SafeKeyboard, SafeScreen } from '~/components/HOCs';
 import { Text } from '~/components/atoms';
 import { FormInput } from '~/components/molecules';
-import { HomeLinks, Metrics, ages, genders } from '~/constants';
+import { AuthorizedLinks, Metrics, ages, genders } from '~/constants';
 import { useUserStore } from '~/stores/useUserStore';
 import { styles } from './InitProfile.styles';
 import { useCreateProfile, useInitProfileForm, useSignOut } from '~/hooks';

@@ -16,6 +16,7 @@ const Styles = StyleSheet.create({
   formInput: {
     height: FixedSizes.form_input,
     paddingHorizontal: Metrics.medium,
+    justifyContent: 'center',
     borderRadius: Rounds.small,
     borderWidth: FixedSizes.border_width,
     flexGrow: 1,

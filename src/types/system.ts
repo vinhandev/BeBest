@@ -6,4 +6,9 @@ export type IconButtonPropsType = {
   title?: string;
 };
 
-export type BottomSheetType = 'add_task';
+export type BottomSheetType = 'add_task' | 'select_data';
+
+export type SelectPropsType = {
+  label: string;
+  value: string;
+};

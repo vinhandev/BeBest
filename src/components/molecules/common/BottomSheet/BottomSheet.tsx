@@ -29,8 +29,8 @@ const BottomSheet = () => {
 
   switch (variant) {
     case 'add_task':
-      body = <AddTask.component />;
-      snapPoints = AddTask.snapPoints;
+      body = <AddTask.Component />;
+      snapPoints = AddTask.SnapPoints;
       break;
 
     default:

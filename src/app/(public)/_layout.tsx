@@ -6,7 +6,7 @@ const PublicNavigator = () => {
     <Stack
       screenOptions={{
         headerShown: false,
-        presentation: 'card',
+        animation: 'fade_from_bottom',
       }}
     >
       <Stack.Screen

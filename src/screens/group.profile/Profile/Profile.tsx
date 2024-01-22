@@ -6,13 +6,14 @@ import {
   ProfileBasicInformation,
   ProfileSettings,
 } from '~/components/molecules';
+import { ProfileLinks } from '~/constants';
 import { useSignOut } from '~/hooks';
 
 export default function Profile() {
   const { signOut } = useSignOut();
 
   const navigateEditProfile = () => {
-    router.push('/group.profile/edit');
+    router.push(ProfileLinks.EDIT);
   };
   return (
     <View>

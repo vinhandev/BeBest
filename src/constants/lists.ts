@@ -1,7 +1,7 @@
 export const ages: { label: string; value: string }[] = Array.from(
   { length: 88 },
   (_, index) => ({
-    label: `${index + 12}`,
+    label: `Age ${index + 12}`,
     value: (index + 12).toString(),
   })
 );

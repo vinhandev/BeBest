@@ -5,10 +5,19 @@ export const PublicLinks = {
   INIT_PROFILE: 'init-profile',
 } as const;
 
-export const HomeLinks = {
+export const AuthorizedLinks = {
   RUN: 'run',
   WATER: 'water',
   HOME: 'home',
   ANALYST: 'analyst',
   PROFILE: 'profile',
 } as const;
+
+export const HomeLinks = {
+  HOME: 'main',
+  TASK_LIST: 'home/task-list',
+}
+export const ProfileLinks = {
+  PROFILE: 'profile',
+  EDIT: 'profile/edit',
+}

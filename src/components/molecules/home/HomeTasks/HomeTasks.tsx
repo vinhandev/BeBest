@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Alert, FlatList } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
-import { Metrics } from '~/constants';
-import { TaskPropsType } from '~/types/task';
+import { HomeLinks, Metrics } from '~/constants';
 import { checkNotSameDate, styleBackground, styleBorderColor } from '~/utils';
 import { useSystemStore, useUserStore } from '~/stores';
 
@@ -17,6 +16,7 @@ import Task from '../../common/Task/Task';
 
 import { styles } from './HomeTasks.styles';
 import { useCheckTask, useDeleteTask, useUpdateStreak } from '~/hooks';
+import { router } from 'expo-router';
 
 export default function HomeTasks() {
   const { t } = useTranslation('home');
@@ -65,6 +65,30 @@ export default function HomeTasks() {
     setOpenBottomSheet(true, 'add_task');
   };
 
+  const handleIncrementStreak = () => {
+    Alert.alert(
+      'Streak',
+      'Are you sure you want to checked streak for today? Cannot be undone',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            incrementStreak();
+          },
+        },
+      ]
+    );
+  };
+
+  const handleTaskList = () => {
+    router.push(HomeLinks.TASK_LIST);
+  };
+
   return (
     <View>
       <Text variant="black_l_bold">{t('tasks_title')}</Text>
@@ -98,7 +122,7 @@ export default function HomeTasks() {
           <IconButton
             disabled={percentOfDoneTask !== 100 || checkedStreak}
             icon="checked"
-            onPress={incrementStreak}
+            onPress={handleIncrementStreak}
             color={percentOfDoneTask === 100 ? streakStatusColor : undefined}
             textColor={percentOfDoneTask === 100 ? colors.white : undefined}
           />
@@ -107,7 +131,7 @@ export default function HomeTasks() {
             icon="add"
             onPress={handleOpenAddTaskBottomSheet}
           />
-          <IconButton icon="list" onPress={() => {}} />
+          <IconButton icon="list" onPress={handleTaskList} />
         </Row>
       </BounceWrapper>
       <Spacer size={Metrics.small} />

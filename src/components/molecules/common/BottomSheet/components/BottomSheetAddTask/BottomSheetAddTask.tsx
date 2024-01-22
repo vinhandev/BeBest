@@ -14,8 +14,8 @@ import { useBottomSheet } from '@gorhom/bottom-sheet';
 import { compileDueTime } from '~/utils';
 import { Keyboard } from 'react-native';
 
-export const snapPoints = ['80%'];
-export const component = () => {
+export const SnapPoints = ['80%'];
+export const Component = () => {
   const { control, handleSubmit, reset } = useAddTask();
   const { addTask } = useAddNewTask();
   const { close } = useBottomSheet();

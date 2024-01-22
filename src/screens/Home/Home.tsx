@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <View style={innerStyle.container}>
-      <PullToScrollView onRefresh={handleRefresh}>
+      {/* <PullToScrollView onRefresh={handleRefresh}> */}
         <View style={styles.container}>
           <RoundedPanel />
           <Spacer size={insets.top} />
@@ -85,7 +85,7 @@ export default function Home() {
           <Spacer size={Metrics.small} />
           <HomeTasks />
         </View>
-      </PullToScrollView>
+      {/* </PullToScrollView> */}
     </View>
   );
 }

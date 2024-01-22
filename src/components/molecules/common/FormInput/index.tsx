@@ -8,8 +8,7 @@ import NumberInput from './NumberInput/NumberInput';
 import OptionInput from './OptionInput/OptionInput';
 import {
   DateTimePickerProps,
-  NumberInputProps,
-  PickerProps,
+  TouchableOpacityProps,
 } from 'react-native-ui-lib';
 import DateInput from './DateInput/DateInput';
 
@@ -24,17 +23,14 @@ type Props<T extends FieldValues> = {
     }
   | (
       | (Omit<TextInputProps, 'theme'> & {
-          variant: 'text';
+          variant: 'text' | 'number';
         })
-      | (PickerProps & {
+      | (TouchableOpacityProps & {
           variant: 'select';
           data: {
             label: string;
             value: string;
           }[];
-        })
-      | (Omit<NumberInputProps, 'onChangeNumber'> & {
-          variant: 'number';
         })
       | (DateTimePickerProps & {
           variant: 'date';
