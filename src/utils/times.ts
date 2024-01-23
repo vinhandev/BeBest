@@ -1,3 +1,4 @@
+import { DatePropsType } from '~/types/dates';
 import { log } from './logs';
 
 function addZero(i: number) {
@@ -58,3 +59,19 @@ export function checkNotSameDate(
   }
   return false;
 }
+
+export const getAllDaysOfWeek = (): DatePropsType[] => {
+  const monday = new Date();
+  const todayDayOfWeek = monday.getDay();
+  monday.setDate(monday.getDate() - todayDayOfWeek);
+
+  const dayOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+  return dayOfWeek.map((day) => {
+    monday.setDate(monday.getDate() + 1);
+    return {
+      dayOfWeek: day,
+      date: new Date(monday),
+    };
+  });
+};

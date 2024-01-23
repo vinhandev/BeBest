@@ -10,5 +10,6 @@ export const styles = StyleSheet.create({
   },
   description: {
     flexGrow: 1,
+    flex: 1,
   },
 });

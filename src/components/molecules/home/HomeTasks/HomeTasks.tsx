@@ -31,12 +31,16 @@ export default function HomeTasks() {
   );
 
   const tasks = useUserStore((state) => state.tasks);
+  const filterTasks = tasks?.filter((item) =>
+    !checkNotSameDate(new Date(item.time), new Date())
+  );
   const updatedStreakDate = useUserStore((state) => state.updatedStreakDate);
-  const percentOfDoneTask = tasks
-    ? Math.round(
-        (tasks?.filter((task) => task.done).length / tasks?.length) * 100
-      )
-    : 0;
+  const percentOfDoneTask =
+    tasks?.length !== 0 && tasks !== null
+      ? Math.round(
+          (tasks?.filter((task) => task.done).length / tasks?.length) * 100
+        )
+      : 0;
 
   const checkedStreak = updatedStreakDate
     ? !checkNotSameDate(updatedStreakDate, new Date())
@@ -138,7 +142,7 @@ export default function HomeTasks() {
       <FlatList
         ItemSeparatorComponent={() => <Spacer size={Metrics.ex_small} />}
         scrollEnabled={false}
-        data={tasks}
+        data={filterTasks}
         renderItem={({ item, index }) => (
           <Task
             disabled={checkedStreak}

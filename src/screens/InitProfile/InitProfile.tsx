@@ -69,39 +69,30 @@ export default function InitProfile() {
             name="age"
             label={'Age'}
             data={ages}
-            defaultValue={ages[6].value}
           />
           <FormInput
             variant="number"
             control={control}
             name="weight"
-            label={'Weight'}
-            trailingText="kg"
-            fractionDigits={1}
+            label={'Weight (kg)'}
           />
           <FormInput
             variant="number"
             control={control}
             name="height"
-            label={'Height'}
-            trailingText="cm"
-            fractionDigits={0}
+            label={'Height (cm)'}
           />
           <FormInput
             variant="number"
             control={control}
             name="water"
-            label={'WaterPerDay'}
-            trailingText="ml"
-            fractionDigits={0}
+            label={'WaterPerDay (ml)'}
           />
           <FormInput
             variant="number"
             control={control}
             name="goal"
-            label={'GoalWeight'}
-            trailingText="kg"
-            fractionDigits={1}
+            label={'GoalWeight (kg)'}
           />
           <FormInput
             variant="select"
@@ -109,7 +100,6 @@ export default function InitProfile() {
             name="gender"
             label={'Gender'}
             data={genders}
-            defaultValue={genders[0].label}
           />
           <Button
             style={{ marginTop: Metrics.medium }}

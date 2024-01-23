@@ -14,7 +14,7 @@ import { useBottomSheet } from '@gorhom/bottom-sheet';
 import { compileDueTime } from '~/utils';
 import { Keyboard } from 'react-native';
 
-export const SnapPoints = ['80%'];
+export const SnapPoints = ['55%'];
 export const Component = () => {
   const { control, handleSubmit, reset } = useAddTask();
   const { addTask } = useAddNewTask();
@@ -54,7 +54,7 @@ export const Component = () => {
         variant="text"
         control={control}
       />
-      <Row gap={Metrics.ex_small}>
+      <Row gap={Metrics.medium}>
         <FormInput
           label="Due Date"
           name="due"

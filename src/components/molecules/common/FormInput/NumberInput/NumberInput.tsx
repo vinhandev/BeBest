@@ -37,7 +37,11 @@ export default function NumberInput<T extends FieldValues>({
           styleBorderColor(fieldState.invalid ? colors.error : colors.backdrop),
         ]}
         inputMode="numeric"
-        onChange={field.onChange}
+        onChangeText={(text) => {
+          if (text) {
+            field.onChange(parseInt(text));
+          }
+        }}
         value={field.value}
         {...props}
       />

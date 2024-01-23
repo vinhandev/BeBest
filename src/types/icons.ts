@@ -2,6 +2,7 @@ export type IconType =
   | 'analyst'
   | 'add'
   | 'app'
+  | 'back'
   | 'body'
   | 'checked'
   | 'eye-off'

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Control, FieldValues, Path, useController } from 'react-hook-form';
 
 import { useTheme } from 'react-native-paper';
@@ -10,7 +10,6 @@ import * as SelectData from '~/components/molecules/common/BottomSheet/component
 
 import Styles from '~/styles';
 import { styleBackground, styleBorderColor } from '~/utils';
-import { useSystemStore } from '~/stores';
 import { Text } from '~/components/atoms';
 import { SelectPropsType } from '~/types';
 type Props<T extends FieldValues> = TouchableOpacityProps & {

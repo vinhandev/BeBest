@@ -31,6 +31,8 @@ export default function Icon({ variant, ...props }: Props) {
       return <Entypo name="cup" {...props} />;
     case 'face':
       return <MaterialIcons name="tag-faces" {...props} />;
+    case 'back':
+      return <Ionicons name="chevron-back" {...props} />;
     case 'body':
       return <Ionicons name="body" {...props} />;
     case 'meal':

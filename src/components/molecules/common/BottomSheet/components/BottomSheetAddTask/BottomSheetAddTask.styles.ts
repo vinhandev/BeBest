@@ -3,7 +3,7 @@ import { Metrics } from '~/constants';
 
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: Metrics.small,
+    paddingHorizontal: Metrics.medium,
 
     gap: Metrics.ex_small,
   },

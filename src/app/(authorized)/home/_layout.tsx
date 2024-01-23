@@ -9,7 +9,7 @@ const ProfileLayout = () => {
         headerShown: false,
         headerTintColor: '#fff',
         headerBackTitle: 'Back',
-        animation: 'slide_from_bottom',
+        animation: 'fade',
         animationDuration: 100,
       }}
     >
