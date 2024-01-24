@@ -5,6 +5,8 @@ import { BottomSheetType } from '~/types';
 import { useSystemStore } from '~/stores';
 
 import * as AddTask from './components/BottomSheetAddTask/BottomSheetAddTask';
+import * as Face from './components/BottomSheetFace/BottomSheetFace';
+import * as Body from './components/BottomSheetBody/BottomSheetBody';
 
 const BottomSheet = () => {
   // ref
@@ -31,6 +33,14 @@ const BottomSheet = () => {
     case 'add_task':
       body = <AddTask.Component />;
       snapPoints = AddTask.SnapPoints;
+      break;
+    case 'face':
+      body = <Face.Component />;
+      snapPoints = Face.SnapPoints;
+      break;
+    case 'body':
+      body = <Body.Component />;
+      snapPoints = Body.SnapPoints;
       break;
 
     default:

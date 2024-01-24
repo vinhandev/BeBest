@@ -18,8 +18,8 @@ export default function TaskListRouter() {
     setChooseDate(date);
   };
 
-  const filterTasks = tasks?.filter((item) =>
-    !checkNotSameDate(new Date(item.time), chooseDate)
+  const filterTasks = tasks?.filter(
+    (item) => !checkNotSameDate(new Date(item.time), chooseDate)
   );
 
   return (
@@ -34,8 +34,14 @@ export default function TaskListRouter() {
         <FlatList
           data={filterTasks}
           ItemSeparatorComponent={() => <Spacer size={8} />}
-          renderItem={({ item }) => (
-            <Task task={item} disabled onPress={() => {}} onDelete={() => {}} />
+          renderItem={({ item, index }) => (
+            <Task
+              key={index}
+              task={item}
+              disabled
+              onPress={() => {}}
+              onDelete={() => {}}
+            />
           )}
         />
       </View>

@@ -32,6 +32,7 @@ export default function Calendar({ selectedDate, onPress }: Props) {
 
           return (
             <TouchableOpacity
+              key={day.dayOfWeek}
               onPress={() => onPress(day.date)}
               style={[
                 styles.item,

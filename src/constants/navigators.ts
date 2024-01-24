@@ -16,6 +16,11 @@ export const AuthorizedLinks = {
 export const HomeLinks = {
   HOME: 'main',
   TASK_LIST: 'home/task-list',
+  FACE_LIST: 'home/face-list',
+  BODY_LIST: 'home/body-list',
+  MEAL_LIST: 'home/meal-list',
+  WEIGHT_LIST: 'home/weight-list',
+  HEIGHT_LIST: 'home/height-list',
 }
 export const ProfileLinks = {
   PROFILE: 'profile',

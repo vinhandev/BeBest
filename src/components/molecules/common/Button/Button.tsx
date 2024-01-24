@@ -7,7 +7,7 @@ export default function Button({ ...props }: Props) {
   return (
     <RNPButton
       labelStyle={{
-        fontSize: FontSizes.small,
+        fontSize: FontSizes.s,
         fontWeight: 'bold',
       }}
       {...props}

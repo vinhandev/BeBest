@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -15,13 +15,19 @@ import { HomeHeader, HomeMenuAction, HomeTasks } from '~/components/molecules';
 import { BounceWrapper, PullToScrollView } from '~/components/HOCs';
 
 import { styles } from './Home.styles';
+import { useSystemStore } from '~/stores';
+import { useCameraPermission } from 'react-native-vision-camera';
 
 export default function Home() {
   const { t } = useTranslation('home');
   const insets = useSafeAreaInsets();
+  const { hasPermission, requestPermission } = useCameraPermission();
   const time = getTime(new Date());
   const notifyMessage = 'Next: Study English with...';
   const profile = useUserStore((state) => state.profile);
+  const setOpenBottomSheet = useSystemStore(
+    (state) => state.setOpenBottomSheet
+  );
 
   const innerStyle = StyleSheet.create({
     container: {
@@ -36,12 +42,34 @@ export default function Home() {
   const actions: IconButtonPropsType[] = [
     {
       icon: 'face',
-      onPress: () => {},
+      onPress: async () => {
+        if (hasPermission) {
+          setOpenBottomSheet(true, 'face');
+        } else {
+          const permission = await requestPermission();
+          if (permission) {
+            setOpenBottomSheet(true, 'face');
+          } else {
+            Alert.alert('No camera permission');
+          }
+        }
+      },
       title: t('face'),
     },
     {
       icon: 'body',
-      onPress: () => {},
+      onPress: async () => {
+        if (hasPermission) {
+          setOpenBottomSheet(true, 'body');
+        } else {
+          const permission = await requestPermission();
+          if (permission) {
+            setOpenBottomSheet(true, 'body');
+          } else {
+            Alert.alert('No camera permission');
+          }
+        }
+      },
       title: t('body'),
     },
     {
@@ -68,23 +96,23 @@ export default function Home() {
   return (
     <View style={innerStyle.container}>
       {/* <PullToScrollView onRefresh={handleRefresh}> */}
-        <View style={styles.container}>
-          <RoundedPanel />
-          <Spacer size={insets.top} />
-          <HomeHeader avatar={''} message={notifyMessage} time={time} />
-          <Spacer size={Metrics.small} />
-          <BounceWrapper>
-            <HomeMenuAction
-              name={profile?.name}
-              streak={profile?.streak}
-              weight={profile?.weight}
-              height={profile?.height}
-              actions={actions}
-            />
-          </BounceWrapper>
-          <Spacer size={Metrics.small} />
-          <HomeTasks />
-        </View>
+      <View style={styles.container}>
+        <RoundedPanel />
+        <Spacer size={insets.top} />
+        <HomeHeader avatar={''} message={notifyMessage} time={time} />
+        <Spacer size={Metrics.small} />
+        <BounceWrapper>
+          <HomeMenuAction
+            name={profile?.name}
+            streak={profile?.streak}
+            weight={profile?.weight}
+            height={profile?.height}
+            actions={actions}
+          />
+        </BounceWrapper>
+        <Spacer size={Metrics.small} />
+        <HomeTasks />
+      </View>
       {/* </PullToScrollView> */}
     </View>
   );

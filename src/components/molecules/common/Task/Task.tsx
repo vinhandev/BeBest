@@ -51,6 +51,7 @@ export default function Task({
   return (
     <Pressable
       disabled={disabled}
+      onPress={() => onPress(!done)}
       onLongPress={onDelete}
       style={({ pressed }) => stylePressed(pressed)}
     >

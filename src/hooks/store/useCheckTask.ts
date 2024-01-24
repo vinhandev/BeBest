@@ -1,13 +1,14 @@
 import { useUserStore } from '~/stores';
 import { TaskPropsType } from '~/types/task';
+import { log } from '~/utils';
 
 export function useCheckTask() {
   const tasks = useUserStore((state) => state.tasks);
   const setTasks = useUserStore((state) => state.setTasks);
-  const checkTask = (paramIndex: number, selected: boolean) => {
+  const checkTask = (time: number, selected: boolean) => {
     setTasks(
       tasks?.map((task, index) => {
-        if (index === paramIndex) {
+        if (task.time === time) {
           return {
             ...task,
             done: selected,

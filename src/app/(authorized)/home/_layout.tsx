@@ -15,6 +15,7 @@ const ProfileLayout = () => {
     >
       <Stack.Screen name="main" />
       <Stack.Screen name="task-list" />
+      <Stack.Screen name="face-list" />
     </Stack>
   );
 };

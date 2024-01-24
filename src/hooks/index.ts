@@ -15,3 +15,5 @@ export * from './store/useAddNewTask';
 export * from './store/useCheckTask';
 export * from './store/useDeleteTask';
 export * from './store/useUpdateStreak';
+export * from './store/useAddNewFace';
+export * from './store/useAddNewBody';

@@ -17,6 +17,7 @@ import Task from '../../common/Task/Task';
 import { styles } from './HomeTasks.styles';
 import { useCheckTask, useDeleteTask, useUpdateStreak } from '~/hooks';
 import { router } from 'expo-router';
+import { TaskPropsType } from '~/types/task';
 
 export default function HomeTasks() {
   const { t } = useTranslation('home');
@@ -31,14 +32,17 @@ export default function HomeTasks() {
   );
 
   const tasks = useUserStore((state) => state.tasks);
-  const filterTasks = tasks?.filter((item) =>
-    !checkNotSameDate(new Date(item.time), new Date())
-  );
+  const filterTasks =
+    tasks?.filter(
+      (item) => !checkNotSameDate(new Date(item.time), new Date())
+    ) ?? null;
   const updatedStreakDate = useUserStore((state) => state.updatedStreakDate);
   const percentOfDoneTask =
-    tasks?.length !== 0 && tasks !== null
+    filterTasks?.length !== 0 && filterTasks !== null
       ? Math.round(
-          (tasks?.filter((task) => task.done).length / tasks?.length) * 100
+          (filterTasks?.filter((task) => task.done).length /
+            filterTasks?.length) *
+            100
         )
       : 0;
 
@@ -46,11 +50,11 @@ export default function HomeTasks() {
     ? !checkNotSameDate(updatedStreakDate, new Date())
     : false;
   const streakStatusColor = checkedStreak ? colors.success : colors.error;
-  const handlePressTask = (index: number, selected: boolean) => {
-    checkTask(index, selected);
+  const handlePressTask = (time: number, selected: boolean) => {
+    checkTask(time, selected);
   };
 
-  const handleDeleteTask = (index: number) => {
+  const handleDeleteTask = (index: number, item: TaskPropsType) => {
     Alert.alert('Delete', 'Are you sure you want to delete this task?', [
       {
         text: 'Cancel',
@@ -60,7 +64,7 @@ export default function HomeTasks() {
       {
         text: 'OK',
         onPress: () => {
-          deleteTask(index);
+          deleteTask(index, item);
         },
       },
     ]);
@@ -149,10 +153,10 @@ export default function HomeTasks() {
             key={index}
             task={item}
             onPress={(selected) => {
-              handlePressTask(index, selected);
+              handlePressTask(item.time, selected);
             }}
             onDelete={() => {
-              handleDeleteTask(index);
+              handleDeleteTask(index, item);
             }}
           />
         )}
