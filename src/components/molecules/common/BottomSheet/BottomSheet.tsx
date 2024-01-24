@@ -7,6 +7,7 @@ import { useSystemStore } from '~/stores';
 import * as AddTask from './components/BottomSheetAddTask/BottomSheetAddTask';
 import * as Face from './components/BottomSheetFace/BottomSheetFace';
 import * as Body from './components/BottomSheetBody/BottomSheetBody';
+import * as Meal from './components/BottomSheetMeal/BottomSheetMeal';
 
 const BottomSheet = () => {
   // ref
@@ -41,6 +42,10 @@ const BottomSheet = () => {
     case 'body':
       body = <Body.Component />;
       snapPoints = Body.SnapPoints;
+      break;
+    case 'meal':
+      body = <Meal.Component />;
+      snapPoints = Meal.SnapPoints;
       break;
 
     default:

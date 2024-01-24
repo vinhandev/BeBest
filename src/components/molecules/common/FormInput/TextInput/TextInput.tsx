@@ -4,7 +4,7 @@ import { View, TextInput as RNTextInput, TextInputProps } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { Spacer, Text } from '~/components/atoms';
 import { styles } from './TextInput.styles';
-import { styleBackground, styleBorderColor } from '~/utils';
+import { styleBackground, styleBorderColor, styleColor } from '~/utils';
 import Styles from '~/styles';
 import { FormControlWrapper } from '~/components/HOCs';
 
@@ -36,6 +36,7 @@ export default function TextInput<T extends FieldValues>({
           Styles.formInput,
           styleBorderColor(fieldState.invalid ? colors.error : colors.backdrop),
           styleBackground(colors.backdrop),
+          styleColor(colors.black),
           props.style,
         ]}
         value={field.value}

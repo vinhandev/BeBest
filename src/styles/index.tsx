@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { FixedSizes, Metrics, Rounds } from '~/constants';
+import { FixedSizes, FontSizes, FontWeight, Metrics, Rounds } from '~/constants';
 
 const Styles = StyleSheet.create({
   shadow: {
@@ -20,6 +20,8 @@ const Styles = StyleSheet.create({
     borderRadius: Rounds.small,
     borderWidth: FixedSizes.border_width,
     flexGrow: 1,
+    fontSize: FontSizes.s,
+    fontWeight:FontWeight.regular,
   },
 });
 

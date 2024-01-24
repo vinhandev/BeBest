@@ -17,10 +17,7 @@ type Props<T extends FieldValues> = TouchableOpacityProps & {
   name: Path<T>;
   theme?: any;
   label?: string;
-  data: {
-    label: string;
-    value: string;
-  }[];
+  data: SelectPropsType[];
 };
 export default function OptionInput<T extends FieldValues>({
   control,
@@ -31,15 +28,20 @@ export default function OptionInput<T extends FieldValues>({
 }: Props<T>) {
   const { colors } = useTheme();
   const {
-    field: { onChange },
+    formState: { defaultValues },
+    field: { onChange, value },
     fieldState,
   } = useController({
     control,
     name,
   });
 
+  const defaultValue = !defaultValues
+    ? null
+    : data.find((item) => item.value === value) ?? null;
+
   const [selectedOption, setSelectedOption] = useState<SelectPropsType | null>(
-    null
+    defaultValue
   );
 
   // ref
@@ -71,7 +73,7 @@ export default function OptionInput<T extends FieldValues>({
             ),
           ]}
         >
-          <Text variant="black_s_light">{selectedOption?.label}</Text>
+          <Text variant="black_s_regular">{selectedOption?.label}</Text>
         </TouchableOpacity>
       </FormControlWrapper>
       <BottomSheetModal

@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 
 import { View } from 'moti';
-import { Calendar, Header, Task } from '~/components/molecules';
+import { Header } from '~/components/molecules';
 import { router } from 'expo-router';
 import { useUserStore } from '~/stores';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import { Image, Spacer, Text } from '~/components/atoms';
 import { FixedSizes, Metrics } from '~/constants';
-import { checkNotSameDate } from '~/utils';
-import { loadImageFromFile } from 'react-native-jsi-image';
 import { TouchableOpacity } from 'react-native-ui-lib';
 
-export default function BodyListRouter() {
-  const bodies = useUserStore((state) => state.bodies);
+export default function MealListRouter() {
+  const meals = useUserStore((state) => state.meals);
 
   const [chooseDate, setChooseDate] = useState(new Date());
 
@@ -22,7 +20,7 @@ export default function BodyListRouter() {
 
   return (
     <View>
-      <Header title="Bodies" left={{ icon: 'back', onPress: router.back }} />
+      <Header title="Meals" left={{ icon: 'back', onPress: router.back }} />
       <View
         style={{
           padding: Metrics.medium,
@@ -37,7 +35,7 @@ export default function BodyListRouter() {
           }}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => <Spacer size={Metrics.medium} />}
-          data={bodies}
+          data={meals}
           renderItem={({ item, index }) => (
             <TouchableOpacity
               style={{
@@ -50,9 +48,9 @@ export default function BodyListRouter() {
                 key={index}
                 style={{
                   width: 100,
-                  height: 200,
+                  height: 100,
                 }}
-                source={item.path}
+                source={item.image}
               />
               <Spacer size={5} />
               <Text variant="black_xs_light">

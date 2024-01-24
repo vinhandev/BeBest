@@ -14,7 +14,7 @@ export function useAddNewTask() {
       for (let index = 0; index < BusinessRules.dayOfHabits; index++) {
         tmpTasks.push({
           ...task,
-          description: `(${index+1}/${BusinessRules.dayOfHabits}) ${task.description}`,
+          description:`(${index+1}/${BusinessRules.dayOfHabits}) ${task.description}`.trim(),
           time: date.getTime(),
         });
         date.setDate(date.getDate() + 1);

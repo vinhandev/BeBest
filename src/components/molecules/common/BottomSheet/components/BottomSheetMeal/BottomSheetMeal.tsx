@@ -1,15 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { View } from 'moti';
 
-import {
-  useAddNewBody,
-} from '~/hooks';
+import { useAddNewFace, useAddNewTask } from '~/hooks';
 
-import { styles } from './BottomSheetBody.styles';
+import { styles } from './BottomSheetMeal.styles';
 import { Spacer, Text } from '~/components/atoms';
 import { useBottomSheet } from '@gorhom/bottom-sheet';
 import { showToast } from '~/utils';
-import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 import {
   Camera,
@@ -19,9 +16,13 @@ import {
 import Button from '../../../Button/Button';
 import { router } from 'expo-router';
 import { HomeLinks } from '~/constants';
+import { useForm } from 'react-hook-form';
+import FormInput from '../../../FormInput';
+import { useUserStore } from '~/stores';
 
-export const SnapPoints = ['90%'];
+export const SnapPoints = ['75%'];
 export const Component = () => {
+  const { control } = useForm();
   const [loading, setLoading] = useState(false);
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
   const device = useCameraDevice('back');
@@ -32,23 +33,14 @@ export const Component = () => {
     },
   ]);
   const camera = useRef<Camera>(null);
+  const { addTask } = useAddNewTask();
   const { close } = useBottomSheet();
-  const { add } = useAddNewBody();
-
-  const handleOpenLibrary = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    console.log(result);
-  };
+  const { add: addFace } = useAddNewFace();
+  const defaultMeals = useUserStore((state) => state.defaultMeals);
 
   const handleViewPictures = () => {
     close();
-    router.push(HomeLinks.BODY_LIST);
+    router.push(HomeLinks.MEAL_LIST);
   };
 
   const handleTakePicture = async () => {
@@ -58,11 +50,11 @@ export const Component = () => {
         const file = await camera.current.takePhoto({});
         if (permissionResponse?.granted) {
           await MediaLibrary.saveToLibraryAsync(`file://${file.path}`);
-          add({
+          addFace({
             path: `file://${file.path}`,
             time: new Date().getTime(),
           });
-          router.push(HomeLinks.BODY_LIST);
+          router.push(HomeLinks.MEAL_LIST);
         } else {
           await requestPermission();
         }
@@ -93,11 +85,26 @@ export const Component = () => {
         orientation="portrait"
       />
       <Spacer size={10} />
+      <View>
+        <FormInput
+          control={control}
+          variant="select"
+          label="Default meal"
+          name="default"
+          data={
+            defaultMeals?.map((item) => ({
+              label: item.name,
+              value: item.name,
+            })) ?? []
+          }
+        />
+      </View>
+      <Spacer size={10} />
       <Button loading={loading} onPress={handleTakePicture} mode="contained">
-        Take Picture
+        Add Meals
       </Button>
       <Spacer size={10} />
-      <Button onPress={handleViewPictures}>View All Picture</Button>
+      <Button onPress={handleViewPictures}>View All Meals</Button>
     </View>
   );
 };

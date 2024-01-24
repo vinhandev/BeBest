@@ -17,3 +17,4 @@ export * from './store/useDeleteTask';
 export * from './store/useUpdateStreak';
 export * from './store/useAddNewFace';
 export * from './store/useAddNewBody';
+export * from './store/useAddNewMeal';

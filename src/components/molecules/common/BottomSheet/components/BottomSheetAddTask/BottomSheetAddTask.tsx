@@ -11,7 +11,7 @@ import { Row, Spacer, Text } from '~/components/atoms';
 import { useUserStore } from '~/stores';
 import { TaskPropsType } from '~/types/task';
 import { useBottomSheet } from '@gorhom/bottom-sheet';
-import { compileDueTime } from '~/utils';
+import { compileDueTime, log } from '~/utils';
 import { Keyboard } from 'react-native';
 
 export const SnapPoints = ['55%'];
@@ -53,6 +53,7 @@ export const Component = () => {
         name="description"
         variant="text"
         control={control}
+        placeholder="What do you want to do today?"
       />
       <Row gap={Metrics.medium}>
         <FormInput
@@ -69,6 +70,7 @@ export const Component = () => {
           control={control}
         />
       </Row>
+      <Text variant="black_xs_light">Habit will last 60 days</Text>
 
       <Spacer size={Metrics.ex_small} />
       <Button onPress={handleSubmit(onValid)} mode="contained">

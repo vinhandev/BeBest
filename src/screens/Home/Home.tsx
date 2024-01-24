@@ -74,7 +74,18 @@ export default function Home() {
     },
     {
       icon: 'meal',
-      onPress: () => {},
+      onPress: async () => {
+        if (hasPermission) {
+          setOpenBottomSheet(true, 'meal');
+        } else {
+          const permission = await requestPermission();
+          if (permission) {
+            setOpenBottomSheet(true, 'meal');
+          } else {
+            Alert.alert('No camera permission');
+          }
+        }
+      },
       title: t('meal'),
     },
     {

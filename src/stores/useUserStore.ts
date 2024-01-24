@@ -5,7 +5,7 @@ import { zustandStorage } from './storage';
 import { ProfilePropsType } from '~/types';
 import { TaskPropsType } from '~/types/task';
 import { ImagePropsType } from '~/types/images';
-
+import { MealDefaultProps, MealProps } from '~/types/meals';
 
 type paramType = {
   initializing: boolean;
@@ -13,8 +13,10 @@ type paramType = {
   profile: ProfilePropsType | null;
   tasks: TaskPropsType[] | null;
   faces: ImagePropsType[] | null;
-  body: ImagePropsType[] | null;
+  bodies: ImagePropsType[] | null;
   updatedStreakDate: Date | null;
+  defaultMeals: MealDefaultProps[] | null;
+  meals: MealProps[] | null;
 };
 type stateProps = paramType & {
   setUser: (user: FirebaseAuthTypes.User | null) => void;
@@ -23,7 +25,9 @@ type stateProps = paramType & {
   setTasks: (tasks: TaskPropsType[]) => void;
   setUpdatedStreakDate: (date: Date) => void;
   setFaces: (faces: ImagePropsType[]) => void;
-  setBody: (body: ImagePropsType[]) => void;
+  setBodies: (bodies: ImagePropsType[]) => void;
+  setDefaultMeals: (meals: MealDefaultProps[]) => void;
+  setMeals: (meals: MealProps[]) => void;
   reset: () => void;
 };
 
@@ -33,7 +37,9 @@ const initProps: paramType = {
   profile: null,
   tasks: null,
   faces: null,
-  body: null,
+  bodies: null,
+  defaultMeals: null,
+  meals: null,
   updatedStreakDate: null,
 };
 
@@ -47,7 +53,9 @@ export const useUserStore = create(
       setTasks: (tasks) => set(() => ({ tasks })),
       setUpdatedStreakDate: (date) => set(() => ({ updatedStreakDate: date })),
       setFaces: (faces) => set(() => ({ faces })),
-      setBody: (body) => set(() => ({ body })),
+      setBodies: (bodies) => set(() => ({ bodies })),
+      setDefaultMeals: (meals) => set(() => ({ defaultMeals: meals })),
+      setMeals: (meals) => set(() => ({ meals })),
       reset: () => set(() => initProps),
     }),
     {
