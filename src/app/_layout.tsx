@@ -6,7 +6,7 @@ import {
   LightTheme,
   PublicLinks,
 } from '~/constants';
-import { useWatchAuth } from '~/hooks';
+import { useInitNotifications, useWatchAuth } from '~/hooks';
 
 import { useColorScheme } from 'react-native';
 import { Provider } from 'react-native-paper';
@@ -19,6 +19,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 export default function App() {
   const { initializing, user } = useWatchAuth();
+  useInitNotifications();
   const profile = useUserStore((state) => state.profile);
 
   useEffect(() => {

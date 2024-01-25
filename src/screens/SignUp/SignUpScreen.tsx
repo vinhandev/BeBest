@@ -3,7 +3,7 @@ import { Alert, Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from './styles';
-import { useSignUp } from '~/hooks/firebase/useSignUp';
+import { useSignUp } from '~/hooks/firebase/auth/useSignUp';
 import { useForm } from 'react-hook-form';
 import FormInput from '~/components/molecules/common/FormInput';
 
