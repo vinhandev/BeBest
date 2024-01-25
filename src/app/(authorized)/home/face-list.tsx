@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 
 import { View } from 'moti';
-import { Calendar, Header, Task } from '~/components/molecules';
+import { Header } from '~/components/molecules';
 import { router } from 'expo-router';
 import { useUserStore } from '~/stores';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import { Image, Spacer, Text } from '~/components/atoms';
 import { FixedSizes, Metrics } from '~/constants';
-import { checkNotSameDate } from '~/utils';
-import { loadImageFromFile } from 'react-native-jsi-image';
 import { TouchableOpacity } from 'react-native-ui-lib';
 
 export default function FaceListRouter() {
@@ -31,9 +29,9 @@ export default function FaceListRouter() {
         }}
       >
         <FlatList
+          numColumns={3}
           contentContainerStyle={{
             flexDirection: 'row',
-            flexWrap: 'wrap',
           }}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => <Spacer size={Metrics.medium} />}

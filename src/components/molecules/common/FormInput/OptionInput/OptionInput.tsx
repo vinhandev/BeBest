@@ -36,13 +36,9 @@ export default function OptionInput<T extends FieldValues>({
     name,
   });
 
-  const defaultValue = !defaultValues
+  const selectedOption = !value
     ? null
     : data.find((item) => item.value === value) ?? null;
-
-  const [selectedOption, setSelectedOption] = useState<SelectPropsType | null>(
-    defaultValue
-  );
 
   // ref
   const bottomSheetRef = useRef<BottomSheetModal>(null);
@@ -51,7 +47,6 @@ export default function OptionInput<T extends FieldValues>({
     bottomSheetRef.current?.present();
   };
   const onSelectedChange = (param: SelectPropsType) => {
-    setSelectedOption(param);
     onChange(param.value);
   };
 

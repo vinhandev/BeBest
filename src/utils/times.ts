@@ -1,3 +1,4 @@
+import { today } from '~/constants';
 import { DatePropsType } from '~/types/dates';
 import { log } from './logs';
 
@@ -45,7 +46,6 @@ export function checkNotSameDate(
   a: Date | null | undefined,
   b: Date | null | undefined
 ) {
-  log.debug(a);
   if (!(a instanceof Date)) return true;
   if (!(b instanceof Date)) return true;
   if (a.getFullYear() !== b.getFullYear()) {
@@ -75,3 +75,18 @@ export const getAllDaysOfWeek = (): DatePropsType[] => {
     };
   });
 };
+
+export function isToday(timeStamp: number) {
+  const a = new Date(timeStamp);
+  if (timeStamp === 0) return false;
+  if (a.getFullYear() !== today.getFullYear()) {
+    return false;
+  }
+  if (a.getMonth() !== today.getMonth()) {
+    return false;
+  }
+  if (a.getDate() !== today.getDate()) {
+    return false;
+  }
+  return true;
+}

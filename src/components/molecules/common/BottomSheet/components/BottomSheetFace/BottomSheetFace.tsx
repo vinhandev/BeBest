@@ -7,7 +7,7 @@ import { styles } from './BottomSheetFace.styles';
 import { Row, Spacer, Text } from '~/components/atoms';
 import { TaskPropsType } from '~/types/task';
 import { useBottomSheet } from '@gorhom/bottom-sheet';
-import { compileDueTime, showToast } from '~/utils';
+import { compileDueTime, showToast, styleBackground } from '~/utils';
 import { Keyboard, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-ui-lib';
 import * as ImagePicker from 'expo-image-picker';
@@ -21,9 +21,11 @@ import {
 import Button from '../../../Button/Button';
 import { router } from 'expo-router';
 import { HomeLinks } from '~/constants';
+import { useTheme } from 'react-native-paper';
 
-export const SnapPoints = ['65%'];
+export const SnapPoints = ['100%'];
 export const Component = () => {
+  const { colors } = useTheme();
   const [loading, setLoading] = useState(false);
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
   const device = useCameraDevice('front');
@@ -31,6 +33,7 @@ export const Component = () => {
     {
       photoAspectRatio: 1,
       photoResolution: 'max',
+      pixelFormat: 'native',
     },
   ]);
   const camera = useRef<Camera>(null);
@@ -98,15 +101,15 @@ export const Component = () => {
     );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, styleBackground(colors.black)]}>
       <Camera
         style={styles.camera}
         ref={camera}
         device={device}
         format={format}
+        zoom={1}
         photo
         isActive
-        orientation="portrait"
       />
       <Spacer size={10} />
       <Button loading={loading} onPress={handleTakePicture} mode="contained">

@@ -9,7 +9,9 @@ const Schema = z.object({
   weight: z.number().min(1),
   height: z.number().min(1),
   water: z.number().min(1),
-  goal: z.number().min(1),
+  goalWeight: z.number().min(1),
+  goalHeight: z.number().min(1),
+  mealPerDay: z.number().min(1),
   gender: z.enum(['MALE', 'FEMALE']),
 });
 export type FormData = z.infer<typeof Schema>;
@@ -19,7 +21,9 @@ export const useInitProfileForm = () => {
     name: '',
     age: '',
     gender: 'MALE',
-    goal: 0,
+    goalHeight: 0,
+    goalWeight: 0,
+    mealPerDay: 0,
     height: 0,
     water: 0,
     weight: 0,

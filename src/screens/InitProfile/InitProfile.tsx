@@ -1,12 +1,10 @@
-import { router } from 'expo-router';
 import React from 'react';
-import { useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { Button } from 'react-native-paper';
 import { SafeKeyboard, SafeScreen } from '~/components/HOCs';
 import { Text } from '~/components/atoms';
 import { FormInput } from '~/components/molecules';
-import { AuthorizedLinks, Metrics, ages, genders } from '~/constants';
+import { Metrics, ages, genders } from '~/constants';
 import { useUserStore } from '~/stores/useUserStore';
 import { styles } from './InitProfile.styles';
 import { useCreateProfile, useInitProfileForm, useSignOut } from '~/hooks';
@@ -34,12 +32,14 @@ export default function InitProfile() {
     const param: ProfilePropsType = {
       age: parseInt(data.age),
       gender: data.gender,
-      goalWeight: data.goal,
+      goalHeight: data.goalHeight,
+      goalWeight: data.goalWeight,
       height: data.height,
       name: data.name,
       waterPerDay: data.water,
       weight: data.weight,
       streak: 0,
+      mealPerDay: data.mealPerDay,
     };
 
     await createProfile(user?.uid, param);
@@ -91,8 +91,21 @@ export default function InitProfile() {
           <FormInput
             variant="number"
             control={control}
-            name="goal"
+            name="goalWeight"
             label={'GoalWeight (kg)'}
+          />
+          <FormInput
+            variant="number"
+            control={control}
+            name="goalHeight"
+            label={'GoalHeight (cm)'}
+          />
+          <FormInput
+            variant="number"
+            control={control}
+            name="mealPerDay"
+            label={'Meals per day'}
+            inputMode="numeric"
           />
           <FormInput
             variant="select"

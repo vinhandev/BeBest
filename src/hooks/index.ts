@@ -4,7 +4,6 @@ export * from './firebase/useSignUp';
 export * from './firebase/useWatchAuth';
 
 export * from './firestore/useCreateProfile';
-export * from './firestore/useWatchProfile';
 
 //form
 export * from './form/useSignInForm';
@@ -18,3 +17,4 @@ export * from './store/useUpdateStreak';
 export * from './store/useAddNewFace';
 export * from './store/useAddNewBody';
 export * from './store/useAddNewMeal';
+export * from './store/useGetHomeInformation';

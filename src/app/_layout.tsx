@@ -6,7 +6,7 @@ import {
   LightTheme,
   PublicLinks,
 } from '~/constants';
-import { useWatchAuth, useWatchProfile } from '~/hooks';
+import { useWatchAuth } from '~/hooks';
 
 import { useColorScheme } from 'react-native';
 import { Provider } from 'react-native-paper';
@@ -19,7 +19,6 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 export default function App() {
   const { initializing, user } = useWatchAuth();
-  useWatchProfile();
   const profile = useUserStore((state) => state.profile);
 
   useEffect(() => {
@@ -32,11 +31,9 @@ export default function App() {
       return;
     }
     if (profile === null && user !== null) {
-      log.debug('profile', profile);
       router.push(PublicLinks.INIT_PROFILE);
       return;
     } else {
-      log.debug('user', user);
       router.replace(AuthorizedLinks.HOME);
     }
   }, [initializing, user, profile]);

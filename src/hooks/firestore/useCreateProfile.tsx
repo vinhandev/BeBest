@@ -1,9 +1,18 @@
 import { usersCollection } from '~/services';
+import { useUserStore } from '~/stores';
 import { ProfilePropsType } from '~/types';
+import { log } from '~/utils';
 
 export const useCreateProfile = () => {
-  function createProfile(id: string, profile: ProfilePropsType) {
-    return usersCollection.doc(id).set(profile);
+  async function createProfile(id: string, profile: ProfilePropsType) {
+    const setProfile = useUserStore((state) => state.setProfile);
+
+    try {
+      await usersCollection.doc(id).set(profile);
+      setProfile(profile);
+    } catch (error) {
+      log.error(error);
+    }
   }
 
   return {

@@ -10,4 +10,5 @@ export type MealDefaultProps = {
 export type MealProps = MealDefaultProps & {
   image: string;
   eatTime: number;
+  type: MealTimeType;
 };

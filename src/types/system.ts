@@ -4,6 +4,7 @@ export type IconButtonPropsType = {
   icon: IconType;
   onPress: () => void;
   title?: string;
+  isChecked?: boolean;
 };
 
 export type BottomSheetType =

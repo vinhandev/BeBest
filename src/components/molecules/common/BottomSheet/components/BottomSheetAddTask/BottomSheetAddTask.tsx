@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'moti';
 
-import { Metrics, taskTypes } from '~/constants';
+import { Metrics, taskTypes, today } from '~/constants';
 import { useAddNewTask, useAddTask } from '~/hooks';
 
 import FormInput from '../../../FormInput';
@@ -25,11 +25,16 @@ export const Component = () => {
       time: new Date().getTime(),
       description: data.description,
       done: false,
-      doneTime: compileDueTime(data.due, data.time).getTime(),
+      doneTime: compileDueTime(data.dueDate, data.dueTime).getTime(),
       type: data.type,
     };
     addTask(param);
-    reset();
+    reset({
+      dueTime: today,
+      dueDate: today,
+      description: '',
+      type: 'TASK',
+    });
     close();
     Keyboard.dismiss();
   };
@@ -58,13 +63,13 @@ export const Component = () => {
       <Row gap={Metrics.medium}>
         <FormInput
           label="Due Date"
-          name="due"
+          name="dueDate"
           variant="date"
           control={control}
         />
         <FormInput
           label="Estimate"
-          name="time"
+          name="dueTime"
           variant="date"
           mode="time"
           control={control}

@@ -15,7 +15,12 @@ import { BounceWrapper } from '~/components/HOCs';
 import Task from '../../common/Task/Task';
 
 import { styles } from './HomeTasks.styles';
-import { useCheckTask, useDeleteTask, useUpdateStreak } from '~/hooks';
+import {
+  useCheckTask,
+  useDeleteTask,
+  useGetHomeInformation,
+  useUpdateStreak,
+} from '~/hooks';
 import { router } from 'expo-router';
 import { TaskPropsType } from '~/types/task';
 
@@ -30,21 +35,11 @@ export default function HomeTasks() {
   const setOpenBottomSheet = useSystemStore(
     (state) => state.setOpenBottomSheet
   );
+  const setLoading = useSystemStore((state) => state.setLoading);
 
-  const tasks = useUserStore((state) => state.tasks);
-  const filterTasks =
-    tasks?.filter(
-      (item) => !checkNotSameDate(new Date(item.time), new Date())
-    ) ?? null;
+  const { tasks, progress } = useGetHomeInformation();
+
   const updatedStreakDate = useUserStore((state) => state.updatedStreakDate);
-  const percentOfDoneTask =
-    filterTasks?.length !== 0 && filterTasks !== null
-      ? Math.round(
-          (filterTasks?.filter((task) => task.done).length /
-            filterTasks?.length) *
-            100
-        )
-      : 0;
 
   const checkedStreak = updatedStreakDate
     ? !checkNotSameDate(updatedStreakDate, new Date())
@@ -70,7 +65,9 @@ export default function HomeTasks() {
     ]);
   };
   const handleOpenAddTaskBottomSheet = () => {
+    setLoading(true);
     setOpenBottomSheet(true, 'add_task');
+    setLoading(false);
   };
 
   const handleIncrementStreak = () => {
@@ -111,28 +108,25 @@ export default function HomeTasks() {
           ]}
         >
           <CircleBar
-            color={percentOfDoneTask === 100 ? streakStatusColor : colors.black}
-            value={percentOfDoneTask}
+            color={progress === 100 ? streakStatusColor : colors.black}
+            value={progress}
           />
           <View style={styles.status}>
             <Text
               style={{
-                color:
-                  percentOfDoneTask === 100 ? streakStatusColor : colors.black,
+                color: progress === 100 ? streakStatusColor : colors.black,
               }}
-              variant={
-                percentOfDoneTask === 100 ? 'black_s_bold' : 'black_s_regular'
-              }
+              variant={progress === 100 ? 'black_s_bold' : 'black_s_regular'}
             >
               {t('tasks_status_title')}
             </Text>
           </View>
           <IconButton
-            disabled={percentOfDoneTask !== 100 || checkedStreak}
+            disabled={progress !== 100 || checkedStreak}
             icon="checked"
             onPress={handleIncrementStreak}
-            color={percentOfDoneTask === 100 ? streakStatusColor : undefined}
-            textColor={percentOfDoneTask === 100 ? colors.white : undefined}
+            color={progress === 100 ? streakStatusColor : undefined}
+            textColor={progress === 100 ? colors.white : undefined}
           />
           <IconButton
             disabled={checkedStreak}
@@ -146,7 +140,7 @@ export default function HomeTasks() {
       <FlatList
         ItemSeparatorComponent={() => <Spacer size={Metrics.ex_small} />}
         scrollEnabled={false}
-        data={filterTasks}
+        data={tasks}
         renderItem={({ item, index }) => (
           <Task
             disabled={checkedStreak}

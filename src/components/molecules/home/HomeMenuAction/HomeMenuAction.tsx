@@ -56,9 +56,10 @@ export default function HomeMenuAction({
         {actions.map((action, index) => (
           <IconButton
             key={index}
-            icon={action.icon}
+            icon={action.isChecked ? 'checked' : action.icon}
             title={action.title}
             onPress={action.onPress}
+            color={action.isChecked ? colors.success : colors.quaternary}
           />
         ))}
       </Row>
