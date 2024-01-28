@@ -6,6 +6,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Metrics.medium,
     justifyContent: 'center',
-    paddingVertical: Metrics.medium,
+    paddingBottom: Metrics.medium,
   },
 });
