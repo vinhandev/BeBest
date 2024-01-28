@@ -13,6 +13,14 @@ export const AuthorizedLinks = {
   PROFILE: 'profile',
 } as const;
 
+export const CameraLinks = {
+  FACE:'face-camera',
+  BODY:'body-camera',
+  MEAL:'meal-camera',
+  WEIGHT:'weight-camera',
+  HEIGHT:'height-camera'
+} as const;
+
 export const HomeLinks = {
   HOME: 'main',
   TASK_LIST: 'home/task-list',

@@ -6,7 +6,7 @@ import { useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { IconButtonPropsType } from '~/types';
-import { FixedSizes, Metrics } from '~/constants';
+import { CameraLinks, FixedSizes, Metrics } from '~/constants';
 import { checkNotSameDate, getTime, log } from '~/utils';
 import { useUserStore } from '~/stores/useUserStore';
 
@@ -19,6 +19,7 @@ import { useSystemStore } from '~/stores';
 import { useCameraPermission } from 'react-native-vision-camera';
 import { useGetHomeInformation } from '~/hooks';
 import * as MediaLibrary from 'expo-media-library';
+import { router } from 'expo-router';
 
 export default function Home() {
   const { t } = useTranslation('home');
@@ -50,13 +51,13 @@ export default function Home() {
     {
       icon: 'face',
       onPress: async () => {
-        if (hasPermission) {
-          setOpenBottomSheet(true, 'face');
+        if (hasPermission && permissionResponse?.granted) {
+          router.push(CameraLinks.FACE);
         } else {
           const permission = await requestPermission();
           const permission2 = await requestPermission2();
           if (permission && permission2) {
-            setOpenBottomSheet(true, 'face');
+            router.push(CameraLinks.FACE);
           } else {
             Alert.alert('No camera permission');
           }
@@ -68,7 +69,7 @@ export default function Home() {
     {
       icon: 'body',
       onPress: async () => {
-        if (hasPermission) {
+        if (hasPermission && permissionResponse?.granted) {
           setOpenBottomSheet(true, 'body');
         } else {
           const permission = await requestPermission();

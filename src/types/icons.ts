@@ -14,10 +14,12 @@ export type IconType =
   | 'list'
   | 'logout'
   | 'meal'
+  | 'camera-flip'
   | 'profile'
   | 'right'
   | 'run'
   | 'settings'
   | 'streak'
+  | 'album'
   | 'water'
   | 'weight';
