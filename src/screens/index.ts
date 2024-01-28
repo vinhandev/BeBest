@@ -10,3 +10,4 @@ export { default as ProfileEditScreen } from './authorized/profiles/Edit/Edit';
 
 export { default as FaceScreen } from './cameras/Face/Face';
 export { default as BodyScreen } from './cameras/Body/Body';
+export { default as MealsScreen } from './cameras/Meals/Meals';

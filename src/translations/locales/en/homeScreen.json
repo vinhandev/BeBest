@@ -1,9 +1,14 @@
 {
-  "face": "Face",
-  "body": "Body",
-  "meal": "Meal",
-  "weight": "Weight",
-  "height": "Height",
+  "view_today": "View Today",
+  "face": "Add Face",
+  "body": "Add Body",
+  "meal": "Add Meal",
+  "weight": "Add Weight",
+  "height": "Add Height",
+  "view_face": "Faces Albums",
+  "view_body": "Bodies Albums",
+  "view_meal": "Meals Albums",
+  "view_weight": "All Weights",
   "tasks_title": "Tasks",
-  "tasks_status_title":"Completed Activities"
+  "tasks_status_title": "Completed Activities"
 }

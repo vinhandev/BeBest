@@ -14,3 +14,9 @@ export const taskTypes = [
   { label: 'Habit', value: 'HABIT' },
   { label: 'Task', value: 'TASK' },
 ];
+export const meals = [
+  { label: '🍳 Breakfast', value: 'Breakfast' },
+  { label: '🍛 Lunch', value: 'Lunch' },
+  { label: '🍝 Dinner', value: 'Dinner' },
+  { label: '🍫 Snack', value: 'Snack' },
+];

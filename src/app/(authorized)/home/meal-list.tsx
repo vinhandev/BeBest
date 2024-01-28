@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { View } from 'moti';
-import { Header } from '~/components/molecules';
+import { Calendar, Header } from '~/components/molecules';
 import { router } from 'expo-router';
 import { useUserStore } from '~/stores';
 import { FlatList } from 'react-native-gesture-handler';
 import { Image, Spacer, Text } from '~/components/atoms';
-import { FixedSizes, Metrics } from '~/constants';
+import { FixedSizes, HomeLinks, Metrics } from '~/constants';
 import { TouchableOpacity } from 'react-native-ui-lib';
+import { useGetUserMeals } from '~/hooks';
+import { checkNotSameDate } from '~/utils';
 
 export default function MealListRouter() {
   const meals = useUserStore((state) => state.meals);
+  const { get } = useGetUserMeals();
+  useEffect(() => {
+    get();
+  }, []);
 
   const [chooseDate, setChooseDate] = useState(new Date());
 
@@ -18,9 +24,22 @@ export default function MealListRouter() {
     setChooseDate(date);
   };
 
+  const filterMeals = meals?.filter(
+    (item) => !checkNotSameDate(new Date(item.time), chooseDate)
+  );
+
   return (
     <View>
-      <Header title="Meals" left={{ icon: 'back', onPress: router.back }} />
+      <Header
+        title="Meals"
+        left={{
+          icon: 'back',
+          onPress: () => {
+            router.replace(HomeLinks.HOME);
+          },
+        }}
+      />
+      <Calendar onPress={handleSelectDate} selectedDate={chooseDate} />
       <View
         style={{
           padding: Metrics.medium,
@@ -35,7 +54,7 @@ export default function MealListRouter() {
           }}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => <Spacer size={Metrics.medium} />}
-          data={meals}
+          data={filterMeals}
           renderItem={({ item, index }) => (
             <TouchableOpacity
               style={{

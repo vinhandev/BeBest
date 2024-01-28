@@ -8,5 +8,6 @@ export const styles = StyleSheet.create({
   },
   actions: {
     flexWrap: 'wrap',
+    alignItems: 'flex-start',
   },
 });

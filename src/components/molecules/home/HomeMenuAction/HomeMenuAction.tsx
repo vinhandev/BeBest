@@ -52,7 +52,7 @@ export default function HomeMenuAction({
         >{` ${streak ?? 0} streaks`}</Text>
       </Row>
       <Spacer size={5} />
-      <Row style={styles.actions}>
+      <Row gap={5} style={styles.actions}>
         {actions.map((action, index) => (
           <IconButton
             key={index}

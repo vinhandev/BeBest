@@ -13,6 +13,7 @@ export type IconType =
   | 'left'
   | 'list'
   | 'logout'
+  | 'today'
   | 'meal'
   | 'camera-flip'
   | 'profile'

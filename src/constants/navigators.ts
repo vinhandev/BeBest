@@ -16,7 +16,7 @@ export const AuthorizedLinks = {
 export const CameraLinks = {
   FACE:'face-camera',
   BODY:'body-camera',
-  MEAL:'meal-camera',
+  MEAL:'meals-camera',
   WEIGHT:'weight-camera',
   HEIGHT:'height-camera'
 } as const;

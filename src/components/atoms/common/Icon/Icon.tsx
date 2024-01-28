@@ -25,6 +25,8 @@ export default function Icon({ variant, ...props }: Props) {
       return <Foundation name="graph-pie" {...props} />;
     case 'profile':
       return <FontAwesome5 name="user-alt" {...props} size={props.size - 4} />;
+    case 'today':
+      return <Ionicons name="today" {...props} />;
     case 'camera-flip':
       return <MaterialIcons name="flip-camera-ios" {...props} />;
     case 'run':

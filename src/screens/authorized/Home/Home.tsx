@@ -6,7 +6,7 @@ import { useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { IconButtonPropsType } from '~/types';
-import { CameraLinks, FixedSizes, Metrics } from '~/constants';
+import { CameraLinks, FixedSizes, HomeLinks, Metrics } from '~/constants';
 import { checkNotSameDate, getTime, log } from '~/utils';
 import { useUserStore } from '~/stores/useUserStore';
 
@@ -23,7 +23,7 @@ import { router } from 'expo-router';
 
 export default function Home() {
   const { t } = useTranslation('home');
-  const { body, face } = useGetHomeInformation();
+  const { body, face, meals } = useGetHomeInformation();
   const insets = useSafeAreaInsets();
   const { hasPermission, requestPermission } = useCameraPermission();
   const [permissionResponse, requestPermission2] =
@@ -48,6 +48,11 @@ export default function Home() {
   });
 
   const actions: IconButtonPropsType[] = [
+    {
+      icon: 'today',
+      onPress: () => {},
+      title: t('view_today'),
+    },
     {
       icon: 'face',
       onPress: async () => {
@@ -88,18 +93,19 @@ export default function Home() {
       icon: 'meal',
       onPress: async () => {
         if (hasPermission) {
-          setOpenBottomSheet(true, 'meal');
+          router.push(CameraLinks.MEAL);
         } else {
           const permission = await requestPermission();
           const permission2 = await requestPermission2();
           if (permission && permission2) {
-            setOpenBottomSheet(true, 'meal');
+            router.push(CameraLinks.MEAL);
           } else {
             Alert.alert('No camera permission');
           }
         }
       },
       title: t('meal'),
+      isChecked: !!meals,
     },
     {
       icon: 'weight',
@@ -110,6 +116,34 @@ export default function Home() {
       icon: 'height',
       onPress: () => {},
       title: t('height'),
+    },
+    {
+      icon: 'face',
+      onPress: () => {
+        router.push(HomeLinks.FACE_LIST);
+      },
+      title: t('view_face'),
+    },
+    {
+      icon: 'body',
+      onPress: () => {
+        router.push(HomeLinks.BODY_LIST);
+      },
+      title: t('view_body'),
+    },
+    {
+      icon: 'meal',
+      onPress: () => {
+        router.push(HomeLinks.MEAL_LIST);
+      },
+      title: t('view_meal'),
+    },
+    {
+      icon: 'analyst',
+      onPress: () => {
+        router.push(HomeLinks.WEIGHT_LIST);
+      },
+      title: t('view_weight'),
     },
   ];
 
