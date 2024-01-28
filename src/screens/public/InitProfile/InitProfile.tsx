@@ -4,7 +4,7 @@ import { Button } from 'react-native-paper';
 import { SafeKeyboard, SafeScreen } from '~/components/HOCs';
 import { Text } from '~/components/atoms';
 import { FormInput } from '~/components/molecules';
-import { Metrics, ages, genders } from '~/constants';
+import { Metrics, ages, genders, todayTime } from '~/constants';
 import { useUserStore } from '~/stores/useUserStore';
 import { styles } from './InitProfile.styles';
 import { useCreateProfile, useInitProfileForm, useSignOut } from '~/hooks';
@@ -40,6 +40,9 @@ export default function InitProfile() {
       weight: data.weight,
       streak: 0,
       mealPerDay: data.mealPerDay,
+      updateHeightTime:todayTime,
+      updateWeightTime:todayTime,
+      updateStreakTime:todayTime,
     };
 
     await createProfile(user?.uid, param);

@@ -23,7 +23,7 @@ import { router } from 'expo-router';
 
 export default function Home() {
   const { t } = useTranslation('home');
-  const { body, face, meals } = useGetHomeInformation();
+  const { body, face, meals, isUpdateWeight,isUpdateHeight } = useGetHomeInformation();
   const insets = useSafeAreaInsets();
   const { hasPermission, requestPermission } = useCameraPermission();
   const [permissionResponse, requestPermission2] =
@@ -50,7 +50,9 @@ export default function Home() {
   const actions: IconButtonPropsType[] = [
     {
       icon: 'today',
-      onPress: () => {},
+      onPress: () => {
+        router.push(HomeLinks.TODAY);
+      },
       title: t('view_today'),
     },
     {
@@ -109,13 +111,19 @@ export default function Home() {
     },
     {
       icon: 'weight',
-      onPress: () => {},
+      onPress: () => {
+        router.push(CameraLinks.WEIGHT);
+      },
       title: t('weight'),
+      isChecked: isUpdateWeight,
     },
     {
       icon: 'height',
-      onPress: () => {},
+      onPress: () => {
+        router.push(CameraLinks.HEIGHT);
+      },
       title: t('height'),
+      isChecked: isUpdateHeight,
     },
     {
       icon: 'face',

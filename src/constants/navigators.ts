@@ -14,11 +14,11 @@ export const AuthorizedLinks = {
 } as const;
 
 export const CameraLinks = {
-  FACE:'face-camera',
-  BODY:'body-camera',
-  MEAL:'meals-camera',
-  WEIGHT:'weight-camera',
-  HEIGHT:'height-camera'
+  FACE: 'face-camera',
+  BODY: 'body-camera',
+  MEAL: 'meals-camera',
+  WEIGHT: 'add-weight',
+  HEIGHT: 'add-height',
 } as const;
 
 export const HomeLinks = {
@@ -29,8 +29,9 @@ export const HomeLinks = {
   MEAL_LIST: 'home/meal-list',
   WEIGHT_LIST: 'home/weight-list',
   HEIGHT_LIST: 'home/height-list',
-}
+  TODAY: 'home/today',
+};
 export const ProfileLinks = {
   PROFILE: 'profile',
   EDIT: 'profile/edit',
-}
+};

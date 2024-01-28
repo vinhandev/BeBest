@@ -1,11 +1,20 @@
+import { today } from '~/constants';
 import { useUserStore } from '~/stores';
-import { isToday, log } from '~/utils';
+import { checkNotSameDate, isToday, log } from '~/utils';
 
 export function useGetHomeInformation() {
   const tasks = useUserStore((state) => state.tasks);
   const meals = useUserStore((state) => state.meals);
   const bodies = useUserStore((state) => state.bodies);
   const faces = useUserStore((state) => state.faces);
+  const updateWeightTime = useUserStore(
+    (state) => state.profile?.updateWeightTime ?? 0
+  );
+  const updateHeightTime = useUserStore(
+    (state) => state.profile?.updateHeightTime ?? 0
+  );
+  const isUpdateWeight = !checkNotSameDate(new Date(updateWeightTime), today);
+  const isUpdateHeight = !checkNotSameDate(new Date(updateHeightTime), today);
 
   const todayTasks = [...(tasks?.filter((item) => isToday(item.time)) ?? [])];
   const sortTasks = todayTasks.sort((a, b) => {
@@ -16,7 +25,7 @@ export function useGetHomeInformation() {
   const todayFace = faces?.find((item) => isToday(item.time));
   const todayBody = bodies?.find((item) => isToday(item.time));
   const todayMeals = meals?.filter((item) => isToday(item.time));
-  const totalProgress = 3 + todayTasks.length;
+  const totalProgress = 4 + todayTasks.length;
 
   let done = 0;
   if (!!todayFace) {
@@ -26,6 +35,9 @@ export function useGetHomeInformation() {
     done += 1;
   }
   if (!!todayMeals) {
+    done += 1;
+  }
+  if (isUpdateWeight) {
     done += 1;
   }
   if (todayTasks.length !== 0) {
@@ -50,5 +62,7 @@ export function useGetHomeInformation() {
     body: todayBody,
     meals: todayMeals,
     progress,
+    isUpdateWeight,
+    isUpdateHeight,
   };
 }

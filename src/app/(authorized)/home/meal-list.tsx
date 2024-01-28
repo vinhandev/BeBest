@@ -73,7 +73,7 @@ export default function MealListRouter() {
               />
               <Spacer size={5} />
               <Text variant="black_xs_light">
-                {new Date(item.time).toDateString()}
+                {item.mealTime}
               </Text>
             </TouchableOpacity>
           )}

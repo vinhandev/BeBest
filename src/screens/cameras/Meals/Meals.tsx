@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'moti';
 
 import {
@@ -28,7 +28,7 @@ import { useTheme } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useSystemStore, useUserStore } from '~/stores';
 import { styles } from './Meals.styles';
-import { Button } from '~/components/molecules';
+import { Button, SwipeSelector } from '~/components/molecules';
 import { Picker, TouchableOpacity } from 'react-native-ui-lib';
 import * as MediaLibrary from 'expo-media-library';
 import { MealTimeType } from '~/types/meals';
@@ -43,7 +43,7 @@ export default function MealsScreen() {
   const loading = useSystemStore((state) => state.loading);
   const [isFrontCamera, setIsFrontCamera] = useState(false);
   const [mealTime, setMealTime] = useState<MealTimeType>('Breakfast');
-  const [calories, setCalories] = useState<number>(200);
+  const [calories, setCalories] = useState<number>(500);
   const device = useCameraDevice(isFrontCamera ? 'front' : 'back');
   const format = useCameraFormat(device, [
     {
@@ -53,11 +53,6 @@ export default function MealsScreen() {
   const camera = useRef<Camera>(null);
   const { create } = useCreateUserMeal();
   const { uploadImage } = useSaveImage();
-
-  const caloriesList = [];
-  for (let index = 0; index < 21; index++) {
-    caloriesList.push(index * 5);
-  }
 
   const filename = `${uid}_${dateString}_${mealTime.toLowerCase()}`;
   const path = `images/bodies/${filename}_meals_${mealTime.toLowerCase()}.jpeg`;
@@ -139,60 +134,14 @@ export default function MealsScreen() {
         >{`${calories} kcal`}</Text>
 
         <Spacer size={10} />
-        <View
-          style={{
-            justifyContent: 'flex-end',
-            height: 20,
-          }}
-        >
-          <View
-            style={{
-              width: 0.5,
-              height: 30,
-              backgroundColor: colors.error,
-              position: 'absolute',
-              alignSelf: 'center',
-            }}
-          />
-          <View
-            style={{
-              width: Metrics.screenWidth,
-            }}
-          >
-            <ScrollView
-              showsHorizontalScrollIndicator={false}
-              onScroll={(e) =>
-                setCalories(Math.round(e.nativeEvent.contentOffset.x) * 5)
-              }
-              horizontal
-            >
-              <Row
-                style={{
-                  paddingLeft: Metrics.screenWidth * 0.5,
-                  paddingRight: Metrics.screenWidth * 0.5 - 1,
-                  alignItems: 'flex-end',
-                }}
-              >
-                {caloriesList.map((item, index) => (
-                  <View
-                    style={{
-                      width: index === caloriesList.length - 1 ? 1 : 20,
-                    }}
-                  >
-                    <View
-                      style={{
-                        width: 1,
-                        height: index % 5 === 0 ? 15 : 10,
-                        backgroundColor:
-                          index % 5 === 0 ? colors.white : `${colors.white}55`,
-                      }}
-                    />
-                  </View>
-                ))}
-              </Row>
-            </ScrollView>
-          </View>
-        </View>
+        <SwipeSelector
+          current={calories}
+          onChange={setCalories}
+          max={2000}
+          min={0}
+          step={50}
+          color={colors.white}
+        />
       </View>
       <Row style={styles.actions}>
         <TouchableOpacity onPress={handleFlipCamera}>

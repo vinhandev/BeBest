@@ -5,9 +5,7 @@ import { BottomSheetType } from '~/types';
 import { useSystemStore } from '~/stores';
 
 import * as AddTask from './components/BottomSheetAddTask/BottomSheetAddTask';
-import * as Face from './components/BottomSheetFace/BottomSheetFace';
-import * as Body from './components/BottomSheetBody/BottomSheetBody';
-import * as Meal from './components/BottomSheetMeal/BottomSheetMeal';
+import * as AddWeight from './components/BottomSheetWeight/BottomSheetWeight';
 
 const BottomSheet = () => {
   // ref
@@ -35,17 +33,9 @@ const BottomSheet = () => {
       body = <AddTask.Component />;
       snapPoints = AddTask.SnapPoints;
       break;
-    case 'face':
-      body = <Face.Component />;
-      snapPoints = Face.SnapPoints;
-      break;
-    case 'body':
-      body = <Body.Component />;
-      snapPoints = Body.SnapPoints;
-      break;
-    case 'meal':
-      body = <Meal.Component />;
-      snapPoints = Meal.SnapPoints;
+    case 'weight':
+      body = <AddWeight.Component />;
+      snapPoints = AddWeight.SnapPoints;
       break;
 
     default:

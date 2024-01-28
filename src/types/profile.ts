@@ -11,4 +11,7 @@ export type ProfilePropsType = {
   gender: GenderType;
   streak: number;
   mealPerDay: number;
+  updateWeightTime: number;
+  updateHeightTime: number;
+  updateStreakTime: number;
 };

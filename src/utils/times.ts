@@ -64,6 +64,7 @@ export const getAllDaysOfWeek = (): DatePropsType[] => {
   const monday = new Date();
   const todayDayOfWeek = monday.getDay();
   monday.setDate(monday.getDate() - todayDayOfWeek);
+  log.debug(monday);
 
   const dayOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 

@@ -7,16 +7,15 @@ export type IconButtonPropsType = {
   isChecked?: boolean;
 };
 
-export type BottomSheetType =
-  | 'add_task'
-  | 'select_data'
-  | 'face'
-  | 'body'
-  | 'meal'
-  | 'weight'
-  | 'height';
+export type BottomSheetType = 'add_task' | 'select_data' | 'weight' | 'height';
 
 export type SelectPropsType = {
   label: string;
   value: string;
+};
+
+export type RecordPropsType = {
+  time: number;
+  uid: string;
+  value: number;
 };
