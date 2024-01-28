@@ -18,12 +18,16 @@ import { styles } from './Home.styles';
 import { useSystemStore } from '~/stores';
 import { useCameraPermission } from 'react-native-vision-camera';
 import { useGetHomeInformation } from '~/hooks';
+import * as MediaLibrary from 'expo-media-library';
 
 export default function Home() {
   const { t } = useTranslation('home');
   const { body, face } = useGetHomeInformation();
   const insets = useSafeAreaInsets();
   const { hasPermission, requestPermission } = useCameraPermission();
+  const [permissionResponse, requestPermission2] =
+    MediaLibrary.usePermissions();
+
   const time = getTime(new Date());
   const notifyMessage = 'Next: Study English with...';
   const profile = useUserStore((state) => state.profile);
@@ -50,7 +54,8 @@ export default function Home() {
           setOpenBottomSheet(true, 'face');
         } else {
           const permission = await requestPermission();
-          if (permission) {
+          const permission2 = await requestPermission2();
+          if (permission && permission2) {
             setOpenBottomSheet(true, 'face');
           } else {
             Alert.alert('No camera permission');
@@ -67,7 +72,8 @@ export default function Home() {
           setOpenBottomSheet(true, 'body');
         } else {
           const permission = await requestPermission();
-          if (permission) {
+          const permission2 = await requestPermission2();
+          if (permission && permission2) {
             setOpenBottomSheet(true, 'body');
           } else {
             Alert.alert('No camera permission');
@@ -84,7 +90,8 @@ export default function Home() {
           setOpenBottomSheet(true, 'meal');
         } else {
           const permission = await requestPermission();
-          if (permission) {
+          const permission2 = await requestPermission2();
+          if (permission && permission2) {
             setOpenBottomSheet(true, 'meal');
           } else {
             Alert.alert('No camera permission');

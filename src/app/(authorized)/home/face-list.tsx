@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { View } from 'moti';
 import { Header } from '~/components/molecules';
@@ -8,15 +8,27 @@ import { FlatList } from 'react-native-gesture-handler';
 import { Image, Spacer, Text } from '~/components/atoms';
 import { FixedSizes, Metrics } from '~/constants';
 import { TouchableOpacity } from 'react-native-ui-lib';
+import { log } from '~/utils';
+import { useGetUserFace } from '~/hooks';
+import { RefreshControl } from 'react-native';
 
 export default function FaceListRouter() {
   const faces = useUserStore((state) => state.faces);
 
-  const [chooseDate, setChooseDate] = useState(new Date());
+  log.debug(faces);
 
-  const handleSelectDate = (date: Date) => {
-    setChooseDate(date);
-  };
+  const [refreshing, setRefreshing] = useState(false);
+  const { get } = useGetUserFace();
+
+  useEffect(() => {
+    get();
+  }, []);
+
+  function handleRefresh() {
+    setRefreshing(true);
+    get();
+    setRefreshing(false);
+  }
 
   return (
     <View>
@@ -29,9 +41,13 @@ export default function FaceListRouter() {
         }}
       >
         <FlatList
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+          }
           numColumns={3}
           contentContainerStyle={{
             flexDirection: 'row',
+            flexWrap: 'wrap',
           }}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => <Spacer size={Metrics.medium} />}
@@ -49,11 +65,6 @@ export default function FaceListRouter() {
                 style={{
                   width: 100,
                   height: 100,
-                  transform: [
-                    {
-                      rotate: '90deg',
-                    },
-                  ],
                 }}
                 source={item.path}
               />

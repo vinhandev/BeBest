@@ -90,3 +90,7 @@ export function isToday(timeStamp: number) {
   }
   return true;
 }
+
+export function getDateStringForImageFile(date: Date) {
+  return `${date.getFullYear()}_${date.getMonth()}_${date.getDate()}`;
+}

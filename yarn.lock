@@ -2503,6 +2503,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/perf/-/perf-18.7.3.tgz#5f128ed35e20042c1b118e1b959e0585220845c4"
   integrity sha512-t3Ooywmaf5n7ivDTcrQQ5wCrq1Ob7SjQ+aCkak+QK4nlGvYSx3OQG1l0Uxb74V+OrGkG0rtEA2K/4xK/Rlbu1w==
 
+"@react-native-firebase/storage@^18.8.0":
+  version "18.8.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-18.8.0.tgz#cb33c76e2c85d54923ed9bdb5528485da8753a8e"
+  integrity sha512-Z+26aQnU/1bNk3JPwuORke7T6yhKu955UFb+LUeh4L/0a36pFFxwuiHKLc4tjjALB4XclFcxVlb1+Ife5TCV4w==
+
 "@react-native/assets-registry@^0.72.0":
   version "0.72.0"
   resolved "https://registry.yarnpkg.com/@react-native/assets-registry/-/assets-registry-0.72.0.tgz#c82a76a1d86ec0c3907be76f7faf97a32bbed05d"
@@ -4216,6 +4221,13 @@ expo-image-loader@~4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/expo-image-loader/-/expo-image-loader-4.3.0.tgz#d897b4d4f1838faa8291c36f00b99c2b36a6ac5c"
   integrity sha512-2kqJIO+oYM8J3GbvTUHLqTSpt1dLpOn/X0eB4U4RTuzz/faj8l/TyQELsMBLlGAkweNUuG9LqznbaBz+WuSFEw==
+
+expo-image-manipulator@~11.3.0:
+  version "11.3.0"
+  resolved "https://registry.yarnpkg.com/expo-image-manipulator/-/expo-image-manipulator-11.3.0.tgz#3bf5e1d7331c182950f73bfacf2060cc4604170e"
+  integrity sha512-lw17v8VD5LqE+j3YMZNNlfM19OlkBPzLEoVyGcx9FtGC533le5dnXF+UiZTCbFIVr/xyBJTMse9G0oJ70q9MbQ==
+  dependencies:
+    expo-image-loader "~4.3.0"
 
 expo-image-picker@~14.3.2:
   version "14.3.2"
