@@ -6,9 +6,10 @@ import { router } from 'expo-router';
 import { useUserStore } from '~/stores';
 import { FlatList } from 'react-native-gesture-handler';
 import { Image, Spacer, Text } from '~/components/atoms';
-import { FixedSizes, HomeLinks, Metrics } from '~/constants';
+import { FixedSizes, HomeLinks, Metrics, Rounds } from '~/constants';
 import { TouchableOpacity } from 'react-native-ui-lib';
 import { useGetUserBody } from '~/hooks';
+import Styles from '~/styles';
 
 export default function BodyListRouter() {
   const bodies = useUserStore((state) => state.bodies);
@@ -52,16 +53,19 @@ export default function BodyListRouter() {
                 alignItems: 'center',
               }}
             >
-              <Image
-                key={index}
-                style={{
-                  width: '100%',
-                  height: undefined,
-                  aspectRatio: 2 / 3,
-                  resizeMode: 'cover',
-                }}
-                source={item.path}
-              />
+              <View style={Styles.shadow}>
+                <Image
+                  key={index}
+                  style={{
+                    width: '100%',
+                    height: undefined,
+                    aspectRatio: 2 / 3,
+                    resizeMode: 'cover',
+                    borderRadius: Rounds.small,
+                  }}
+                  source={item.path}
+                />
+              </View>
               <Spacer size={5} />
               <Text variant="black_xs_light">
                 {new Date(item.time).toDateString()}

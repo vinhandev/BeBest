@@ -37,6 +37,7 @@ export default function HomeNavigator() {
       <Tabs.Screen
         name="run"
         options={{
+          
           tabBarShowLabel: false,
           tabBarIcon(props) {
             return <Icon variant="run" {...props} />;

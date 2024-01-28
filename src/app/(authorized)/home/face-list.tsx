@@ -6,11 +6,12 @@ import { router } from 'expo-router';
 import { useUserStore } from '~/stores';
 import { FlatList } from 'react-native-gesture-handler';
 import { Image, Spacer, Text } from '~/components/atoms';
-import { FixedSizes, HomeLinks, Metrics } from '~/constants';
+import { FixedSizes, HomeLinks, Metrics, Rounds } from '~/constants';
 import { TouchableOpacity } from 'react-native-ui-lib';
 import { log } from '~/utils';
 import { useGetUserFace } from '~/hooks';
 import { RefreshControl } from 'react-native';
+import Styles from '~/styles';
 
 export default function FaceListRouter() {
   const faces = useUserStore((state) => state.faces);
@@ -68,16 +69,21 @@ export default function FaceListRouter() {
                 alignItems: 'center',
               }}
             >
-              <Image
-                key={index}
-                style={{
-                  width: 100,
-                  height: 100,
-                }}
-                source={item.path}
-              />
+              <View style={Styles.shadow}>
+                <Image
+                  key={index}
+                  style={[
+                    {
+                      width: 100,
+                      height: 100,
+                      borderRadius: Rounds.small,
+                    },
+                  ]}
+                  source={item.path}
+                />
+              </View>
               <Spacer size={5} />
-              <Text variant="black_xs_light">
+              <Text variant="black_xs_bold">
                 {new Date(item.time).toDateString()}
               </Text>
             </TouchableOpacity>

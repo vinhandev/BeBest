@@ -35,7 +35,7 @@ export default function FaceScreen() {
 
   const setLoading = useSystemStore((state) => state.setLoading);
   const loading = useSystemStore((state) => state.loading);
-  const [isFrontCamera, setIsFrontCamera] = useState(false);
+  const [isFrontCamera, setIsFrontCamera] = useState(true);
   const device = useCameraDevice(isFrontCamera ? 'front' : 'back');
   const format = useCameraFormat(device, [
     {

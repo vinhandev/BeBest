@@ -29,7 +29,6 @@ export const Component = () => {
   ]);
   const camera = useRef<Camera>(null);
   const { close } = useBottomSheet();
-  const { add } = useAddNewBody();
 
   const handleOpenLibrary = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
