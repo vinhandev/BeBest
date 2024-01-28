@@ -41,7 +41,6 @@ export default function SignUpScreen({ onSignIn, onHome }: Props) {
           control={control}
           name={'username'}
           style={styles.textInput}
-          mode="outlined"
           label="Username"
         />
         <FormInput
@@ -49,7 +48,6 @@ export default function SignUpScreen({ onSignIn, onHome }: Props) {
           control={control}
           name={'password'}
           style={styles.textInput}
-          mode="outlined"
           label="Password"
         />
         <FormInput
@@ -57,7 +55,6 @@ export default function SignUpScreen({ onSignIn, onHome }: Props) {
           control={control}
           name={'confirm'}
           style={styles.textInput}
-          mode="outlined"
           label="Confirm Password"
         />
       </View>

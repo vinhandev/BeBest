@@ -1,10 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { View } from 'moti';
 
-import {
-  useAddNewBody,
-} from '~/hooks';
-
 import { styles } from './BottomSheetBody.styles';
 import { Spacer, Text } from '~/components/atoms';
 import { useBottomSheet } from '@gorhom/bottom-sheet';

@@ -6,7 +6,7 @@ import { router } from 'expo-router';
 import { useUserStore } from '~/stores';
 import { FlatList } from 'react-native-gesture-handler';
 import { Image, Spacer, Text } from '~/components/atoms';
-import { FixedSizes, Metrics } from '~/constants';
+import { FixedSizes, HomeLinks, Metrics } from '~/constants';
 import { TouchableOpacity } from 'react-native-ui-lib';
 import { log } from '~/utils';
 import { useGetUserFace } from '~/hooks';
@@ -32,7 +32,15 @@ export default function FaceListRouter() {
 
   return (
     <View>
-      <Header title="Faces" left={{ icon: 'back', onPress: router.back }} />
+      <Header
+        title="Faces"
+        left={{
+          icon: 'back',
+          onPress: () => {
+            router.replace(HomeLinks.HOME);
+          },
+        }}
+      />
       <View
         style={{
           padding: Metrics.medium,

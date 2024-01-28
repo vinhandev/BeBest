@@ -22,7 +22,7 @@ export const CameraLinks = {
 } as const;
 
 export const HomeLinks = {
-  HOME: 'main',
+  HOME: 'home/main',
   TASK_LIST: 'home/task-list',
   FACE_LIST: 'home/face-list',
   BODY_LIST: 'home/body-list',

@@ -70,12 +70,12 @@ export default function Home() {
       icon: 'body',
       onPress: async () => {
         if (hasPermission && permissionResponse?.granted) {
-          setOpenBottomSheet(true, 'body');
+          router.push(CameraLinks.BODY);
         } else {
           const permission = await requestPermission();
           const permission2 = await requestPermission2();
           if (permission && permission2) {
-            setOpenBottomSheet(true, 'body');
+            router.push(CameraLinks.BODY);
           } else {
             Alert.alert('No camera permission');
           }

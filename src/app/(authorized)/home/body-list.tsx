@@ -1,28 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { View } from 'moti';
-import { Calendar, Header, Task } from '~/components/molecules';
+import { Header } from '~/components/molecules';
 import { router } from 'expo-router';
 import { useUserStore } from '~/stores';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import { Image, Spacer, Text } from '~/components/atoms';
-import { FixedSizes, Metrics } from '~/constants';
-import { checkNotSameDate } from '~/utils';
-import { loadImageFromFile } from 'react-native-jsi-image';
+import { FixedSizes, HomeLinks, Metrics } from '~/constants';
 import { TouchableOpacity } from 'react-native-ui-lib';
+import { useGetUserBody } from '~/hooks';
 
 export default function BodyListRouter() {
   const bodies = useUserStore((state) => state.bodies);
 
-  const [chooseDate, setChooseDate] = useState(new Date());
-
-  const handleSelectDate = (date: Date) => {
-    setChooseDate(date);
-  };
+  const { get } = useGetUserBody();
+  useEffect(() => {
+    get();
+  }, []);
 
   return (
     <View>
-      <Header title="Bodies" left={{ icon: 'back', onPress: router.back }} />
+      <Header
+        title="Bodies"
+        left={{
+          icon: 'back',
+          onPress: () => {
+            router.replace(HomeLinks.HOME);
+          },
+        }}
+      />
       <View
         style={{
           padding: Metrics.medium,
@@ -49,8 +55,10 @@ export default function BodyListRouter() {
               <Image
                 key={index}
                 style={{
-                  width: 100,
-                  height: 200,
+                  width: '100%',
+                  height: undefined,
+                  aspectRatio: 2 / 3,
+                  resizeMode: 'cover',
                 }}
                 source={item.path}
               />

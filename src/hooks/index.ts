@@ -5,7 +5,9 @@ export * from './firebase/auth/useWatchAuth';
 
 export * from './firebase/firestore/useCreateProfile';
 export * from './firebase/firestore/useCreateUserFace';
+export * from './firebase/firestore/useCreateUserBody';
 export * from './firebase/firestore/useGetUserFace';
+export * from './firebase/firestore/useGetUserBody';
 
 export * from './firebase/messaging/useInitNotifications';
 
@@ -20,6 +22,5 @@ export * from './store/useAddNewTask';
 export * from './store/useCheckTask';
 export * from './store/useDeleteTask';
 export * from './store/useUpdateStreak';
-export * from './store/useAddNewBody';
 export * from './store/useAddNewMeal';
 export * from './store/useGetHomeInformation';
