@@ -23,7 +23,8 @@ import { router } from 'expo-router';
 
 export default function Home() {
   const { t } = useTranslation('home');
-  const { body, face, meals, isUpdateWeight,isUpdateHeight } = useGetHomeInformation();
+  const { body, face, meals, isUpdateWeight, isUpdateHeight } =
+    useGetHomeInformation();
   const insets = useSafeAreaInsets();
   const { hasPermission, requestPermission } = useCameraPermission();
   const [permissionResponse, requestPermission2] =
@@ -107,7 +108,7 @@ export default function Home() {
         }
       },
       title: t('meal'),
-      isChecked: !!meals,
+      isChecked: meals?.length !== 0,
     },
     {
       icon: 'weight',
@@ -126,28 +127,28 @@ export default function Home() {
       isChecked: isUpdateHeight,
     },
     {
-      icon: 'face',
+      icon: 'album',
       onPress: () => {
         router.push(HomeLinks.FACE_LIST);
       },
       title: t('view_face'),
     },
     {
-      icon: 'body',
+      icon: 'album',
       onPress: () => {
         router.push(HomeLinks.BODY_LIST);
       },
       title: t('view_body'),
     },
     {
-      icon: 'meal',
+      icon: 'album',
       onPress: () => {
         router.push(HomeLinks.MEAL_LIST);
       },
       title: t('view_meal'),
     },
     {
-      icon: 'analyst',
+      icon: 'album',
       onPress: () => {
         router.push(HomeLinks.WEIGHT_LIST);
       },
