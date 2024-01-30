@@ -6,7 +6,12 @@ import { Alert, FlatList } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 import { HomeLinks, Metrics } from '~/constants';
-import { checkNotSameDate, styleBackground, styleBorderColor } from '~/utils';
+import {
+  checkNotSameDate,
+  showToast,
+  styleBackground,
+  styleBorderColor,
+} from '~/utils';
 import { useSystemStore, useUserStore } from '~/stores';
 
 import { CircleBar, Row, Spacer, Text } from '~/components/atoms';
@@ -51,7 +56,7 @@ export default function HomeTasks() {
     checkTask(time, selected);
   };
 
-  const handleDeleteTask = (index: number, item: TaskPropsType) => {
+  const handleDeleteTask = async (index: number, item: TaskPropsType) => {
     Alert.alert('Delete', 'Are you sure you want to delete this task?', [
       {
         text: 'Cancel',
@@ -60,8 +65,15 @@ export default function HomeTasks() {
       },
       {
         text: 'OK',
-        onPress: () => {
-          deleteTask(index, item);
+        onPress: async () => {
+          setLoading(true);
+          try {
+            await deleteTask(index, item);
+            await get();
+          } catch (error) {
+            showToast((error as Error).message);
+          }
+          setLoading(false);
         },
       },
     ]);

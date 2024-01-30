@@ -14,6 +14,7 @@ export * from './firebase/firestore/useGetUserMeals';
 export * from './firebase/firestore/useUpdateUserWeight';
 export * from './firebase/firestore/useUpdateUserHeight';
 export * from './firebase/firestore/useAddNewTask';
+export * from './firebase/firestore/useDeleteTask';
 
 
 export * from './firebase/messaging/useInitNotifications';
@@ -26,7 +27,6 @@ export * from './form/useInitProfileForm';
 export * from './form/useAddTask';
 
 export * from './store/useCheckTask';
-export * from './store/useDeleteTask';
 export * from './store/useUpdateStreak';
 export * from './store/useAddNewMeal';
 export * from './store/useGetHomeInformation';
