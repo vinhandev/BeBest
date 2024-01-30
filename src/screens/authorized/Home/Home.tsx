@@ -17,12 +17,13 @@ import { BounceWrapper, PullToScrollView } from '~/components/HOCs';
 import { styles } from './Home.styles';
 import { useSystemStore } from '~/stores';
 import { useCameraPermission } from 'react-native-vision-camera';
-import { useGetHomeInformation } from '~/hooks';
+import { useGetHomeInformation, useGetUserTasks } from '~/hooks';
 import * as MediaLibrary from 'expo-media-library';
 import { router } from 'expo-router';
 
 export default function Home() {
   const { t } = useTranslation('home');
+  const { get } = useGetUserTasks();
   const { body, face, meals, isUpdateWeight, isUpdateHeight } =
     useGetHomeInformation();
   const insets = useSafeAreaInsets();
@@ -157,7 +158,7 @@ export default function Home() {
   ];
 
   const handleRefresh = async () => {
-    log.info('handleRefresh');
+    await get();
   };
 
   return (

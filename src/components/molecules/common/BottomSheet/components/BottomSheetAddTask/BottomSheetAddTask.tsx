@@ -8,10 +8,10 @@ import FormInput from '../../../FormInput';
 import { styles } from './BottomSheetAddTask.styles';
 import Button from '../../../Button/Button';
 import { Row, Spacer, Text } from '~/components/atoms';
-import { useUserStore } from '~/stores';
+import { useSystemStore, useUserStore } from '~/stores';
 import { TaskPropsType } from '~/types/task';
 import { useBottomSheet } from '@gorhom/bottom-sheet';
-import { compileDueTime, log } from '~/utils';
+import { compileDueTime, log, showToast } from '~/utils';
 import { Keyboard } from 'react-native';
 
 export const SnapPoints = ['55%'];
@@ -19,24 +19,33 @@ export const Component = () => {
   const { control, handleSubmit, reset } = useAddTask();
   const { addTask } = useAddNewTask();
   const { close } = useBottomSheet();
+  const uid = useUserStore((state) => state.user?.uid ?? '');
+  const setLoading = useSystemStore((state) => state.setLoading);
 
-  const onValid = (data: any) => {
-    const param: TaskPropsType = {
-      time: new Date().getTime(),
-      description: data.description,
-      done: false,
-      doneTime: compileDueTime(data.dueDate, data.dueTime).getTime(),
-      type: data.type,
-    };
-    addTask(param);
-    reset({
-      dueTime: today,
-      dueDate: today,
-      description: '',
-      type: 'TASK',
-    });
-    close();
-    Keyboard.dismiss();
+  const onValid = async (data: any) => {
+    setLoading(true);
+    try {
+      const param: TaskPropsType = {
+        time: new Date().getTime(),
+        description: data.description,
+        done: false,
+        doneTime: compileDueTime(data.dueDate, data.dueTime).getTime(),
+        type: data.type,
+        uid,
+      };
+      await addTask(param);
+      reset({
+        dueTime: today,
+        dueDate: today,
+        description: '',
+        type: 'TASK',
+      });
+      close();
+      Keyboard.dismiss();
+    } catch (error) {
+      showToast((error as Error).message);
+    }
+    setLoading(false);
   };
 
   return (

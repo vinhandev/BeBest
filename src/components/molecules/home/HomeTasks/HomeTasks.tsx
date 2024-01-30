@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'moti';
 import { useTranslation } from 'react-i18next';
 
@@ -19,6 +19,7 @@ import {
   useCheckTask,
   useDeleteTask,
   useGetHomeInformation,
+  useGetUserTasks,
   useUpdateStreak,
 } from '~/hooks';
 import { router } from 'expo-router';
@@ -29,6 +30,7 @@ export default function HomeTasks() {
   const { colors } = useTheme();
 
   const { checkTask } = useCheckTask();
+  const { get } = useGetUserTasks();
   const { deleteTask } = useDeleteTask();
   const { incrementStreak } = useUpdateStreak();
 
@@ -93,6 +95,10 @@ export default function HomeTasks() {
   const handleTaskList = () => {
     router.push(HomeLinks.TASK_LIST);
   };
+
+  useEffect(() => {
+    get();
+  }, []);
 
   return (
     <View>

@@ -57,7 +57,7 @@ export function useGetHomeInformation() {
   log.debug(todayFace, todayBody);
 
   return {
-    tasks: todayTasks,
+    tasks: sortTasks,
     face: todayFace,
     body: todayBody,
     meals: todayMeals,

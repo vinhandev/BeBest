@@ -5,4 +5,5 @@ export type TaskPropsType = {
   description: string;
   done: boolean;
   doneTime: number;
+  uid: string;
 };
