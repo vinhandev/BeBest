@@ -15,6 +15,7 @@ export * from './firebase/firestore/useUpdateUserWeight';
 export * from './firebase/firestore/useUpdateUserHeight';
 export * from './firebase/firestore/useAddNewTask';
 export * from './firebase/firestore/useDeleteTask';
+export * from './firebase/firestore/useGetUserWeight';
 
 
 export * from './firebase/messaging/useInitNotifications';

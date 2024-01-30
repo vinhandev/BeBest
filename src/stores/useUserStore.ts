@@ -2,7 +2,7 @@ import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { zustandStorage } from './storage';
-import { ProfilePropsType } from '~/types';
+import { ProfilePropsType, RecordPropsType } from '~/types';
 import { TaskPropsType } from '~/types/task';
 import { ImagePropsType } from '~/types/images';
 import { MealDefaultProps, MealProps } from '~/types/meals';
@@ -17,6 +17,7 @@ type paramType = {
   updatedStreakDate: Date | null;
   defaultMeals: MealDefaultProps[] | null;
   meals: MealProps[] | null;
+  weightRecords: RecordPropsType[] | null;
 };
 type stateProps = paramType & {
   setUser: (user: FirebaseAuthTypes.User | null) => void;
@@ -28,6 +29,7 @@ type stateProps = paramType & {
   setBodies: (bodies: ImagePropsType[]) => void;
   setDefaultMeals: (meals: MealDefaultProps[]) => void;
   setMeals: (meals: MealProps[]) => void;
+  setWeightRecords: (records: RecordPropsType[]) => void;
   reset: () => void;
 };
 
@@ -41,6 +43,7 @@ const initProps: paramType = {
   defaultMeals: null,
   meals: null,
   updatedStreakDate: null,
+  weightRecords: null,
 };
 
 export const useUserStore = create(
@@ -56,6 +59,7 @@ export const useUserStore = create(
       setBodies: (bodies) => set(() => ({ bodies })),
       setDefaultMeals: (meals) => set(() => ({ defaultMeals: meals })),
       setMeals: (meals) => set(() => ({ meals })),
+      setWeightRecords: (records) => set(() => ({ weightRecords: records })),
       reset: () => set(() => initProps),
     }),
     {
