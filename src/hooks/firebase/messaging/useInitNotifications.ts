@@ -16,14 +16,14 @@ export function useInitNotifications() {
     requestUserPermission();
     // Handle incoming notifications when app is in foreground
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      console.log('Received foreground notification: ', remoteMessage);
+      console.log('Received message notification: ', remoteMessage);
     });
     return unsubscribe;
   }, []);
 
   // Handle incoming notifications when app is in background
   messaging().onNotificationOpenedApp(async (remoteMessage) => {
-    console.log('Received background notification: ', remoteMessage);
+    console.log('Received foreground notification: ', remoteMessage);
   });
 
   messaging().setBackgroundMessageHandler(async (remoteMessage) => {
