@@ -29,6 +29,12 @@ export default function Icon({ variant, ...props }: Props) {
       return <Ionicons name="today" {...props} />;
     case 'camera-flip':
       return <MaterialIcons name="flip-camera-ios" {...props} />;
+    case 'compare':
+      return <MaterialCommunityIcons name="compare" {...props} />;
+    case 'image':
+      return <MaterialCommunityIcons name="image" {...props} />;
+    case 'close':
+      return <MaterialIcons name="close" {...props} />;
     case 'run':
       return <FontAwesome5 name="running" {...props} />;
     case 'water':
@@ -39,6 +45,8 @@ export default function Icon({ variant, ...props }: Props) {
       return <MaterialIcons name="tag-faces" {...props} />;
     case 'back':
       return <Ionicons name="chevron-back" {...props} />;
+    case 'next':
+      return <Ionicons name="chevron-forward" {...props} />;
     case 'body':
       return <Ionicons name="body" {...props} />;
     case 'meal':
