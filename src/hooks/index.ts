@@ -27,7 +27,6 @@ export * from './form/useSignInForm';
 export * from './form/useInitProfileForm';
 export * from './form/useAddTask';
 
-export * from './store/useCheckTask';
-export * from './store/useUpdateStreak';
-export * from './store/useAddNewMeal';
+export * from './firebase/firestore/useCheckTask';
+export * from './firebase/firestore/useUpdateStreak';
 export * from './store/useGetHomeInformation';

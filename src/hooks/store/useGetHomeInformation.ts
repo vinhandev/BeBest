@@ -34,7 +34,7 @@ export function useGetHomeInformation() {
   if (!!todayBody) {
     done += 1;
   }
-  if (!!todayMeals) {
+  if (todayMeals?.length !== 0) {
     done += 1;
   }
   if (isUpdateWeight) {

@@ -52,8 +52,14 @@ export default function HomeTasks() {
     ? !checkNotSameDate(updatedStreakDate, new Date())
     : false;
   const streakStatusColor = checkedStreak ? colors.success : colors.error;
-  const handlePressTask = (time: number, selected: boolean) => {
-    checkTask(time, selected);
+  const handlePressTask = async (time: number, selected: boolean) => {
+    setLoading(true);
+    try {
+      await checkTask(time, selected);
+    } catch (error) {
+      showToast((error as Error).message);
+    }
+    setLoading(false);
   };
 
   const handleDeleteTask = async (index: number, item: TaskPropsType) => {
@@ -96,8 +102,14 @@ export default function HomeTasks() {
         },
         {
           text: 'OK',
-          onPress: () => {
-            incrementStreak();
+          onPress: async () => {
+            setLoading(true);
+            try {
+              await incrementStreak();
+            } catch (error) {
+              showToast((error as Error).message);
+            }
+            setLoading(false);
           },
         },
       ]
