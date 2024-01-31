@@ -5,6 +5,7 @@ import {
   useCreateUserBody,
   useCreateUserFace,
   useCreateUserMeal,
+  useGetHomeInformation,
   useSaveImage,
 } from '~/hooks';
 
@@ -32,17 +33,25 @@ import { Button, SwipeSelector } from '~/components/molecules';
 import { Picker, TouchableOpacity } from 'react-native-ui-lib';
 import * as MediaLibrary from 'expo-media-library';
 import { MealTimeType } from '~/types/meals';
-import { FlatList, ScrollView } from 'react-native';
 
 export default function MealsScreen() {
   const { colors } = useTheme();
   const uid = useUserStore((state) => state.user?.uid) ?? '';
   const dateString = getDateStringForImageFile(today);
 
+  const { meals: selectedMeals } = useGetHomeInformation();
+  let filterMeals = meals?.filter((item) => {
+    const isExistedMealTime = selectedMeals?.find(
+      (subItem) => subItem.mealTime === item.value
+    );
+    return !isExistedMealTime;
+  });
   const setLoading = useSystemStore((state) => state.setLoading);
   const loading = useSystemStore((state) => state.loading);
   const [isFrontCamera, setIsFrontCamera] = useState(false);
-  const [mealTime, setMealTime] = useState<MealTimeType>('Breakfast');
+  const [mealTime, setMealTime] = useState<MealTimeType>(
+    filterMeals[0].value as MealTimeType
+  );
   const [calories, setCalories] = useState<number>(500);
   const device = useCameraDevice(isFrontCamera ? 'front' : 'back');
   const format = useCameraFormat(device, [
@@ -110,7 +119,7 @@ export default function MealsScreen() {
               styleBackground(colors.black),
               styleColor(colors.white),
             ]}
-            items={meals}
+            items={filterMeals}
             value={mealTime}
             placeholder={'Placeholder'}
             onChange={(value) => setMealTime(value as MealTimeType)}

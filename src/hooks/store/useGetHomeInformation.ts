@@ -45,16 +45,7 @@ export function useGetHomeInformation() {
     done += doneTasks;
   }
 
-  log.debug(
-    'hmm',
-    done,
-    totalProgress,
-    Math.round((done / totalProgress) * 100)
-  );
-
   const progress = Math.round((done / totalProgress) * 100);
-
-  log.debug(todayFace, todayBody);
 
   return {
     tasks: sortTasks,
