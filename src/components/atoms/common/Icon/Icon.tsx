@@ -35,6 +35,8 @@ export default function Icon({ variant, ...props }: Props) {
       return <MaterialCommunityIcons name="image" {...props} />;
     case 'close':
       return <MaterialIcons name="close" {...props} />;
+    case 'edit':
+      return <MaterialIcons name="edit" {...props} />;
     case 'run':
       return <FontAwesome5 name="running" {...props} />;
     case 'water':

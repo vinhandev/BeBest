@@ -7,6 +7,7 @@ type Props = TextProps & {
   variant?:
     | 'black_l_bold'
     | 'black_m_bold'
+    | 'black_m_regular'
     | 'black_s_bold'
     | 'black_xs_bold'
     | 'black_s_light'
@@ -73,6 +74,13 @@ export default function Text({
         color: 'black',
         fontSize: 'm',
         fontWeight: 'bold',
+      });
+      break;
+    case 'black_m_regular':
+      custom = renderText({
+        color: 'black',
+        fontSize: 'm',
+        fontWeight: 'regular',
       });
       break;
     case 'black_l_light':

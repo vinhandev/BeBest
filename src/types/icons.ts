@@ -12,6 +12,7 @@ export type IconType =
   | 'height'
   | 'home'
   | 'left'
+  | 'edit'
   | 'compare'
   | 'close'
   | 'image'
