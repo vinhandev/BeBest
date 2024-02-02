@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { View } from 'moti';
-import { Calendar, Header } from '~/components/molecules';
+import { Calendar, Header, MealPictureModal } from '~/components/molecules';
 import { router } from 'expo-router';
 import { useUserStore } from '~/stores';
 import { FlatList } from 'react-native-gesture-handler';
@@ -19,6 +19,8 @@ export default function MealListRouter() {
   }, []);
 
   const [chooseDate, setChooseDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleSelectDate = (date: Date) => {
     setChooseDate(date);
@@ -57,6 +59,10 @@ export default function MealListRouter() {
           data={filterMeals}
           renderItem={({ item, index }) => (
             <TouchableOpacity
+              onPress={() => {
+                setSelectedIndex(index);
+                setOpen(true);
+              }}
               style={{
                 width: (Metrics.screenWidth - 2 * Metrics.medium) / 3,
                 justifyContent: 'center',
@@ -72,13 +78,26 @@ export default function MealListRouter() {
                 source={item.image}
               />
               <Spacer size={5} />
-              <Text variant="black_xs_light">
-                {item.mealTime}
-              </Text>
+              <Text variant="black_xs_light">{item.mealTime}</Text>
             </TouchableOpacity>
           )}
         />
       </View>
+      <MealPictureModal
+        aspectRatio={1}
+        open={open}
+        photos={
+          filterMeals?.map((item) => ({
+            path: item.image,
+            time: item.time,
+            calories: item.calories,
+            mealTime: item.mealTime,
+          })) ?? []
+        }
+        selectedIndex={selectedIndex}
+        setSelectedIndex={setSelectedIndex}
+        setOpen={setOpen}
+      />
     </View>
   );
 }

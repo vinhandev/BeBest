@@ -9,6 +9,7 @@ export { default as Header } from './common/Header/Header';
 export { default as Calendar } from './common/Calendar/Calendar';
 export { default as SwipeSelector } from './common/SwipeSelector/SwipeSelector';
 export { default as PictureModal } from './common/PictureModal/PictureModal';
+export { default as MealPictureModal } from './common/MealPictureModal/MealPictureModal';
 
 export { default as ProfileBasicInformation } from './profile/ProfileBasicInformation';
 export { default as ProfileSettings } from './profile/ProfileSettings';
