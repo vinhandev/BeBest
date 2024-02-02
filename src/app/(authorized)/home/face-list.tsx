@@ -17,7 +17,7 @@ export default function FaceListRouter() {
   const faces = useUserStore((state) => state.faces);
 
   const [open, setOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(1);
 
   log.debug(faces);
 
