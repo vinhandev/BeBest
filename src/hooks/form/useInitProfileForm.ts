@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
+import { useUserStore } from '~/stores';
 
 const Schema = z.object({
   name: z.string().min(1),
@@ -17,16 +18,17 @@ const Schema = z.object({
 export type FormData = z.infer<typeof Schema>;
 
 export const useInitProfileForm = () => {
+  const profile = useUserStore((state) => state.profile);
   const defaultValues: FormData = {
-    name: '',
-    age: '',
-    gender: 'MALE',
-    goalHeight: 0,
-    goalWeight: 0,
-    mealPerDay: 0,
-    height: 0,
-    water: 0,
-    weight: 0,
+    name: profile?.name ?? '',
+    age: `${profile?.age}` ?? '18',
+    gender: profile?.gender ?? 'MALE',
+    goalHeight: profile?.goalHeight ?? 0,
+    goalWeight: profile?.goalWeight ?? 0,
+    mealPerDay: profile?.mealPerDay ?? 3,
+    height: profile?.height ?? 0,
+    water: profile?.waterPerDay ?? 0,
+    weight: profile?.weight ?? 0,
   };
 
   return useForm<FormData>({

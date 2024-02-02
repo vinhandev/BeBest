@@ -8,6 +8,7 @@ export const useCreateProfile = () => {
     const setProfile = useUserStore((state) => state.setProfile);
 
     try {
+      console.log(profile);
       await usersCollection.doc(id).set(profile);
       setProfile(profile);
     } catch (error) {

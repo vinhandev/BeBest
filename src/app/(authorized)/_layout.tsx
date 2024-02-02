@@ -79,8 +79,6 @@ export default function HomeNavigator() {
       <Tabs.Screen
         name="profile"
         options={{
-          headerTitle: 'My Profile',
-          headerShown: true,
           tabBarShowLabel: false,
           tabBarIcon(props) {
             return <Icon variant="profile" {...props} />;

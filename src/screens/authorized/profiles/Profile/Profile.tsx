@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
 import React from 'react';
 import { View, Text } from 'react-native';
+import { SafeScreen } from '~/components/HOCs';
 import { Spacer } from '~/components/atoms';
 import {
   ProfileBasicInformation,
@@ -16,7 +17,7 @@ export default function Profile() {
     router.push(ProfileLinks.EDIT);
   };
   return (
-    <View>
+    <SafeScreen>
       <ProfileBasicInformation onPress={navigateEditProfile} />
       <Spacer size={10} />
       <ProfileSettings
@@ -28,6 +29,6 @@ export default function Profile() {
           },
         ]}
       />
-    </View>
+    </SafeScreen>
   );
 }

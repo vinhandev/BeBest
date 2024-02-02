@@ -44,7 +44,7 @@ export default function ProfileBasicInformation({ onPress }: Props) {
               </Text>
               <Text variant="black_s_light">Edit Profile</Text>
             </View>
-            <Icon variant="right" size={25} color={colors.black} />
+            <Icon variant="right" size={15} color={colors.black} />
           </Row>
         </View>
       </Row>

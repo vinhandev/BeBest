@@ -42,7 +42,7 @@ export default function NumberInput<T extends FieldValues>({
             field.onChange(parseInt(text));
           }
         }}
-        value={field.value}
+        value={`${field.value}`}
         {...props}
       />
     </FormControlWrapper>
