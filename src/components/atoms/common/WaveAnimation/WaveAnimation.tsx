@@ -46,8 +46,8 @@ export default function WaveAnimation({ waterPercent }: Props) {
 
   const animatedPath = useComputedValue(() => {
     const current = (clock.current / 255) % 255;
-    const start = Skia.Path.MakeFromSVGString(createWavePath(120));
-    const end = Skia.Path.MakeFromSVGString(createWavePath(Math.PI * 120));
+    const start = Skia.Path.MakeFromSVGString(createWavePath(current));
+    const end = Skia.Path.MakeFromSVGString(createWavePath(Math.PI * current));
     return start.interpolate(end, 0.5);
   }, [clock, verticalOffset]);
 
@@ -60,7 +60,7 @@ export default function WaveAnimation({ waterPercent }: Props) {
   }, [verticalOffset]);
 
   useEffect(() => {
-    verticalOffset.current = (1 - waterPercent) * height;
+    verticalOffset.current = (1 - waterPercent) * height - 20;
   }, [waterPercent]);
 
   return (
@@ -70,7 +70,7 @@ export default function WaveAnimation({ waterPercent }: Props) {
           <LinearGradient
             start={gradientStart}
             end={gradientEnd}
-            colors={[colors.quaternary, colors.tertiary]}
+            colors={[colors.tertiary, colors.secondary]}
           />
         </Path>
       </Canvas>

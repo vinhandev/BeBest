@@ -8,6 +8,7 @@ export * from './firebase/firestore/useCreateUserFace';
 export * from './firebase/firestore/useCreateUserBody';
 export * from './firebase/firestore/useCreateUserMeal';
 export * from './firebase/firestore/useGetUserFace';
+export * from './firebase/firestore/useGetAllWeightRecord';
 export * from './firebase/firestore/useGetUserTasks';
 export * from './firebase/firestore/useGetUserBody';
 export * from './firebase/firestore/useGetUserMeals';

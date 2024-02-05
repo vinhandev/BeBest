@@ -6,6 +6,7 @@ import { FontSizes, FontWeight } from '~/constants';
 type Props = TextProps & {
   variant?:
     | 'black_l_bold'
+    | 'black_m_light'
     | 'black_m_bold'
     | 'black_m_regular'
     | 'black_s_bold'
@@ -67,6 +68,13 @@ export default function Text({
         color: 'black',
         fontSize: 's',
         fontWeight: 'bold',
+      });
+      break;
+    case 'black_m_light':
+      custom = renderText({
+        color: 'black',
+        fontSize: 'm',
+        fontWeight: 'light',
       });
       break;
     case 'black_m_bold':

@@ -9,4 +9,5 @@ export const Colors = {
   black: '#000000',
   white: '#ffffff',
   grey_2: '#EEEEEE',
+  transparent: 'transparent',
 } as const;
