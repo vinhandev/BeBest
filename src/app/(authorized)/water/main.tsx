@@ -15,7 +15,11 @@ import { FixedSizes, Metrics, WaterLinks, today, todayTime } from '~/constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MotiView } from 'moti';
 import { router } from 'expo-router';
-import { useGetAllWaterRecords, useUpdateUserWater } from '~/hooks';
+import {
+  useGetAllWaterRecords,
+  useGetHomeInformation,
+  useUpdateUserWater,
+} from '~/hooks';
 import { useSystemStore } from '~/stores';
 
 export default function WaterRouter() {
@@ -28,9 +32,10 @@ export default function WaterRouter() {
   const { create } = useUpdateUserWater();
   const { get } = useGetAllWaterRecords();
   const time = getDateStringForImageFile(today);
+  const { water } = useGetHomeInformation();
   const filename = `${uid}_${time}`;
 
-  const [drinkWater, setDrinkWater] = React.useState(0);
+  const [drinkWater, setDrinkWater] = React.useState(water);
 
   const handleAddWater = async () => {
     setLoading(true);

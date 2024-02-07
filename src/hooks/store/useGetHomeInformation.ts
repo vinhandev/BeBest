@@ -7,6 +7,7 @@ export function useGetHomeInformation() {
   const meals = useUserStore((state) => state.meals);
   const bodies = useUserStore((state) => state.bodies);
   const faces = useUserStore((state) => state.faces);
+  const water = useUserStore((state) => state.waterRecords);
   const updateWeightTime = useUserStore(
     (state) => state.profile?.updateWeightTime ?? 0
   );
@@ -26,6 +27,8 @@ export function useGetHomeInformation() {
   const todayBody = bodies?.find((item) => isToday(item.time));
   const todayMeals = meals?.filter((item) => isToday(item.time));
   const totalProgress = 4 + todayTasks.length;
+  const todayWaterRecords =
+    water?.find((item) => isToday(item.time))?.value ?? 0;
 
   let done = 0;
   if (!!todayFace) {
@@ -52,6 +55,7 @@ export function useGetHomeInformation() {
     face: todayFace,
     body: todayBody,
     meals: todayMeals,
+    water: todayWaterRecords,
     progress,
     isUpdateWeight,
     isUpdateHeight,
