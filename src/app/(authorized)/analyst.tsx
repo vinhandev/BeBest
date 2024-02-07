@@ -6,23 +6,24 @@ import { useForm } from 'react-hook-form';
 import { FormInput } from '~/components/molecules';
 import { Row, Text } from '~/components/atoms';
 import { LineChart } from 'react-native-chart-kit';
-import { useGetAllWeightRecord } from '~/hooks';
+import { useGetAllWaterRecords, useGetAllWeightRecord } from '~/hooks';
 import { useSystemStore } from '~/stores';
 import {
   getTotalDayFromRange,
   getTotalMonthFromRange,
   getTotalWeekFromRange,
+  isToday,
+  log,
   showToast,
   styleColor,
 } from '~/utils';
 import { Metrics, today } from '~/constants';
 import { useTheme } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
+import { logProfileData } from 'react-native-ui-lib/src/helpers/Profiler';
 export default function AnalystRouter() {
   const { colors } = useTheme();
-  const [type, setType] = React.useState<'weight' | 'water' | 'images'>(
-    'weight'
-  );
+  const [type, setType] = React.useState<'weight' | 'water'>('weight');
   const { control, watch } = useForm({
     defaultValues: {
       type,
@@ -31,8 +32,10 @@ export default function AnalystRouter() {
   const watchType = watch('type');
   const profile = useUserStore((state) => state.profile);
   const weightRecords = useUserStore((state) => state.weightRecords);
+  const waterRecords = useUserStore((state) => state.waterRecords);
 
   const { get: getWeight } = useGetAllWeightRecord();
+  const { get: getWater } = useGetAllWaterRecords();
   const setLoading = useSystemStore((state) => state.setLoading);
 
   const currentIncreaseWeight = useMemo(() => {
@@ -124,6 +127,57 @@ export default function AnalystRouter() {
     }
   }, [weightRecords]);
 
+  const todayWater = useMemo(() => {
+    if (waterRecords) {
+      return waterRecords.find((item) => isToday(item.time))?.value ?? 0;
+    } else {
+      return 0;
+    }
+  }, [waterRecords]);
+
+  const averageWaterThisWeek = useMemo(() => {
+    if (waterRecords) {
+      const totalWeek = getTotalWeekFromRange(
+        new Date(waterRecords[0].time),
+        today
+      );
+      let weekWater = 0;
+      for (
+        let index = waterRecords.length > 7 ? waterRecords.length - 7 : 0;
+        index < waterRecords.length;
+        index++
+      ) {
+        const element = waterRecords[index];
+        log.debug('water', element, waterRecords, index);
+        weekWater = element.value + weekWater;
+      }
+      return Math.round(weekWater / totalWeek);
+    } else {
+      return 0;
+    }
+  }, [waterRecords]);
+
+  const averageWaterThisMonth = useMemo(() => {
+    if (waterRecords) {
+      const totalWeek = getTotalWeekFromRange(
+        new Date(waterRecords[0].time),
+        today
+      );
+      let weekWater = 0;
+      for (
+        let index = waterRecords.length > 30 ? waterRecords.length - 30 : 0;
+        index < waterRecords.length;
+        index++
+      ) {
+        const element = waterRecords[index];
+        weekWater = element.value + weekWater;
+      }
+      return Math.round(weekWater / totalWeek);
+    } else {
+      return 0;
+    }
+  }, [waterRecords]);
+
   useEffect(() => {
     async function handleLoadType() {
       setLoading(true);
@@ -132,6 +186,7 @@ export default function AnalystRouter() {
           await getWeight();
         }
         if (type === 'water') {
+          await getWater();
         }
       } catch (error) {
         showToast((error as Error).message);
@@ -175,10 +230,6 @@ export default function AnalystRouter() {
               {
                 label: 'Water',
                 value: 'water',
-              },
-              {
-                label: 'Images',
-                value: 'images',
               },
             ]}
           />
@@ -352,6 +403,63 @@ export default function AnalystRouter() {
                     </View>
                   </View>
                 )}
+              {type === 'water' && waterRecords && waterRecords?.length > 0 && (
+                <View>
+                  <LineChart
+                    style={{
+                      marginLeft: -Metrics.medium,
+                      marginBottom: -Metrics.large,
+                      paddingTop: Metrics.medium,
+                    }}
+                    data={{
+                      labels:
+                        waterRecords?.map(
+                          (record) =>
+                            `${new Date(record.time).getDate()}/${
+                              new Date(record.time).getMonth() + 1
+                            }`
+                        ) || [],
+                      datasets: [
+                        {
+                          data:
+                            waterRecords?.map((record) => record.value) || [],
+                        },
+                      ],
+                    }}
+                    width={Metrics.screenWidth - Metrics.medium}
+                    height={Metrics.screenHeight / 2}
+                    verticalLabelRotation={30}
+                    bezier
+                    chartConfig={{
+                      color: (opacity = 1) => colors.primary,
+                      backgroundColor: colors.background,
+                      backgroundGradientFrom: colors.background,
+                      backgroundGradientTo: colors.background,
+                    }}
+                  />
+                  <View>
+                    <View style={{ paddingTop: Metrics.small }}>
+                      <Text variant="black_m_bold">Statistical</Text>
+                      <Row>
+                        <Text variant="black_s_light">Today</Text>
+                        <Text variant="black_s_bold">{`${todayWater} ml`}</Text>
+                      </Row>
+                      <Row>
+                        <Text variant="black_s_light">Average every week</Text>
+                        <Text variant="black_s_bold">
+                          {`${averageWaterThisWeek} ml`}
+                        </Text>
+                      </Row>
+                      <Row>
+                        <Text variant="black_s_light">Average every month</Text>
+                        <Text variant="black_s_bold">
+                          {`${averageWaterThisMonth} ml`}
+                        </Text>
+                      </Row>
+                    </View>
+                  </View>
+                </View>
+              )}
             </View>
           </View>
         </View>
