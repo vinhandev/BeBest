@@ -1,27 +1,57 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { useUserStore } from '~/stores/useUserStore';
 import { useTheme } from 'react-native-paper';
-import { styleBackground, styleColor } from '~/utils';
+import {
+  getDateStringForImageFile,
+  showToast,
+  styleBackground,
+  styleColor,
+} from '~/utils';
 import { SafeScreen } from '~/components/HOCs';
 import { TouchableOpacity } from 'react-native-ui-lib';
 import { Icon, Row, Text, WaveAnimation } from '~/components/atoms';
-import { FixedSizes, Metrics } from '~/constants';
+import { FixedSizes, Metrics, WaterLinks, today, todayTime } from '~/constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { MotiView } from 'moti';
+import { router } from 'expo-router';
+import { useGetAllWaterRecords, useUpdateUserWater } from '~/hooks';
+import { useSystemStore } from '~/stores';
 
 export default function WaterRouter() {
   const { top, bottom } = useSafeAreaInsets();
   const { colors } = useTheme();
+  const setLoading = useSystemStore((state) => state.setLoading);
   const profile = useUserStore((state) => state.profile);
+  const uid = useUserStore((state) => state.user?.uid ?? '');
+  const waterPerCup = useUserStore((state) => state.waterPerCup);
+  const { create } = useUpdateUserWater();
+  const { get } = useGetAllWaterRecords();
+  const time = getDateStringForImageFile(today);
+  const filename = `${uid}_${time}`;
 
   const [drinkWater, setDrinkWater] = React.useState(0);
-  const [waterPerCup, setWaterPerCup] = React.useState(150);
 
-  const handleAddWater = () => {
-    if (drinkWater + waterPerCup > (profile?.waterPerDay ?? 0)) {
-    } else {
-      setDrinkWater(drinkWater + waterPerCup);
+  const handleAddWater = async () => {
+    setLoading(true);
+    try {
+      if (profile?.waterPerDay) {
+        if (drinkWater < (profile.waterPerDay ?? 0)) {
+          if (drinkWater + waterPerCup >= profile.waterPerDay) {
+            await create(filename, {
+              time: todayTime,
+              uid,
+              value: drinkWater + waterPerCup,
+            });
+            await get();
+          }
+          setDrinkWater(drinkWater + waterPerCup);
+        }
+      }
+    } catch (error) {
+      showToast((error as Error).message);
     }
+    setLoading(false);
   };
 
   return (
@@ -40,7 +70,11 @@ export default function WaterRouter() {
           flex: 1,
         }}
       >
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            router.push(WaterLinks.EDIT);
+          }}
+        >
           <Icon variant="edit" color={colors.white} size={20} />
         </TouchableOpacity>
         <View
@@ -109,11 +143,22 @@ export default function WaterRouter() {
           left: 0,
           right: 0,
           zIndex: -2,
+          justifyContent: 'flex-end',
         }}
       >
-        <WaveAnimation
-          waterPercent={drinkWater / (profile?.waterPerDay ?? 1)}
-        />
+        {Platform.OS === 'ios' ? (
+          <WaveAnimation
+            waterPercent={drinkWater / (profile?.waterPerDay ?? 1)}
+          />
+        ) : (
+          <MotiView
+            style={{
+              backgroundColor: colors.tertiary,
+              width: Metrics.screenWidth,
+              flex: drinkWater / (profile?.waterPerDay ?? 1),
+            }}
+          />
+        )}
       </View>
     </View>
   );

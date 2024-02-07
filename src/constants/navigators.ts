@@ -35,3 +35,7 @@ export const ProfileLinks = {
   PROFILE: 'profile',
   EDIT: 'profile/edit',
 };
+export const WaterLinks = {
+  WATER: 'water',
+  EDIT: 'water/edit',
+};

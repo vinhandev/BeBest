@@ -18,6 +18,8 @@ type paramType = {
   defaultMeals: MealDefaultProps[] | null;
   meals: MealProps[] | null;
   weightRecords: RecordPropsType[] | null;
+  waterRecords: RecordPropsType[] | null;
+  waterPerCup: number;
 };
 type stateProps = paramType & {
   setUser: (user: FirebaseAuthTypes.User | null) => void;
@@ -30,6 +32,8 @@ type stateProps = paramType & {
   setDefaultMeals: (meals: MealDefaultProps[]) => void;
   setMeals: (meals: MealProps[]) => void;
   setWeightRecords: (records: RecordPropsType[]) => void;
+  setWaterRecords: (records: RecordPropsType[]) => void;
+  setWaterPerCup: (waterPerCup: number) => void;
   reset: () => void;
 };
 
@@ -44,6 +48,8 @@ const initProps: paramType = {
   meals: null,
   updatedStreakDate: null,
   weightRecords: null,
+  waterRecords: null,
+  waterPerCup: 150,
 };
 
 export const useUserStore = create(
@@ -60,6 +66,8 @@ export const useUserStore = create(
       setDefaultMeals: (meals) => set(() => ({ defaultMeals: meals })),
       setMeals: (meals) => set(() => ({ meals })),
       setWeightRecords: (records) => set(() => ({ weightRecords: records })),
+      setWaterPerCup: (waterPerCup) => set(() => ({ waterPerCup })),
+      setWaterRecords: (records) => set(() => ({ waterRecords: records })),
       reset: () => set(() => initProps),
     }),
     {
