@@ -95,3 +95,17 @@ export function isToday(timeStamp: number) {
 export function getDateStringForImageFile(date: Date) {
   return `${date.getFullYear()}_${date.getMonth()}_${date.getDate()}`;
 }
+
+export function getTotalWeekFromRange(startDate: Date, endDate: Date) {
+  const diff = endDate.getTime() - startDate.getTime();
+  return Math.ceil(diff / (1000 * 60 * 60 * 24 * 7));
+}
+export function getTotalMonthFromRange(startDate: Date, endDate: Date) {
+  const diff = endDate.getTime() - startDate.getTime();
+  return Math.ceil(diff / (1000 * 60 * 60 * 24 * 30));
+}
+
+export function getTotalDayFromRange(startDate: Date, endDate: Date) {
+  const diff = endDate.getTime() - startDate.getTime();
+  return Math.ceil(diff / (1000 * 60 * 60 * 24));
+}

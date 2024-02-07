@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { View } from 'react-native';
 import { useUserStore } from '~/stores/useUserStore';
 import auth from '@react-native-firebase/auth';
@@ -9,8 +9,14 @@ import { Row, Text } from '~/components/atoms';
 import { LineChart } from 'react-native-chart-kit';
 import { useGetAllWeightRecord } from '~/hooks';
 import { useSystemStore } from '~/stores';
-import { showToast, styleColor } from '~/utils';
-import { Colors, Metrics } from '~/constants';
+import {
+  getTotalDayFromRange,
+  getTotalMonthFromRange,
+  getTotalWeekFromRange,
+  showToast,
+  styleColor,
+} from '~/utils';
+import { Colors, Metrics, today } from '~/constants';
 import { useTheme } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 export default function AnalystRouter() {
@@ -29,10 +35,94 @@ export default function AnalystRouter() {
   const { get: getWeight } = useGetAllWeightRecord();
   const setLoading = useSystemStore((state) => state.setLoading);
 
-  const last7days = weightRecords
-    ?.filter((record) => record.time >= Date.now() - 1000 * 60 * 60 * 24 * 7)
-    .map((record) => record.value)
-    .reduce((acc, cur) => acc + cur, 0);
+  const currentIncreaseWeight = useMemo(() => {
+    if (profile?.weight && weightRecords) {
+      return profile?.weight - weightRecords[0].value;
+    } else {
+      return 0;
+    }
+  }, [weightRecords]);
+
+  const remainingDay = useMemo(() => {
+    if (profile?.weight && weightRecords) {
+      return getTotalDayFromRange(new Date(weightRecords[0].time), today);
+    } else {
+      return 0;
+    }
+  }, [weightRecords]);
+
+  const currentAverage = useMemo(() => {
+    if (profile?.weight && weightRecords) {
+      return Math.round((currentIncreaseWeight / remainingDay) * 100) / 100;
+    } else {
+      return 0;
+    }
+  }, [weightRecords]);
+  const { high, low } = useMemo(() => {
+    if (profile?.weight && weightRecords) {
+      let tempWeight = weightRecords.map((item, index) => {
+        if (index !== weightRecords.length - 1) {
+          return item.value - weightRecords[index + 1].value;
+        }
+        return 0;
+      });
+      tempWeight = tempWeight.sort();
+
+      return {
+        high: tempWeight[tempWeight.length - 1],
+        low: tempWeight[0],
+      };
+    } else {
+      return { high: 0, low: 0 };
+    }
+  }, [weightRecords]);
+
+  const last7dayIncrease = useMemo(() => {
+    if (profile?.weight && weightRecords) {
+      if (weightRecords?.length > 7) {
+        const weightLast7Day = weightRecords[weightRecords?.length - 7];
+        return profile?.weight - weightLast7Day.value;
+      } else {
+        return currentIncreaseWeight;
+      }
+    } else {
+      return 0;
+    }
+  }, [weightRecords]);
+  const last30dayIncrease = useMemo(() => {
+    if (profile?.weight && weightRecords) {
+      if (weightRecords?.length > 30) {
+        const weightLast7Day = weightRecords[weightRecords?.length - 7];
+        return profile?.weight - weightLast7Day.value;
+      } else {
+        return currentIncreaseWeight;
+      }
+    } else {
+      return 0;
+    }
+  }, [weightRecords]);
+  const averageWeekIncrease = useMemo(() => {
+    if (profile?.weight && weightRecords) {
+      const totalWeek = getTotalWeekFromRange(
+        new Date(weightRecords[0].time),
+        today
+      );
+      return Math.round((currentIncreaseWeight / totalWeek) * 100) / 100;
+    } else {
+      return 0;
+    }
+  }, [weightRecords]);
+  const averageMonthIncrease = useMemo(() => {
+    if (profile?.weight && weightRecords) {
+      const totalMonth = getTotalMonthFromRange(
+        new Date(weightRecords[0].time),
+        today
+      );
+      return Math.round((currentIncreaseWeight / totalMonth) * 100) / 100;
+    } else {
+      return 0;
+    }
+  }, [weightRecords]);
 
   useEffect(() => {
     async function handleLoadType() {
@@ -169,41 +259,69 @@ export default function AnalystRouter() {
                 <Text variant="black_m_bold">Statistical</Text>
                 <Row>
                   <Text variant="black_s_light">Last 7 days</Text>
-                  <Text variant="black_s_bold">{last7days}</Text>
+                  <Text
+                    style={styleColor(
+                      last7dayIncrease > 0 ? colors.error : colors.purple
+                    )}
+                    variant="black_s_bold"
+                  >
+                    {`${last7dayIncrease} kg`}
+                  </Text>
                 </Row>
                 <Row>
                   <Text variant="black_s_light">Last 30 days</Text>
-                  <Text variant="black_s_bold">Statistical</Text>
+                  <Text
+                    style={styleColor(
+                      last30dayIncrease > 0 ? colors.error : colors.purple
+                    )}
+                    variant="black_s_bold"
+                  >
+                    {`${last30dayIncrease} kg`}
+                  </Text>
                 </Row>
               </View>
               <View style={{ paddingTop: Metrics.small }}>
                 <Text variant="black_m_bold">Process</Text>
                 <Row>
                   <Text variant="black_s_light">Average every week</Text>
-                  <Text variant="black_s_bold">Statistical</Text>
+                  <Text
+                    style={styleColor(
+                      averageWeekIncrease > 0 ? colors.error : colors.purple
+                    )}
+                    variant="black_s_bold"
+                  >
+                    {`${averageWeekIncrease} kg`}
+                  </Text>
                 </Row>
                 <Row>
                   <Text variant="black_s_light">Average every month</Text>
-                  <Text variant="black_s_bold">Statistical</Text>
+                  <Text
+                    style={styleColor(
+                      averageMonthIncrease > 0 ? colors.error : colors.purple
+                    )}
+                    variant="black_s_bold"
+                  >
+                    {`${averageMonthIncrease} kg`}
+                  </Text>
                 </Row>
                 <Row>
-                  <Text variant="black_s_light">Time remaining</Text>
-                  <Text variant="black_s_bold">Statistical</Text>
+                  <Text variant="black_s_light">Total days</Text>
+                  <Text variant="black_s_bold">{remainingDay} days</Text>
                 </Row>
               </View>
               <View style={{ paddingTop: Metrics.small }}>
                 <Text variant="black_m_bold">All</Text>
                 <Row>
                   <Text variant="black_s_light">Average</Text>
-                  <Text variant="black_s_bold">Statistical</Text>
+                  <Text variant="black_s_bold">{currentAverage} kg</Text>
                 </Row>
                 <Row>
                   <Text variant="black_s_light">Highest</Text>
-                  <Text variant="black_s_bold">Statistical</Text>
+                  <Text variant="black_s_bold">{high > 0 ? `+ ${high}` : high} kg</Text>
                 </Row>
                 <Row>
                   <Text variant="black_s_light">Lowest</Text>
-                  <Text variant="black_s_bold">Statistical</Text>
+                  <Text variant="black_s_bold">{low} kg</Text>
                 </Row>
               </View>
             </View>
