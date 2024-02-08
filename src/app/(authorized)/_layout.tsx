@@ -35,17 +35,6 @@ export default function HomeNavigator() {
       }}
     >
       <Tabs.Screen
-        name="run"
-        options={{
-          
-          tabBarShowLabel: false,
-          tabBarIcon(props) {
-            return <Icon variant="run" {...props} />;
-          },
-        }}
-        redirect={!user}
-      />
-      <Tabs.Screen
         name="water"
         options={{
           tabBarShowLabel: false,

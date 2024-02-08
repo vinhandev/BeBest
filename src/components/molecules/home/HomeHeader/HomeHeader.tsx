@@ -30,9 +30,10 @@ export default function HomeHeader({ avatar, message, time }: Props) {
       </View>
       <BounceWrapper>
         <Image
+          key={avatar}
           style={[styles.image, Styles.shadow]}
           defaultImage={Images.defaultUserAvatar}
-          source={getUriImage(avatar)}
+          source={avatar}
         />
       </BounceWrapper>
     </Row>

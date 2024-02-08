@@ -137,10 +137,6 @@ export default function AnalystRouter() {
 
   const averageWaterThisWeek = useMemo(() => {
     if (waterRecords) {
-      const totalWeek = getTotalWeekFromRange(
-        new Date(waterRecords[0].time),
-        today
-      );
       let weekWater = 0;
       for (
         let index = waterRecords.length > 7 ? waterRecords.length - 7 : 0;
@@ -151,7 +147,7 @@ export default function AnalystRouter() {
         log.debug('water', element, waterRecords, index);
         weekWater = element.value + weekWater;
       }
-      return Math.round(weekWater / totalWeek);
+      return Math.round(weekWater / (waterRecords.length > 7 ? 7 : waterRecords.length));
     } else {
       return 0;
     }
@@ -172,7 +168,7 @@ export default function AnalystRouter() {
         const element = waterRecords[index];
         weekWater = element.value + weekWater;
       }
-      return Math.round(weekWater / totalWeek);
+      return Math.round(weekWater / (waterRecords.length > 30 ? 30   : waterRecords.length));
     } else {
       return 0;
     }

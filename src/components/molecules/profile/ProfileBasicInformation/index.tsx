@@ -5,6 +5,7 @@ import { Icon, Image, Row, Text } from '~/components/atoms';
 import { styles } from './styles';
 import { Images } from '~/constants';
 import { useUserStore } from '~/stores/useUserStore';
+import { useGetHomeInformation } from '~/hooks';
 
 type Props = {
   onPress: () => void;
@@ -12,6 +13,8 @@ type Props = {
 export default function ProfileBasicInformation({ onPress }: Props) {
   const { colors } = useTheme();
   const profile = useUserStore((state) => state.profile);
+  const faces = useUserStore((state) => state.faces);
+  const face = faces?.[faces?.length - 1]?.path ?? '';
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -23,6 +26,7 @@ export default function ProfileBasicInformation({ onPress }: Props) {
     >
       <Row justifyContent="flex-start">
         <Image
+          source={face}
           defaultImage={Images.defaultUserAvatar}
           style={{
             height: 50,

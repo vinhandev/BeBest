@@ -26,15 +26,19 @@ export default function Home() {
   const { get } = useGetUserTasks();
   const { body, face, meals, isUpdateWeight, isUpdateHeight } =
     useGetHomeInformation();
+  const tasks = useUserStore((state) => state.tasks);
   const insets = useSafeAreaInsets();
   const { hasPermission, requestPermission } = useCameraPermission();
   const [permissionResponse, requestPermission2] =
     MediaLibrary.usePermissions();
 
   const time = getTime(new Date());
-  const notifyMessage = 'Next: Study English with...';
+  const notifyMessage = `Next: ${
+    tasks?.find((item) => !item.done)?.description
+  }`;
   const profile = useUserStore((state) => state.profile);
-
+  const faces = useUserStore((state) => state.faces);
+  const avatar = faces?.[faces?.length - 1]?.path ?? '';
   const setOpenBottomSheet = useSystemStore(
     (state) => state.setOpenBottomSheet
   );
@@ -167,7 +171,7 @@ export default function Home() {
         <View style={styles.container}>
           <RoundedPanel />
           <Spacer size={insets.top} />
-          <HomeHeader avatar={''} message={notifyMessage} time={time} />
+          <HomeHeader avatar={avatar} message={notifyMessage} time={time} />
           <Spacer size={Metrics.small} />
           <BounceWrapper>
             <HomeMenuAction
