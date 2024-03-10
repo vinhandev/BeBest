@@ -6,6 +6,7 @@ import { useSystemStore } from '~/stores';
 
 import * as AddTask from './components/BottomSheetAddTask/BottomSheetAddTask';
 import * as AddWeight from './components/BottomSheetWeight/BottomSheetWeight';
+import * as Camera from './components/BottomSheetCamera/BottomSheetCamera';
 
 const BottomSheet = () => {
   // ref
@@ -36,6 +37,10 @@ const BottomSheet = () => {
     case 'weight':
       body = <AddWeight.Component />;
       snapPoints = AddWeight.SnapPoints;
+      break;
+    case 'camera':
+      body = <Camera.Component />;
+      snapPoints = Camera.SnapPoints;
       break;
 
     default:

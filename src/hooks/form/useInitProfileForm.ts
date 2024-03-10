@@ -5,6 +5,7 @@ import i18next from 'i18next';
 import { useUserStore } from '~/stores';
 
 const Schema = z.object({
+  avatar: z.string().min(1),
   name: z.string().min(1),
   age: z.string().min(1),
   weight: z.number().min(1),
@@ -20,6 +21,7 @@ export type FormData = z.infer<typeof Schema>;
 export const useInitProfileForm = () => {
   const profile = useUserStore((state) => state.profile);
   const defaultValues: FormData = {
+    avatar: profile?.avatar ?? '',
     name: profile?.name ?? '',
     age: `${profile?.age}` ?? '18',
     gender: profile?.gender ?? 'MALE',

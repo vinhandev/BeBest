@@ -30,6 +30,7 @@ export default function InitProfile() {
     }
 
     const param: ProfilePropsType = {
+      avatar: data.avatar,
       age: parseInt(data.age),
       gender: data.gender,
       goalHeight: data.goalHeight,
@@ -40,10 +41,12 @@ export default function InitProfile() {
       weight: data.weight,
       streak: 0,
       mealPerDay: data.mealPerDay,
-      updateHeightTime:todayTime,
-      updateWeightTime:todayTime,
-      updateStreakTime:todayTime,
+      updateHeightTime: todayTime,
+      updateWeightTime: todayTime,
+      updateStreakTime: todayTime,
     };
+
+    console.log(param, user.uid);
 
     await createProfile(user?.uid, param);
   };
@@ -60,6 +63,12 @@ export default function InitProfile() {
           >
             Init Profile
           </Text>
+          <FormInput
+            variant="avatar"
+            control={control}
+            name="avatar"
+            label={'Avatar'}
+          />
           <FormInput
             variant="text"
             control={control}

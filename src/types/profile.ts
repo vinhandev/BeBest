@@ -1,6 +1,7 @@
 import { GenderType } from './gender';
 
 export type ProfilePropsType = {
+  avatar: string;
   name: string;
   age: number;
   height: number;

@@ -7,6 +7,7 @@ type paramType = {
   variant: BottomSheetType | null;
   data: SelectPropsType[] | null;
   selectedOption: SelectPropsType | null;
+  tempImage: string;
 };
 type stateProps = paramType & {
   setLoading: (loading: boolean) => void;
@@ -16,6 +17,7 @@ type stateProps = paramType & {
   ) => void;
   setData: (data: SelectPropsType[]) => void;
   setOption: (data: SelectPropsType) => void;
+  setTempImage: (image: string) => void;
   reset: () => void;
 };
 
@@ -25,6 +27,7 @@ const initProps: paramType = {
   variant: null,
   data: null,
   selectedOption: null,
+  tempImage: '',
 };
 
 export const useSystemStore = create<stateProps>((set, get) => ({
@@ -37,5 +40,6 @@ export const useSystemStore = create<stateProps>((set, get) => ({
     })),
   setData: (data) => set(() => ({ data })),
   setOption: (data) => set(() => ({ selectedOption: data })),
+  setTempImage: (image) => set(() => ({ tempImage: image })),
   reset: () => set(() => initProps),
 }));

@@ -11,6 +11,7 @@ import {
   TouchableOpacityProps,
 } from 'react-native-ui-lib';
 import DateInput from './DateInput/DateInput';
+import AvatarInput from './AvatarInput/AvatarInput';
 
 type Props<T extends FieldValues> = {
   control: Control<T>;
@@ -19,7 +20,7 @@ type Props<T extends FieldValues> = {
   placeholder?: string;
 } & (
   | {
-      variant: 'password' | 'age';
+      variant: 'password' | 'age' | 'avatar';
     }
   | (
       | (Omit<TextInputProps, 'theme'> & {
@@ -41,6 +42,8 @@ export default function FormInput<T extends FieldValues>(props: Props<T>) {
   switch (props.variant) {
     case 'text':
       return <TextInput {...props} />;
+    case 'avatar':
+      return <AvatarInput {...props} />;
     case 'select':
       return <OptionInput {...props} />;
     case 'password':

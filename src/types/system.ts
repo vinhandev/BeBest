@@ -7,7 +7,12 @@ export type IconButtonPropsType = {
   isChecked?: boolean;
 };
 
-export type BottomSheetType = 'add_task' | 'select_data' | 'weight' | 'height';
+export type BottomSheetType =
+  | 'add_task'
+  | 'select_data'
+  | 'weight'
+  | 'height'
+  | 'camera';
 
 export type SelectPropsType = {
   label: string;
