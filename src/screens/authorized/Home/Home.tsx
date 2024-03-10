@@ -38,7 +38,7 @@ export default function Home() {
   }`;
   const profile = useUserStore((state) => state.profile);
   const faces = useUserStore((state) => state.faces);
-  const avatar = faces?.[faces?.length - 1]?.path ?? '';
+  const avatar = faces?.[faces?.length - 1]?.path ?? profile?.avatar;
   const setOpenBottomSheet = useSystemStore(
     (state) => state.setOpenBottomSheet
   );
