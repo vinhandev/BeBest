@@ -34,7 +34,7 @@ export default function TextInput<T extends FieldValues>({
       <RNTextInput
         style={[
           Styles.formInput,
-          styleBorderColor(fieldState.invalid ? colors.error : colors.backdrop),
+          styleBorderColor(fieldState.invalid ? colors.error : colors.disabled),
           styleBackground(colors.backdrop),
           styleColor(colors.black),
           props.style,

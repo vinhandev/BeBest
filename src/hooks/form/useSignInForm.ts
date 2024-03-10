@@ -15,8 +15,8 @@ export type SignInSchemaType = z.infer<typeof SignInSchema>;
 
 export const useSignInForm = () => {
   const defaultValues: SignInSchemaType = {
-    email: 'vinhan.dev@gmail.com',
-    password: '123456',
+    email: '',
+    password: '',
   };
 
   return useForm<SignInSchemaType>({

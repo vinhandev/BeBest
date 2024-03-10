@@ -11,17 +11,13 @@ import { SignInSchemaType, useSignIn, useSignInForm } from '~/hooks';
 import FormInput from '~/components/molecules/common/FormInput';
 import { Button, Logo } from '~/components/molecules';
 import { Spacer } from '~/components/atoms';
-
+import PhoneInput from "react-native-phone-number-input";
 import { styles } from './styles';
 
 export default function SignInScreen() {
-  const { t, i18n } = useTranslation('loginScreen');
+  const { t } = useTranslation('loginScreen');
   const { handleSubmit, control } = useSignInForm();
   const { isLoading, signIn } = useSignIn();
-
-  function onNavigateSignUp() {
-    router.push(PublicLinks.SIGN_UP);
-  }
 
   const onValid = async (data: SignInSchemaType) => {
     try {
@@ -41,21 +37,7 @@ export default function SignInScreen() {
     >
       <Logo size={150} />
       <View style={styles.inputGroup}>
-        <FormInput
-          variant="text"
-          control={control}
-          name="email"
-          placeholder="Username"
-          label={'Username'}
-        />
-        <Spacer size={10} />
-        <FormInput
-          variant="password"
-          control={control}
-          name="password"
-          placeholder="Password"
-          label={'Password'}
-        />
+        <PhoneInput/>
       </View>
       <View style={styles.buttonGroup}>
         <Button
@@ -65,13 +47,6 @@ export default function SignInScreen() {
           style={styles.button}
         >
           {t('login_button')}
-        </Button>
-        <Button
-          onPress={onNavigateSignUp}
-          mode="outlined"
-          style={styles.button}
-        >
-          {t('register_button')}
         </Button>
       </View>
     </MotiView>
