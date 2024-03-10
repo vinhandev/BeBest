@@ -10,9 +10,7 @@
     "web": "expo start --web",
     "prebuild": "expo prebuild",
     "build": "eas build",
-    "submit": "eas submit",
-    "pair": "adb pair",
-    "connect": "adb connect"
+    "submit": "eas submit"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",
