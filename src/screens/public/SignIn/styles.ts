@@ -17,5 +17,6 @@ export const styles = StyleSheet.create({
   buttonGroup: {
     gap: Metrics.small,
   },
-  button: {},
+  button: {
+  },
 });
