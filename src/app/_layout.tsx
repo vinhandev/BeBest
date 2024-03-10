@@ -19,7 +19,6 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 export default function App() {
   const { initializing, user } = useWatchAuth();
-  useInitNotifications();
   const profile = useUserStore((state) => state.profile);
 
   useEffect(() => {

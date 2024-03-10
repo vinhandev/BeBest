@@ -5,43 +5,42 @@ import { UserCredential } from 'firebase/auth';
 
 export const useSignIn = () => {
   const [isLoading, setLoading] = useState(false);
-  const [confirmation, setConfirmation] =
-    useState<(verificationCode: string) => Promise<UserCredential | null>>();
-  const [code, setCode] = useState('');
+  const [confirmation, setConfirmation] = useState<any>();
 
   async function signIn(phone: string) {
     setLoading(true);
     try {
       const response = await auth().signInWithPhoneNumber(phone);
-
       setLoading(false);
-      setConfirmation(response.confirm as any);
+      setConfirmation(response);
+      return response;
     } catch (error) {
-      logError(error as Error);
       setLoading(false);
+
+      logError(error as Error);
       throw Error('Something went wrong. Please try again.');
     }
   }
 
-  async function confirmCode() {
-    setLoading(true);
-    try {
-      await confirmation?.(code);
-      setLoading(false);
-      return true;
-    } catch (error) {
-      logError(error as Error);
-      setLoading(false);
-      return false;
+  const verifyCode = async (code: string) => {
+    if (confirmation) {
+      setLoading(true);
+      try {
+        const response = await confirmation.confirm(code);
+        setLoading(false);
+        return response;
+      } catch (error) {
+        setLoading(false);
+        logError(error as Error);
+        throw Error('Something went wrong. Please try again.');
+      }
     }
-  }
+  };
 
   return {
     isLoading,
-    signIn,
-    confirmCode,
-    onChangeCode: setCode,
-    code,
     isSended: !!confirmation,
+    signIn,
+    verifyCode,
   };
 };

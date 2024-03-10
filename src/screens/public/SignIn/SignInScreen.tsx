@@ -5,24 +5,28 @@ import { MotiView } from 'moti';
 
 import { SignInSchemaType, useSignIn, useSignInForm } from '~/hooks';
 
-import { Button, Logo } from '~/components/molecules';
+import { Button, FormInput, Logo } from '~/components/molecules';
 import PhoneInput from 'react-native-phone-number-input';
 import { styles } from './styles';
+import { router } from 'expo-router';
+import { PublicLinks } from '~/constants';
+import { log } from '~/utils';
 
 export default function SignInScreen() {
   const { t } = useTranslation('loginScreen');
-  const [country, setCountry] = useState<string>();
+  const [country, setCountry] = useState<string>('84');
   const [phone, setPhone] = useState<string | undefined>();
-  const { isLoading, signIn, confirmCode, code, onChangeCode, isSended } =
-    useSignIn();
+  const [code, setCode] = useState<string>('');
+  const { isLoading, signIn, verifyCode, isSended } = useSignIn();
 
   const handleLoginByPhone = async () => {
     if (phone) {
+      const requestPhone = `+${country}${phone}`;
+      console.log('phone', requestPhone);
       await signIn(`+${country}${phone}`);
     }
   };
 
-  console.log(phone, country);
   if (isSended) {
     return (
       <MotiView
@@ -33,15 +37,11 @@ export default function SignInScreen() {
       >
         <Logo size={150} />
         <View style={styles.inputGroup}>
-          <TextInput
-            value={code}
-            onChangeText={onChangeCode}
-            placeholder="Enter OTP"
-          />
+          <TextInput value={code} onChangeText={setCode} />
         </View>
         <View style={styles.buttonGroup}>
           <Button
-            onPress={confirmCode}
+            onPress={() => verifyCode(code)}
             loading={isLoading}
             mode="contained"
             style={styles.button}
@@ -52,6 +52,7 @@ export default function SignInScreen() {
       </MotiView>
     );
   }
+
   return (
     <MotiView
       from={{ opacity: 0 }}
@@ -62,9 +63,10 @@ export default function SignInScreen() {
       <Logo size={150} />
       <View style={styles.inputGroup}>
         <PhoneInput
+          defaultCode={"VN"}
           value={phone}
+          onChangeCountry={(value) => setCountry(value.callingCode[0])}
           onChangeText={setPhone}
-          onChangeCountry={(country) => setCountry(country.callingCode[0])}
         />
       </View>
       <View style={styles.buttonGroup}>
