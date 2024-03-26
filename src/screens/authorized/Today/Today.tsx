@@ -24,7 +24,8 @@ export default function TodayScreen() {
     body: {
       height: Metrics.screenHeight - top - bottom - FixedSizes.bottom_bar + 20,
       backgroundColor: colors.primary,
-      padding: Metrics.medium,
+      paddingHorizontal: Metrics.medium,
+      paddingVertical: Metrics.large,
     },
   });
 

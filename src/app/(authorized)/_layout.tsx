@@ -45,6 +45,16 @@ export default function HomeNavigator() {
         redirect={!user}
       />
       <Tabs.Screen
+        name="today"
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon(props) {
+            return <Icon variant="today" {...props} />;
+          },
+        }}
+        redirect={!user}
+      />
+      <Tabs.Screen
         name="home"
         options={{
           headerTitle: 'Home',

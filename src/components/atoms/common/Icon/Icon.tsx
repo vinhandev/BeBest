@@ -21,6 +21,8 @@ export default function Icon({ variant, ...props }: Props) {
   switch (variant) {
     case 'home':
       return <Foundation name="home" {...props} />;
+    case 'today':
+      return <Ionicons name="today" {...props} />;
     case 'analyst':
       return <Foundation name="graph-pie" {...props} />;
     case 'profile':

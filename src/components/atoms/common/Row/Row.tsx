@@ -36,7 +36,6 @@ export default function Row({
           alignItems,
           justifyContent,
           gap,
-          height: '100%',
         },
         style,
       ]}

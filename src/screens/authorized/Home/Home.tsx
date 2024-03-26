@@ -55,13 +55,6 @@ export default function Home() {
 
   const actions: IconButtonPropsType[] = [
     {
-      icon: 'today',
-      onPress: () => {
-        router.push(HomeLinks.TODAY);
-      },
-      title: t('view_today'),
-    },
-    {
       icon: 'face',
       onPress: async () => {
         if (hasPermission && permissionResponse?.granted) {
@@ -131,34 +124,6 @@ export default function Home() {
       title: t('height'),
       isChecked: isUpdateHeight,
     },
-    {
-      icon: 'album',
-      onPress: () => {
-        router.push(HomeLinks.FACE_LIST);
-      },
-      title: t('view_face'),
-    },
-    {
-      icon: 'album',
-      onPress: () => {
-        router.push(HomeLinks.BODY_LIST);
-      },
-      title: t('view_body'),
-    },
-    {
-      icon: 'album',
-      onPress: () => {
-        router.push(HomeLinks.MEAL_LIST);
-      },
-      title: t('view_meal'),
-    },
-    {
-      icon: 'album',
-      onPress: () => {
-        router.push(HomeLinks.WEIGHT_LIST);
-      },
-      title: t('view_weight'),
-    },
   ];
 
   const handleRefresh = async () => {
@@ -173,7 +138,9 @@ export default function Home() {
           <Spacer size={insets.top} />
           <HomeHeader
             avatar={avatar}
-            message={tasks?.filter(item=>!item.done)?.[0]?.description ?? ''}
+            message={
+              tasks?.filter((item) => !item.done)?.[0]?.description ?? ''
+            }
             time={time}
           />
           <Spacer size={Metrics.small} />

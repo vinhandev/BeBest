@@ -13,6 +13,7 @@ export type IconType =
   | 'home'
   | 'left'
   | 'edit'
+  | 'today'
   | 'compare'
   | 'close'
   | 'image'
