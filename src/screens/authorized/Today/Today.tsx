@@ -11,6 +11,7 @@ import { FixedSizes, HomeLinks, Metrics, Rounds, today } from '~/constants';
 import MealListRouter from '~/app/(authorized)/home/meal-list';
 import { Header } from '~/components/molecules';
 import { router } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function TodayScreen() {
   const { colors } = useTheme();
@@ -49,7 +50,7 @@ export default function TodayScreen() {
             <Spacer size={20} />
             <Row gap={10} alignItems="stretch">
               <View style={{ flex: 1, gap: 10 }}>
-                <View>
+                <LinearGradient colors={['rgba(0,0,0,0.8)', 'transparent']}>
                   <Image
                     style={{
                       width: '100%',
@@ -73,7 +74,7 @@ export default function TodayScreen() {
                   >
                     face
                   </Text>
-                </View>
+                </LinearGradient>
                 <View
                   style={[
                     {
@@ -133,7 +134,7 @@ export default function TodayScreen() {
                     </Text>
                   </Text>
                 </View>
-                <View>
+                <LinearGradient colors={['rgba(0,0,0,0.8)', 'transparent']}>
                   <Image
                     style={{
                       width: '100%',
@@ -157,11 +158,12 @@ export default function TodayScreen() {
                   >
                     body
                   </Text>
-                </View>
+                </LinearGradient>
               </View>
               <View style={{ flex: 1, gap: 10 }}>
                 {meals?.map((item) => (
-                  <View
+                  <LinearGradient
+                    colors={['rgba(0,0,0,0.8)', 'transparent']}
                     key={item.mealTime}
                     style={{
                       width: '100%',
@@ -200,7 +202,7 @@ export default function TodayScreen() {
                         variant="black_s_light"
                       >{`${item.calories} kcal`}</Text>
                     </View>
-                  </View>
+                  </LinearGradient>
                 ))}
               </View>
             </Row>

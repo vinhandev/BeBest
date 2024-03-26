@@ -79,6 +79,12 @@ export default function FaceScreen() {
     setLoading(false);
   };
 
+  const handleBack = () => {
+    if (router.canGoBack()) {
+      router.back();
+    }
+  };
+
   if (!device)
     return (
       <View>
@@ -88,14 +94,29 @@ export default function FaceScreen() {
 
   return (
     <View style={[styles.container, styleBackground(colors.black)]}>
-      <Camera
-        style={styles.camera}
-        ref={camera}
-        device={device}
-        format={format}
-        photo
-        isActive={!loading}
-      />
+      <Row
+        style={{
+          backgroundColor: 'red',
+          paddingHorizontal: 20,
+          paddingVertical: 10,
+        }}
+      >
+        <TouchableOpacity onPress={handleBack}>
+          <Icon variant="back" size={30} color={colors.white} />
+        </TouchableOpacity>
+      </Row>
+      <View style={{ flexGrow: 1 }}>
+        <Camera
+          style={styles.camera}
+          ref={camera}
+          device={device}
+          format={format}
+          photo
+          isActive={!loading}
+          resizeMode="contain"
+          pixelFormat="native"
+        />
+      </View>
       <Row style={styles.actions}>
         <TouchableOpacity onPress={handleFlipCamera}>
           <Icon variant="camera-flip" size={30} color={colors.white} />

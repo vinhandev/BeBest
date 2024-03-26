@@ -151,19 +151,9 @@ export default function WaterRouter() {
           justifyContent: 'flex-end',
         }}
       >
-        {Platform.OS === 'ios' ? (
-          <WaveAnimation
-            waterPercent={drinkWater / (profile?.waterPerDay ?? 1)}
-          />
-        ) : (
-          <MotiView
-            style={{
-              backgroundColor: colors.tertiary,
-              width: Metrics.screenWidth,
-              flex: drinkWater / (profile?.waterPerDay ?? 1),
-            }}
-          />
-        )}
+        <WaveAnimation
+          waterPercent={drinkWater / (profile?.waterPerDay ?? 1)}
+        />
       </View>
     </View>
   );

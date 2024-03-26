@@ -39,15 +39,15 @@ export default function AnalystRouter() {
   const setLoading = useSystemStore((state) => state.setLoading);
 
   const currentIncreaseWeight = useMemo(() => {
-    if (profile?.weight && weightRecords) {
-      return profile?.weight - weightRecords[0].value;
+    if (profile?.weight && weightRecords && weightRecords?.length > 0) {
+      return profile?.weight - weightRecords?.[0]?.value;
     } else {
       return 0;
     }
   }, [weightRecords]);
 
   const remainingDay = useMemo(() => {
-    if (profile?.weight && weightRecords) {
+    if (profile?.weight && weightRecords && weightRecords.length > 0) {
       return getTotalDayFromRange(new Date(weightRecords[0].time), today);
     } else {
       return 0;
@@ -147,7 +147,9 @@ export default function AnalystRouter() {
         log.debug('water', element, waterRecords, index);
         weekWater = element.value + weekWater;
       }
-      return Math.round(weekWater / (waterRecords.length > 7 ? 7 : waterRecords.length));
+      return Math.round(
+        weekWater / (waterRecords.length > 7 ? 7 : waterRecords.length)
+      );
     } else {
       return 0;
     }
@@ -168,7 +170,9 @@ export default function AnalystRouter() {
         const element = waterRecords[index];
         weekWater = element.value + weekWater;
       }
-      return Math.round(weekWater / (waterRecords.length > 30 ? 30   : waterRecords.length));
+      return Math.round(
+        weekWater / (waterRecords.length > 30 ? 30 : waterRecords.length)
+      );
     } else {
       return 0;
     }

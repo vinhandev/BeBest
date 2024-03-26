@@ -3,14 +3,13 @@ import { FontSizes, FontWeight, Metrics, Rounds } from '~/constants';
 
 export const styles = StyleSheet.create({
   container: {
-    paddingTop: 120,
     flex: 1,
   },
   camera: {
     borderRadius: Rounds.normal,
     width: '100%',
     height: undefined,
-    aspectRatio: 3 / 4,
+    aspectRatio: 1,
   },
   actions: {
     padding: Metrics.large,

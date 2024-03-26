@@ -171,7 +171,11 @@ export default function Home() {
         <View style={styles.container}>
           <RoundedPanel />
           <Spacer size={insets.top} />
-          <HomeHeader avatar={avatar} message={notifyMessage} time={time} />
+          <HomeHeader
+            avatar={avatar}
+            message={tasks?.filter(item=>!item.done)?.[0]?.description ?? ''}
+            time={time}
+          />
           <Spacer size={Metrics.small} />
           <BounceWrapper>
             <HomeMenuAction
