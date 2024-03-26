@@ -3,9 +3,7 @@ import { Metrics } from '~/constants';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingHorizontal: Metrics.medium,
+    padding: 40,
     justifyContent: 'center',
-    paddingBottom: Metrics.medium,
   },
 });
