@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Platform, View } from 'react-native';
 import { useUserStore } from '~/stores/useUserStore';
 import { useTheme } from 'react-native-paper';
@@ -35,7 +35,14 @@ export default function WaterRouter() {
   const { water } = useGetHomeInformation();
   const filename = `${uid}_${time}`;
 
-  const [drinkWater, setDrinkWater] = React.useState(water);
+  const drinkWater = useUserStore((state) => state.waterToday);
+  const setDrinkWater = useUserStore((state) => state.setWaterToday);
+
+  useEffect(() => {
+    if (water !== 0) {
+      setDrinkWater(water);
+    }
+  }, []);
 
   const handleAddWater = async () => {
     setLoading(true);

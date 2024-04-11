@@ -20,6 +20,7 @@ type paramType = {
   weightRecords: RecordPropsType[] | null;
   waterRecords: RecordPropsType[] | null;
   waterPerCup: number;
+  waterToday: number;
 };
 type stateProps = paramType & {
   setUser: (user: FirebaseAuthTypes.User | null) => void;
@@ -34,6 +35,7 @@ type stateProps = paramType & {
   setWeightRecords: (records: RecordPropsType[]) => void;
   setWaterRecords: (records: RecordPropsType[]) => void;
   setWaterPerCup: (waterPerCup: number) => void;
+  setWaterToday: (waterToday: number) => void;
   reset: () => void;
 };
 
@@ -50,6 +52,7 @@ const initProps: paramType = {
   weightRecords: null,
   waterRecords: null,
   waterPerCup: 150,
+  waterToday: 0,
 };
 
 export const useUserStore = create(
@@ -68,6 +71,7 @@ export const useUserStore = create(
       setWeightRecords: (records) => set(() => ({ weightRecords: records })),
       setWaterPerCup: (waterPerCup) => set(() => ({ waterPerCup })),
       setWaterRecords: (records) => set(() => ({ waterRecords: records })),
+      setWaterToday: (waterToday) => set(() => ({ waterToday })),
       reset: () => set(() => initProps),
     }),
     {

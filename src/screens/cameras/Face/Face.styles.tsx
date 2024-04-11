@@ -4,12 +4,11 @@ import { FontSizes, FontWeight, Metrics, Rounds } from '~/constants';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent:'flex-end',
   },
   camera: {
-    borderRadius: Rounds.normal,
     width: '100%',
-    height: undefined,
-    aspectRatio: 1,
+    height: '100%',
   },
   actions: {
     padding: Metrics.large,

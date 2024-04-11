@@ -96,16 +96,23 @@ export default function FaceScreen() {
     <View style={[styles.container, styleBackground(colors.black)]}>
       <Row
         style={{
-          backgroundColor: 'red',
           paddingHorizontal: 20,
           paddingVertical: 10,
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          zIndex: 100,
         }}
       >
         <TouchableOpacity onPress={handleBack}>
           <Icon variant="back" size={30} color={colors.white} />
         </TouchableOpacity>
       </Row>
-      <View style={{ flexGrow: 1 }}>
+      <View
+        style={{
+          flexGrow: 1,
+        }}
+      >
         <Camera
           style={styles.camera}
           ref={camera}

@@ -14,6 +14,7 @@ export type IconType =
   | 'left'
   | 'edit'
   | 'today'
+  | 'share'
   | 'compare'
   | 'close'
   | 'image'
