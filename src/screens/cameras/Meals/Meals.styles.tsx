@@ -22,6 +22,14 @@ export const styles = StyleSheet.create({
     height: 40,
     borderRadius: Rounds.circle,
   },
+  goBack: {
+    position: 'absolute',
+    top: Metrics.ex_large,
+    left: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 100,
+  },
   meals: {
     position: 'absolute',
     top: Metrics.ex_large,
@@ -39,6 +47,5 @@ export const styles = StyleSheet.create({
     fontSize: FontSizes.s,
     fontWeight: FontWeight.regular,
   },
-  calories: {
-  },
+  calories: {},
 });

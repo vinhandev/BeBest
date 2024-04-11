@@ -112,6 +112,15 @@ export default function MealsScreen() {
   return (
     <View style={[styles.container, styleBackground(colors.black)]}>
       <View style={{ flex: 1 }}>
+        <View style={styles.goBack}>
+          <TouchableOpacity
+            onPress={() => {
+              router.back();
+            }}
+          >
+            <Icon variant="back" color={colors.white} size={25} />
+          </TouchableOpacity>
+        </View>
         <View style={styles.meals}>
           <Picker
             style={[

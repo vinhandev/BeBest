@@ -7,7 +7,7 @@ import {
   ProfileBasicInformation,
   ProfileSettings,
 } from '~/components/molecules';
-import { ProfileLinks } from '~/constants';
+import { HomeLinks, ProfileLinks } from '~/constants';
 import { useSignOut } from '~/hooks';
 
 export default function Profile() {
@@ -22,6 +22,27 @@ export default function Profile() {
       <Spacer size={10} />
       <ProfileSettings
         settings={[
+          {
+            icon: 'album',
+            title: 'Face Albums',
+            onPress: () => {
+              router.push(HomeLinks.FACE_LIST);
+            },
+          },
+          {
+            icon: 'album',
+            title: 'Body Albums',
+            onPress: () => {
+              router.push(HomeLinks.BODY_LIST);
+            },
+          },
+          {
+            icon: 'album',
+            title: 'Meal Albums',
+            onPress: () => {
+              router.push(HomeLinks.MEAL_LIST);
+            },
+          },
           {
             icon: 'logout',
             title: 'Log Out',

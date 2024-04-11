@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, TextInput, View } from 'react-native';
+import { Alert, Dimensions, TextInput, View } from 'react-native';
 import { MotiView } from 'moti';
 
 import { SignInSchemaType, useSignIn, useSignInForm } from '~/hooks';
@@ -11,6 +11,7 @@ import { styles } from './styles';
 import { router } from 'expo-router';
 import { PublicLinks } from '~/constants';
 import { log } from '~/utils';
+import OTPTextInput from 'react-native-otp-textinput';
 
 export default function SignInScreen() {
   const { t } = useTranslation('loginScreen');
@@ -18,6 +19,7 @@ export default function SignInScreen() {
   const [phone, setPhone] = useState<string | undefined>();
   const [code, setCode] = useState<string>('');
   const { isLoading, signIn, verifyCode, isSended } = useSignIn();
+  let otpInput = useRef<OTPTextInput>(null);
 
   const handleLoginByPhone = async () => {
     if (phone) {
@@ -37,11 +39,25 @@ export default function SignInScreen() {
       >
         <Logo size={150} />
         <View style={styles.inputGroup}>
-          <TextInput value={code} onChangeText={setCode} />
+          <OTPTextInput
+            containerStyle={{
+              width: Dimensions.get('window').width - 40,
+              overflow: 'hidden',
+            }}
+            textInputStyle={{
+              borderWidth: 0,
+              width: 40,
+            }}
+            autoFocus
+            handleTextChange={setCode}
+            inputCount={6}
+          />
         </View>
         <View style={styles.buttonGroup}>
           <Button
-            onPress={() => verifyCode(code)}
+            onPress={() => {
+              verifyCode(code);
+            }}
             loading={isLoading}
             mode="contained"
             style={styles.button}
@@ -63,10 +79,13 @@ export default function SignInScreen() {
       <Logo size={150} />
       <View style={styles.inputGroup}>
         <PhoneInput
-          defaultCode={"VN"}
+          defaultCode={'VN'}
           value={phone}
           onChangeCountry={(value) => setCountry(value.callingCode[0])}
           onChangeText={setPhone}
+          containerStyle={{
+            width: Dimensions.get('window').width - 40,
+          }}
         />
       </View>
       <View style={styles.buttonGroup}>

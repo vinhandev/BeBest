@@ -38,7 +38,9 @@ export default function NumberInput<T extends FieldValues>({
         ]}
         inputMode="numeric"
         onChangeText={(text) => {
-          if (text) {
+          if (text === '') {
+            field.onChange(0);
+          } else if (text) {
             field.onChange(parseInt(text));
           }
         }}

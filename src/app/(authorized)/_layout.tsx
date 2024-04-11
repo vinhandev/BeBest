@@ -35,21 +35,21 @@ export default function HomeNavigator() {
       }}
     >
       <Tabs.Screen
-        name="water"
-        options={{
-          tabBarShowLabel: false,
-          tabBarIcon(props) {
-            return <Icon variant="water" {...props} />;
-          },
-        }}
-        redirect={!user}
-      />
-      <Tabs.Screen
         name="today"
         options={{
           tabBarShowLabel: false,
           tabBarIcon(props) {
             return <Icon variant="today" {...props} />;
+          },
+        }}
+        redirect={!user}
+      />
+      <Tabs.Screen
+        name="water"
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon(props) {
+            return <Icon variant="water" {...props} />;
           },
         }}
         redirect={!user}
