@@ -6,20 +6,54 @@ import {
   LightTheme,
   PublicLinks,
 } from '~/constants';
-import { useInitNotifications, useWatchAuth } from '~/hooks';
+import {
+  useGetAllWaterRecords,
+  useGetAllWeightRecord,
+  useGetUserBody,
+  useGetUserFace,
+  useGetUserMeals,
+  useGetUserWeight,
+  useInitNotifications,
+  useWatchAuth,
+} from '~/hooks';
 
 import { useColorScheme } from 'react-native';
 import { Provider } from 'react-native-paper';
 import { useUserStore } from '~/stores/useUserStore';
 
 import '~/translations';
-import { log } from '~/utils';
+import { log, showError } from '~/utils';
 import { BottomSheet, Loading } from '~/components/molecules';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { useSystemStore } from '~/stores';
 
 export default function App() {
   const { initializing, user } = useWatchAuth();
   const profile = useUserStore((state) => state.profile);
+  const { get: getWater } = useGetAllWaterRecords();
+  const { get: getWeight } = useGetAllWeightRecord();
+  const { get: getFace } = useGetUserFace();
+  const { get: getBody } = useGetUserBody();
+  const { get: getMeal } = useGetUserMeals();
+  const setLoading = useSystemStore((state) => state.setLoading);
+
+  useEffect(() => {
+    async function handleInitData() {
+      setLoading(true);
+      try {
+        console.log('get all data');
+        await getWater();
+        await getWeight();
+        await getFace();
+        await getBody();
+        await getMeal();
+      } catch (error) {
+        showError(error);
+      }
+      setLoading(false);
+    }
+    void handleInitData();
+  }, []);
 
   useEffect(() => {
     if (initializing) {
