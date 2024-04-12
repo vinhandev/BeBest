@@ -12,7 +12,7 @@ import {
 } from 'react-native-safe-area-context';
 import { FixedSizes, HomeLinks, Metrics, Rounds, today } from '~/constants';
 import MealListRouter from '~/app/(authorized)/home/meal-list';
-import { Header } from '~/components/molecules';
+import { Header, Logo } from '~/components/molecules';
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import TodayImage from './TodayImage/TodayImage';
@@ -46,7 +46,7 @@ export default function TodayScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <TouchableOpacity
         onPress={handleShareImage}
         style={{
@@ -208,6 +208,20 @@ export default function TodayScreen() {
                     </View>
                   ))}
                 </View>
+              </Row>
+              <Row
+                style={{
+                  alignSelf: 'flex-end',
+                  gap: 10,
+                }}
+              >
+                <Logo size={20} />
+                <Text
+                  style={styleColor(colors.secondary)}
+                  variant="black_s_bold"
+                >
+                  BeBest
+                </Text>
               </Row>
             </View>
           </ViewShot>
