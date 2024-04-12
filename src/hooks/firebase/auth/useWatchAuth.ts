@@ -31,6 +31,8 @@ export const useWatchAuth = () => {
         const response = await usersCollection.doc(user.uid).get();
         const profile = response.data();
         if (profile) {
+          console.log('get user data');
+
           setProfile(response.data() as ProfilePropsType);
 
           await getWater();

@@ -22,24 +22,6 @@ import { showError } from '~/utils';
 export default function StartUp() {
   const [selectedImage, setSelectedImage] = useState<number>(0);
   const { colors } = useTheme();
-  const { initializing, user } = useWatchAuth();
-  const profile = useUserStore((state) => state.profile);
-
-  useEffect(() => {
-    if (!initializing) {
-      if (user === null) {
-        router.replace(PublicLinks.SIGN_IN);
-        return;
-      }
-      if (profile === null && user !== null) {
-        router.push(PublicLinks.INIT_PROFILE);
-        return;
-      } else {
-        router.replace(AuthorizedLinks.HOME);
-      }
-    }
-  }, [initializing, user, profile]);
-
   const waitImages: { image: string; quote: string; actor: string }[] = [
     {
       image:

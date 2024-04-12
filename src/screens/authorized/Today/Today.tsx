@@ -46,7 +46,14 @@ export default function TodayScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: colors.primary,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <TouchableOpacity
         onPress={handleShareImage}
         style={{
