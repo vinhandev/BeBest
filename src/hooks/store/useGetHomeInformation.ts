@@ -8,14 +8,31 @@ export function useGetHomeInformation() {
   const bodies = useUserStore((state) => state.bodies);
   const faces = useUserStore((state) => state.faces);
   const water = useUserStore((state) => state.waterRecords);
+  const weightRecords = useUserStore((state) => state.weightRecords);
+  const heightRecords = useUserStore((state) => state.heightRecords);
   const updateWeightTime = useUserStore(
     (state) => state.profile?.updateWeightTime ?? 0
   );
   const updateHeightTime = useUserStore(
     (state) => state.profile?.updateHeightTime ?? 0
   );
-  const isUpdateWeight = !checkNotSameDate(new Date(updateWeightTime), today);
-  const isUpdateHeight = !checkNotSameDate(new Date(updateHeightTime), today);
+
+  console.log('updated', updateWeightTime, updateHeightTime);
+
+  const isUpdateWeight =
+    weightRecords &&
+    weightRecords?.length > 0 &&
+    !checkNotSameDate(
+      new Date(weightRecords?.[weightRecords?.length - 1].time),
+      today
+    );
+  const isUpdateHeight =
+    heightRecords &&
+    heightRecords?.length > 0 &&
+    !checkNotSameDate(
+      new Date(heightRecords?.[heightRecords?.length - 1].time),
+      today
+    );
 
   const todayTasks = [...(tasks?.filter((item) => isToday(item.time)) ?? [])];
   const sortTasks = todayTasks.sort((a, b) => {

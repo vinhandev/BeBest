@@ -7,13 +7,12 @@ import {
   PublicLinks,
 } from '~/constants';
 import {
+  useGetAllHeightRecords,
   useGetAllWaterRecords,
   useGetAllWeightRecord,
   useGetUserBody,
   useGetUserFace,
   useGetUserMeals,
-  useGetUserWeight,
-  useInitNotifications,
   useWatchAuth,
 } from '~/hooks';
 
@@ -31,10 +30,11 @@ export default function App() {
   const { initializing, user } = useWatchAuth();
   const profile = useUserStore((state) => state.profile);
   const { get: getWater } = useGetAllWaterRecords();
-  const { get: getWeight } = useGetAllWeightRecord();
-  const { get: getFace } = useGetUserFace();
-  const { get: getBody } = useGetUserBody();
-  const { get: getMeal } = useGetUserMeals();
+  const { get: getWeights } = useGetAllWeightRecord();
+  const { get: getHeights } = useGetAllHeightRecords();
+  const { get: getFaces } = useGetUserFace();
+  const { get: getBodies } = useGetUserBody();
+  const { get: getMeals } = useGetUserMeals();
   const setLoading = useSystemStore((state) => state.setLoading);
 
   useEffect(() => {
@@ -43,10 +43,11 @@ export default function App() {
       try {
         console.log('get all data');
         await getWater();
-        await getWeight();
-        await getFace();
-        await getBody();
-        await getMeal();
+        await getWeights();
+        await getHeights();
+        await getFaces();
+        await getBodies();
+        await getMeals();
       } catch (error) {
         showError(error);
       }

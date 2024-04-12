@@ -40,12 +40,7 @@ export default function MealsScreen() {
   const dateString = getDateStringForImageFile(today);
 
   const { meals: selectedMeals } = useGetHomeInformation();
-  let filterMeals = meals?.filter((item) => {
-    const isExistedMealTime = selectedMeals?.find(
-      (subItem) => subItem.mealTime === item.value
-    );
-    return !isExistedMealTime;
-  });
+  let filterMeals = meals;
   const setLoading = useSystemStore((state) => state.setLoading);
   const loading = useSystemStore((state) => state.loading);
   const [isFrontCamera, setIsFrontCamera] = useState(false);

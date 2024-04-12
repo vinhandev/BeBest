@@ -53,6 +53,8 @@ export default function Home() {
     },
   });
 
+  console.log('meals', meals, isUpdateHeight, isUpdateWeight);
+
   const actions: IconButtonPropsType[] = [
     {
       icon: 'face',
@@ -106,7 +108,7 @@ export default function Home() {
         }
       },
       title: t('meal'),
-      isChecked: meals?.length !== 0,
+      isChecked: meals !== undefined && meals?.length !== 0,
     },
     {
       icon: 'weight',
@@ -114,7 +116,7 @@ export default function Home() {
         router.push(CameraLinks.WEIGHT);
       },
       title: t('weight'),
-      isChecked: isUpdateWeight,
+      isChecked: isUpdateWeight ?? false,
     },
     {
       icon: 'height',
@@ -122,7 +124,7 @@ export default function Home() {
         router.push(CameraLinks.HEIGHT);
       },
       title: t('height'),
-      isChecked: isUpdateHeight,
+      isChecked: isUpdateHeight ?? false,
     },
   ];
 

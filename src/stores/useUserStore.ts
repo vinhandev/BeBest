@@ -18,6 +18,7 @@ type paramType = {
   defaultMeals: MealDefaultProps[] | null;
   meals: MealProps[] | null;
   weightRecords: RecordPropsType[] | null;
+  heightRecords: RecordPropsType[] | null;
   waterRecords: RecordPropsType[] | null;
   waterPerCup: number;
   waterToday: number;
@@ -33,6 +34,7 @@ type stateProps = paramType & {
   setDefaultMeals: (meals: MealDefaultProps[]) => void;
   setMeals: (meals: MealProps[]) => void;
   setWeightRecords: (records: RecordPropsType[]) => void;
+  setHeightRecords: (records: RecordPropsType[]) => void;
   setWaterRecords: (records: RecordPropsType[]) => void;
   setWaterPerCup: (waterPerCup: number) => void;
   setWaterToday: (waterToday: number) => void;
@@ -50,6 +52,7 @@ const initProps: paramType = {
   meals: null,
   updatedStreakDate: null,
   weightRecords: null,
+  heightRecords: null,
   waterRecords: null,
   waterPerCup: 150,
   waterToday: 0,
@@ -69,6 +72,7 @@ export const useUserStore = create(
       setDefaultMeals: (meals) => set(() => ({ defaultMeals: meals })),
       setMeals: (meals) => set(() => ({ meals })),
       setWeightRecords: (records) => set(() => ({ weightRecords: records })),
+      setHeightRecords: (records) => set(() => ({ heightRecords: records })),
       setWaterPerCup: (waterPerCup) => set(() => ({ waterPerCup })),
       setWaterRecords: (records) => set(() => ({ waterRecords: records })),
       setWaterToday: (waterToday) => set(() => ({ waterToday })),
