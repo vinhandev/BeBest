@@ -22,7 +22,7 @@ type stateProps = paramType & {
 };
 
 const initProps: paramType = {
-  loading: true,
+  loading: false,
   openBottomSheet: false,
   variant: null,
   data: null,

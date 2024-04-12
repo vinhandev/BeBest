@@ -6,5 +6,5 @@ import { PublicLinks } from '~/constants';
 import '../translations';
 
 export default function StartPage() {
-  return <Redirect href={PublicLinks.SIGN_IN} />;
+  return <Redirect href={PublicLinks.START_UP} />;
 }

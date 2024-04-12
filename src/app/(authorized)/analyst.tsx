@@ -105,7 +105,7 @@ export default function AnalystRouter() {
     }
   }, [weightRecords]);
   const averageWeekIncrease = useMemo(() => {
-    if (profile?.weight && weightRecords) {
+    if (profile?.weight && weightRecords && weightRecords.length > 0) {
       const totalWeek = getTotalWeekFromRange(
         new Date(weightRecords[0].time),
         today
@@ -116,7 +116,7 @@ export default function AnalystRouter() {
     }
   }, [weightRecords]);
   const averageMonthIncrease = useMemo(() => {
-    if (profile?.weight && weightRecords) {
+    if (profile?.weight && weightRecords && weightRecords.length > 0) {
       const totalMonth = getTotalMonthFromRange(
         new Date(weightRecords[0].time),
         today
@@ -128,7 +128,7 @@ export default function AnalystRouter() {
   }, [weightRecords]);
 
   const todayWater = useMemo(() => {
-    if (waterRecords) {
+    if (waterRecords && waterRecords.length > 0) {
       return waterRecords.find((item) => isToday(item.time))?.value ?? 0;
     } else {
       return 0;
@@ -156,7 +156,7 @@ export default function AnalystRouter() {
   }, [waterRecords]);
 
   const averageWaterThisMonth = useMemo(() => {
-    if (waterRecords) {
+    if (waterRecords && waterRecords.length > 0) {
       const totalWeek = getTotalWeekFromRange(
         new Date(waterRecords[0].time),
         today

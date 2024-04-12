@@ -21,8 +21,6 @@ export * from './firebase/firestore/useAddNewTask';
 export * from './firebase/firestore/useDeleteTask';
 export * from './firebase/firestore/useGetUserWeight';
 
-
-
 export * from './firebase/messaging/useInitNotifications';
 
 export * from './firebase/storage/useSaveImage';
@@ -35,3 +33,5 @@ export * from './form/useAddTask';
 export * from './firebase/firestore/useCheckTask';
 export * from './firebase/firestore/useUpdateStreak';
 export * from './store/useGetHomeInformation';
+
+export * from './useInterval';
