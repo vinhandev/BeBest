@@ -25,8 +25,9 @@ export const useWatchAuth = () => {
 
   // Handle user state changes
   async function onAuthStateChanged(user: FirebaseAuthTypes.User | null) {
+    setInitializing(true);
     try {
-      setUser(user);
+      console.log('user', user);
       if (user !== null) {
         const response = await usersCollection.doc(user.uid).get();
         const profile = response.data();
@@ -35,18 +36,19 @@ export const useWatchAuth = () => {
 
           setProfile(response.data() as ProfilePropsType);
 
-          await getWater();
-          await getWeights();
-          await getHeights();
-          await getFaces();
-          await getBodies();
-          await getMeals();
+          await getWater(user.uid);
+          await getWeights(user.uid);
+          await getHeights(user.uid);
+          await getFaces(user.uid);
+          await getBodies(user.uid);
+          await getMeals(user.uid);
         }
       }
+      setUser(user);
     } catch (error) {
       showError(error);
     }
-    if (initializing) setInitializing(false);
+    setInitializing(false);
   }
 
   useEffect(() => {

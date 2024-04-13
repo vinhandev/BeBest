@@ -16,6 +16,8 @@ type Props = {
   streak: number | undefined;
   weight: number | undefined;
   height: number | undefined;
+  waterToday: number | undefined;
+  waterGoal: number | undefined;
   actions: IconButtonPropsType[];
 };
 export default function HomeMenuAction({
@@ -24,8 +26,12 @@ export default function HomeMenuAction({
   streak,
   weight,
   actions,
+  waterGoal = 0,
+  waterToday = 0,
 }: Props) {
   const { colors } = useTheme();
+
+  const isEnoughWater = waterToday !== 0 && waterToday >= waterGoal;
 
   const updatedStreakDate = useUserStore((state) => state.updatedStreakDate);
 
@@ -33,7 +39,7 @@ export default function HomeMenuAction({
     ? !checkNotSameDate(updatedStreakDate, new Date())
     : false;
   const streakStatusColor = checkedStreak ? colors.success : colors.error;
-
+  const waterColor = isEnoughWater ? colors.water : colors.disabled;
   return (
     <View style={[styles.container, styleBackground(colors.white)]}>
       <Text variant="black_l_bold">{name ?? ' '}</Text>
@@ -42,14 +48,29 @@ export default function HomeMenuAction({
         <Text variant="black_s_light">|</Text>
         <Text variant="black_s_light"> {height ?? 0} cm</Text>
       </Row>
-      <Row justifyContent="flex-start">
-        <Icon variant="streak" size={15} color={streakStatusColor} />
-        <Text
-          style={{
-            color: streakStatusColor,
-          }}
-          variant="streak"
-        >{` ${streak ?? 0} streaks`}</Text>
+      <Row justifyContent="flex-start" gap={5}>
+        <Row justifyContent="flex-start">
+          <Icon variant="streak" size={15} color={streakStatusColor} />
+          <Text
+            style={{
+              color: streakStatusColor,
+            }}
+            variant="streak"
+          >{` ${streak ?? 0} streaks`}</Text>
+        </Row>
+        <Row justifyContent="flex-start">
+          <Icon
+            variant={isEnoughWater ? 'water' : 'noWater'}
+            size={15}
+            color={waterColor}
+          />
+          <Text
+            style={{
+              color: waterColor,
+            }}
+            variant="streak"
+          >{` ${waterToday}/${waterGoal} ml`}</Text>
+        </Row>
       </Row>
       <Spacer size={5} />
       <Row gap={5} style={styles.actions}>

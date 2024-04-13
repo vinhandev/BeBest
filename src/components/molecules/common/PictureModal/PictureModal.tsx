@@ -112,8 +112,8 @@ export default function PictureModal(props: Props) {
           </Row>
         </View>
         {isComparedMode ? (
-          <View>
-            <Row>
+          <View style={{ flex: 1 }}>
+            <Row style={{ flex: 1 }}>
               <View>
                 <Image
                   source={{ uri: photos[compareSelectedIndex].path }}
@@ -161,6 +161,8 @@ export default function PictureModal(props: Props) {
         ) : (
           <FlatList
             ref={ref}
+            snapToInterval={Metrics.screenWidth}
+            snapToAlignment='center'
             contentContainerStyle={{
               alignItems: 'center',
             }}

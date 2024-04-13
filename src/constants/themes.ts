@@ -8,6 +8,7 @@ import { Colors } from './colors';
 declare global {
   namespace ReactNativePaper {
     interface ThemeColors {
+      water: string;
       secondary: string;
       tertiary: string;
       quaternary: string;
@@ -34,6 +35,7 @@ export const LightTheme: ReactNativePaper.Theme = {
     success: Colors.green,
     backdrop: Colors.grey_2,
     purple: Colors.purple,
+    water:Colors.light_blue
   },
 };
 export const DarkTheme: ReactNativePaper.Theme = {
@@ -50,6 +52,6 @@ export const DarkTheme: ReactNativePaper.Theme = {
     success: Colors.green,
     backdrop: Colors.grey_2,
     purple: Colors.purple,
-
+    water:Colors.light_blue
   },
 };

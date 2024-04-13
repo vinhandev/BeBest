@@ -25,6 +25,7 @@ import { styles } from './Body.styles';
 import { Button } from '~/components/molecules';
 import { TouchableOpacity } from 'react-native-ui-lib';
 import * as MediaLibrary from 'expo-media-library';
+import ImageCropPicker from 'react-native-image-crop-picker';
 
 export default function BodyScreen() {
   const { t } = useTranslation('bottomSheet');
@@ -34,6 +35,10 @@ export default function BodyScreen() {
   const filename = `${uid}_${dateString}`;
   const path = `images/bodies/${filename}_body.jpeg`;
 
+  const setTempImage = useSystemStore((state) => state.setTempImage);
+  const setConfettiVariant = useSystemStore(
+    (state) => state.setConfettiVariant
+  );
   const setLoading = useSystemStore((state) => state.setLoading);
   const loading = useSystemStore((state) => state.loading);
   const [isFrontCamera, setIsFrontCamera] = useState(false);
@@ -61,17 +66,23 @@ export default function BodyScreen() {
       if (camera.current) {
         const file = await camera.current.takePhoto({});
         const uri = `file://${file.path}`;
-        await MediaLibrary.saveToLibraryAsync(uri);
-
+        const image = await ImageCropPicker.openCropper({
+          path: uri,
+          width: 600,
+          height: 900,
+          mediaType: 'photo',
+        });
         if (uri) {
-          const savedUrlInFirebase = await uploadImage(uri, path);
+          const savedUrlInFirebase = await uploadImage(image.path, path);
           if (savedUrlInFirebase) {
             await create(filename, {
               path: savedUrlInFirebase,
               time: new Date().getTime(),
               uid,
             });
-            router.push(HomeLinks.BODY_LIST);
+            setTempImage(savedUrlInFirebase);
+            setConfettiVariant('body');
+            router.push(HomeLinks.CONFETTI);
           }
         }
       }

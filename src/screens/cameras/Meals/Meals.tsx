@@ -33,6 +33,7 @@ import { Button, SwipeSelector } from '~/components/molecules';
 import { Picker, TouchableOpacity } from 'react-native-ui-lib';
 import * as MediaLibrary from 'expo-media-library';
 import { MealTimeType } from '~/types/meals';
+import ImageCropPicker from 'react-native-image-crop-picker';
 
 export default function MealsScreen() {
   const { colors } = useTheme();
@@ -57,6 +58,10 @@ export default function MealsScreen() {
   const camera = useRef<Camera>(null);
   const { create } = useCreateUserMeal();
   const { uploadImage } = useSaveImage();
+  const setTempImage = useSystemStore((state) => state.setTempImage);
+  const setConfettiVariant = useSystemStore(
+    (state) => state.setConfettiVariant
+  );
 
   const filename = `${uid}_${dateString}_${mealTime.toLowerCase()}`;
   const path = `images/bodies/${filename}_meals_${mealTime.toLowerCase()}.jpeg`;
@@ -75,10 +80,15 @@ export default function MealsScreen() {
       if (camera.current) {
         const file = await camera.current.takePhoto({});
         const uri = `file://${file.path}`;
-        await MediaLibrary.saveToLibraryAsync(uri);
+        const image = await ImageCropPicker.openCropper({
+          path: uri,
+          width: 400,
+          height: 400,
+          mediaType: 'photo',
+        });
 
         if (uri) {
-          const savedUrlInFirebase = await uploadImage(uri, path);
+          const savedUrlInFirebase = await uploadImage(image.path, path);
           if (savedUrlInFirebase) {
             await create(filename, {
               calories: calories,
@@ -87,7 +97,9 @@ export default function MealsScreen() {
               time: new Date().getTime(),
               uid: uid,
             });
-            router.push(HomeLinks.MEAL_LIST);
+            setTempImage(savedUrlInFirebase);
+            setConfettiVariant('meal');
+            router.push(HomeLinks.CONFETTI);
           }
         }
       }

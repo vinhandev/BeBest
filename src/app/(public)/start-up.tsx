@@ -1,7 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { Image } from 'moti';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, useColorScheme } from 'react-native';
 import { ActivityIndicator, useTheme } from 'react-native-paper';
 import { Text } from '~/components/atoms';
@@ -31,31 +31,49 @@ export default function StartUp() {
     },
     {
       image:
-        'https://is.zobj.net/image-server/v1/images?r=mrBlH5KRgk9rWxR-UHowopUHyLr5elJ68HMqAJmtccUC18aSIjhBrOIA9EIdXSF2sgmtwE2BAtG7o8ehxgQtF5_a9jTAdPTnsZQqnoK4BqATm9YtEWhy9vKkSlHPn4MJ_mLauApevIxK23CAy4IpYl-Lj7cgC-2qIS9Q7Efh8Z5OEl4ShsQwB_HFte6ioafLbBrwO4ZbQ8JptNqLaTqVseI2y8YZRxuJ9KiMlA',
+        'https://i.pinimg.com/originals/a7/ff/7e/a7ff7ed4aed0538cec5596c395980df1.jpg',
       quote:
-        'The biggest factor in success is self-belief. Without it, no matter how talented you are, you will never achieve anything significant.',
+        'Your future is the result of your daily actions. You’re defined by what you do today. Lazy now, loser later. Get to work.',
       actor: 'Andrew Tate',
     },
     {
       image:
-        'https://r1.ilikewallpaper.net/iphone-x-wallpapers/download-152092/Lionel-Messi-FIFA-Word-CUP-2022.jpg',
+        'https://i.pinimg.com/564x/78/05/03/780503aca32b2f61b8d487f7ed961517.jpg',
       quote:
         'You have to fight to reach your dream. You have to sacrifice and work hard for it.',
       actor: 'Lionel Messi',
     },
     {
       image:
-        'https://i.pinimg.com/564x/e4/ff/55/e4ff55076255ff9fbf731003833a45ec.jpg',
+        'https://i.pinimg.com/originals/d8/0d/64/d80d643a2c69138465a77441f90d75f0.jpg',
       quote: 'The hero is you.',
       actor: 'David Goggins',
     },
     {
       image:
-        'https://i.pinimg.com/564x/66/8b/bd/668bbd38aa30d59952387a57c5a26eb4.jpg',
+        'https://i.pinimg.com/564x/37/03/4c/37034ccfecd0dd39aeea7aa31cf66983.jpg',
       quote: 'Rest at the end. Not in the middle',
       actor: 'Kobe Bryant',
     },
+    {
+      image:
+        'https://i.pinimg.com/originals/38/57/13/385713e991eab9f4b97c9e51b26ed1de.png',
+      quote: 'If you want to become successful, you have to deal with pressure. If you can’t deal with pressure, that’s your fault. Put yourself through more hard sh*t.',
+      actor: 'Tristan Tate',
+    },
   ];
+
+  const shuffleImages = useMemo(() => {
+    const shuffledImages = waitImages;
+    for (let i = waitImages.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledImages[i], shuffledImages[j]] = [
+        shuffledImages[j],
+        shuffledImages[i],
+      ];
+    }
+    return shuffledImages;
+  }, [waitImages]);
 
   useInterval(() => {
     if (selectedImage < waitImages.length - 1) {
@@ -63,7 +81,7 @@ export default function StartUp() {
     } else {
       setSelectedImage(0);
     }
-  }, 3000);
+  }, 5000);
 
   return (
     <View
@@ -84,7 +102,7 @@ export default function StartUp() {
           top: 0,
           bottom: 0,
         }}
-        source={{ uri: waitImages[selectedImage].image }}
+        source={{ uri: shuffleImages[selectedImage].image }}
       />
       <LinearGradient
         colors={['#00000000', colors.primary]}
@@ -117,7 +135,7 @@ export default function StartUp() {
               color: colors.white,
             }}
           >
-            {waitImages[selectedImage].quote}
+            {shuffleImages[selectedImage].quote}
           </Text>
           <Text
             center
@@ -126,9 +144,10 @@ export default function StartUp() {
               color: colors.white,
             }}
           >
-            {waitImages[selectedImage].actor}
+            {shuffleImages[selectedImage].actor}
           </Text>
         </View>
+
         <ActivityIndicator color={colors.white} size={'small'} />
       </View>
     </View>

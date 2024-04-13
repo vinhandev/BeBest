@@ -108,6 +108,8 @@ export default function MealPictureModal(props: Props) {
 
         <FlatList
           ref={ref}
+          snapToInterval={Metrics.screenWidth}
+          snapToAlignment='center'
           contentContainerStyle={{
             alignItems: 'center',
           }}

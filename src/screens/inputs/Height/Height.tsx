@@ -5,6 +5,7 @@ import { HomeLinks, Metrics, today, todayTime } from '~/constants';
 import {
   useAddNewTask,
   useAddTask,
+  useGetAllHeightRecords,
   useUpdateUserHeight,
   useUpdateUserWeight,
 } from '~/hooks';
@@ -30,6 +31,7 @@ export default function Height() {
   const setLoading = useSystemStore((state) => state.setLoading);
   const time = getDateStringForImageFile(today);
   const filename = `${uid}_${time}`;
+  const { get } = useGetAllHeightRecords();
 
   const { create } = useUpdateUserHeight();
   const handleSaveWeight = async () => {
@@ -40,6 +42,7 @@ export default function Height() {
         uid,
         value: selectHeight,
       });
+      await get();
       router.push(HomeLinks.HOME);
     } catch (error) {
       showToast((error as Error).message);

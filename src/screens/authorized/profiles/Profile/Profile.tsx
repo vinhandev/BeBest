@@ -7,7 +7,7 @@ import {
   ProfileBasicInformation,
   ProfileSettings,
 } from '~/components/molecules';
-import { HomeLinks, ProfileLinks } from '~/constants';
+import { HomeLinks, ProfileLinks, PublicLinks } from '~/constants';
 import { useSignOut } from '~/hooks';
 
 export default function Profile() {
@@ -41,6 +41,13 @@ export default function Profile() {
             title: 'Meal Albums',
             onPress: () => {
               router.push(HomeLinks.MEAL_LIST);
+            },
+          },
+          {
+            icon: 'app',
+            title: 'Motivation',
+            onPress: () => {
+              router.push(PublicLinks.START_UP);
             },
           },
           {

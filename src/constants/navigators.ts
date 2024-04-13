@@ -30,6 +30,7 @@ export const HomeLinks = {
   WEIGHT_LIST: 'home/weight-list',
   HEIGHT_LIST: 'home/height-list',
   TODAY: 'home/today',
+  CONFETTI: 'home/confetti',
 };
 export const ProfileLinks = {
   PROFILE: 'profile',

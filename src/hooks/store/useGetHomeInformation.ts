@@ -3,6 +3,7 @@ import { useUserStore } from '~/stores';
 import { checkNotSameDate, isToday, log } from '~/utils';
 
 export function useGetHomeInformation() {
+  const waterPerDay = useUserStore((state) => state.profile?.waterPerDay);
   const tasks = useUserStore((state) => state.tasks);
   const meals = useUserStore((state) => state.meals);
   const bodies = useUserStore((state) => state.bodies);
@@ -10,6 +11,7 @@ export function useGetHomeInformation() {
   const water = useUserStore((state) => state.waterRecords);
   const weightRecords = useUserStore((state) => state.weightRecords);
   const heightRecords = useUserStore((state) => state.heightRecords);
+  const todayWater = useUserStore((state) => state.waterToday);
   const updateWeightTime = useUserStore(
     (state) => state.profile?.updateWeightTime ?? 0
   );
@@ -43,12 +45,15 @@ export function useGetHomeInformation() {
   const todayFace = faces?.find((item) => isToday(item.time));
   const todayBody = bodies?.find((item) => isToday(item.time));
   const todayMeals = meals?.filter((item) => isToday(item.time));
-  const totalProgress = 4 + todayTasks.length;
+  const totalProgress = 6 + todayTasks.length;
   const todayWaterRecords =
     water?.find((item) => isToday(item.time))?.value ?? 0;
 
   let done = 0;
   if (!!todayFace) {
+    done += 1;
+  }
+  if (todayWater >= (waterPerDay ?? 0)) {
     done += 1;
   }
   if (!!todayBody) {
@@ -58,6 +63,9 @@ export function useGetHomeInformation() {
     done += 1;
   }
   if (isUpdateWeight) {
+    done += 1;
+  }
+  if (isUpdateHeight) {
     done += 1;
   }
   if (todayTasks.length !== 0) {

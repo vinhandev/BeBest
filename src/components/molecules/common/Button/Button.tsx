@@ -8,7 +8,12 @@ export default function Button({ ...props }: Props) {
     <RNPButton
       labelStyle={{
         fontSize: FontSizes.s,
-        fontWeight: 'bold',
+        textTransform: 'capitalize',
+        fontWeight: '400',
+        paddingVertical: 4,
+      }}
+      style={{
+        borderRadius: 10,
       }}
       {...props}
     />

@@ -39,6 +39,7 @@ export default function Home() {
   const profile = useUserStore((state) => state.profile);
   const faces = useUserStore((state) => state.faces);
   const avatar = faces?.[faces?.length - 1]?.path ?? profile?.avatar;
+  const waterToday = useUserStore((state) => state.waterToday);
   const setOpenBottomSheet = useSystemStore(
     (state) => state.setOpenBottomSheet
   );
@@ -148,6 +149,8 @@ export default function Home() {
           <Spacer size={Metrics.small} />
           <BounceWrapper>
             <HomeMenuAction
+              waterToday={waterToday}
+              waterGoal={profile?.waterPerDay}
               name={profile?.name}
               streak={profile?.streak}
               weight={profile?.weight}

@@ -1,6 +1,14 @@
 import { create } from 'zustand';
 import { BottomSheetType, SelectPropsType } from '~/types';
 
+type ConfettiVariantType =
+  | 'face'
+  | 'body'
+  | 'weight'
+  | 'height'
+  | 'meal'
+  | 'water';
+
 type paramType = {
   loading: boolean;
   openBottomSheet: boolean;
@@ -8,6 +16,7 @@ type paramType = {
   data: SelectPropsType[] | null;
   selectedOption: SelectPropsType | null;
   tempImage: string;
+  confettiVariant: ConfettiVariantType | null;
 };
 type stateProps = paramType & {
   setLoading: (loading: boolean) => void;
@@ -18,6 +27,7 @@ type stateProps = paramType & {
   setData: (data: SelectPropsType[]) => void;
   setOption: (data: SelectPropsType) => void;
   setTempImage: (image: string) => void;
+  setConfettiVariant: (variant: ConfettiVariantType) => void;
   reset: () => void;
 };
 
@@ -28,6 +38,7 @@ const initProps: paramType = {
   data: null,
   selectedOption: null,
   tempImage: '',
+  confettiVariant: null,
 };
 
 export const useSystemStore = create<stateProps>((set, get) => ({
@@ -41,5 +52,6 @@ export const useSystemStore = create<stateProps>((set, get) => ({
   setData: (data) => set(() => ({ data })),
   setOption: (data) => set(() => ({ selectedOption: data })),
   setTempImage: (image) => set(() => ({ tempImage: image })),
+  setConfettiVariant: (variant) => set(() => ({ confettiVariant: variant })),
   reset: () => set(() => initProps),
 }));

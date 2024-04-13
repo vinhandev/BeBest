@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { View } from 'moti';
 
 import { HomeLinks, Metrics, today, todayTime } from '~/constants';
-import { useAddNewTask, useAddTask, useUpdateUserWeight } from '~/hooks';
+import {
+  useAddNewTask,
+  useAddTask,
+  useGetAllWeightRecord,
+  useUpdateUserWeight,
+} from '~/hooks';
 
 import { styles } from './Weight.styles';
 import { Spacer, Text } from '~/components/atoms';
@@ -20,9 +25,11 @@ export default function Weight() {
   const goalWeight = useUserStore((state) => state.profile?.goalWeight);
   const weight = useUserStore((state) => state.profile?.weight);
   const [selectWeight, setSelectWeight] = useState(weight || 0);
+  const { get } = useGetAllWeightRecord();
 
   const uid = useUserStore((state) => state.user?.uid ?? '');
   const setLoading = useSystemStore((state) => state.setLoading);
+  const setConfettiVariant = useSystemStore((state) => state.setConfettiVariant);
   const time = getDateStringForImageFile(today);
   const filename = `${uid}_${time}`;
 
@@ -35,7 +42,9 @@ export default function Weight() {
         uid,
         value: selectWeight,
       });
-      router.push(HomeLinks.HOME);
+      await get();
+      setConfettiVariant('weight');
+      router.push(HomeLinks.CONFETTI);
     } catch (error) {
       showToast((error as Error).message);
     }

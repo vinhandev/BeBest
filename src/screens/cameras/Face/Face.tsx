@@ -24,11 +24,18 @@ import { useSystemStore, useUserStore } from '~/stores';
 import { styles } from './Face.styles';
 import { Button } from '~/components/molecules';
 import { TouchableOpacity } from 'react-native-ui-lib';
+import { EditImageWrapper } from '~/components/HOCs';
+import ImageCropPicker from 'react-native-image-crop-picker';
 
 export default function FaceScreen() {
+  const [url, setUrl] = useState<string | null>(null);
   const { t } = useTranslation('bottomSheet');
   const { colors } = useTheme();
   const uid = useUserStore((state) => state.user?.uid) ?? '';
+  const setConfettiVariant = useSystemStore(
+    (state) => state.setConfettiVariant
+  );
+  const setTempImage = useSystemStore((state) => state.setTempImage);
   const dateString = getDateStringForImageFile(today);
   const filename = `${uid}_${dateString}`;
   const path = `images/faces/${filename}_face.jpeg`;
@@ -59,24 +66,36 @@ export default function FaceScreen() {
     try {
       if (camera.current) {
         const file = await camera.current.takePhoto({});
-        const asset = await rotateAndSaveImage(`file://${file.path}`);
-
-        if (asset) {
-          const savedUrlInFirebase = await uploadImage(asset?.uri, path);
-          if (savedUrlInFirebase) {
-            await create(filename, {
-              path: savedUrlInFirebase,
-              time: new Date().getTime(),
-              uid,
-            });
-            router.push(HomeLinks.FACE_LIST);
-          }
-        }
+        setUrl(file.path);
+        const image = await ImageCropPicker.openCropper({
+          path: 'file://' + file.path,
+          width: 500,
+          height: 500,
+          cropping: true,
+          mediaType: 'photo',
+        });
+        await handleSubmitPhoto(image.path);
       }
     } catch (error) {
       showToast((error as Error).message);
     }
     setLoading(false);
+  };
+
+  const handleSubmitPhoto = async (asset: string) => {
+    if (asset) {
+      const savedUrlInFirebase = await uploadImage(asset, path);
+      if (savedUrlInFirebase) {
+        await create(filename, {
+          path: savedUrlInFirebase,
+          time: new Date().getTime(),
+          uid,
+        });
+        setTempImage(savedUrlInFirebase);
+        setConfettiVariant('face');
+        router.push(HomeLinks.CONFETTI);
+      }
+    }
   };
 
   const handleBack = () => {

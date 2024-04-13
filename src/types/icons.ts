@@ -12,6 +12,8 @@ export type IconType =
   | 'height'
   | 'home'
   | 'left'
+  | 'water'
+  | 'noWater'
   | 'edit'
   | 'today'
   | 'share'
