@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { LegacyRef, useRef } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { styleBackground, styleBorderColor, styleColor } from '~/utils';
@@ -12,24 +12,30 @@ import {
 } from 'react-native-safe-area-context';
 import { FixedSizes, HomeLinks, Metrics, Rounds, today } from '~/constants';
 import MealListRouter from '~/app/(authorized)/home/meal-list';
-import { Header, Logo } from '~/components/molecules';
+import { Background, Header, Logo } from '~/components/molecules';
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import TodayImage from './TodayImage/TodayImage';
 import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
+import { BlurView } from 'expo-blur';
 
 export default function TodayScreen() {
   const { colors } = useTheme();
   const ref = useRef<ViewShot>();
   const { top, bottom } = useSafeAreaInsets();
   const profile = useUserStore((state) => state.profile);
-  const { body, face, meals } = useGetHomeInformation();
+  const { face, body, meals } = useGetHomeInformation();
+  // const meals = [];
+  // const body = undefined;
+  // const face = undefined;
+  const isAddedFace = face !== undefined;
+  const isAddedBody = body !== undefined;
+  const isAddedMeals = meals !== undefined && meals?.length > 0;
   const waterToday = useUserStore((state) => state.waterToday);
   const innerStyle = StyleSheet.create({
     body: {
       flex: 1,
-      // height: Metrics.screenHeight - top - bottom - FixedSizes.bottom_bar * 2,
     },
   });
 
@@ -45,13 +51,12 @@ export default function TodayScreen() {
     }
   };
 
+  const totalMealKcal = meals?.reduce((a, b) => a + b.calories, 0) ?? 0;
+
   return (
-    <SafeAreaView
+    <View
       style={{
         flex: 1,
-        backgroundColor: colors.primary,
-        justifyContent: 'center',
-        alignItems: 'center',
       }}
     >
       <TouchableOpacity
@@ -79,7 +84,12 @@ export default function TodayScreen() {
           }}
         >
           <ViewShot
-            ref={ref}
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            ref={ref as LegacyRef<ViewShot>}
             options={{
               fileName: 'Your-File-Name',
               format: 'jpg',
@@ -88,152 +98,187 @@ export default function TodayScreen() {
           >
             <View
               style={{
-                backgroundColor: colors.primary,
-                width: Metrics.screenWidth,
-                height: undefined,
-                aspectRatio: 9 / 16,
-                padding: Metrics.medium,
-                gap: 10,
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '100%',
+                paddingTop: top,
+                paddingBottom: bottom,
               }}
             >
-              <View>
-                <Text style={styleColor(colors.white)} variant="black_s_light">
-                  {profile?.name}
-                </Text>
-                <Text style={styleColor(colors.white)} variant="black_l_bold">
-                  {today.toDateString()}
-                </Text>
-              </View>
-              <Row
+              <Background />
+              <View
                 style={{
-                  flexGrow: 1,
+                  width: Metrics.screenWidth - 2 * Metrics.medium,
+                  height: undefined,
+                  aspectRatio: isAddedMeals ? 9 / 16 : 4 / 5,
+                  gap: 10,
+                  justifyContent: 'space-between',
                 }}
-                gap={10}
-                alignItems="stretch"
               >
-                <View style={{ flex: 1, gap: 10, flexDirection: 'column' }}>
-                  <View style={{ flex: 1 }}>
-                    <TodayImage
-                      image={face?.path ?? ''}
-                      text="face"
-                      subText=""
-                    />
-                  </View>
-                  <View
-                    style={[
-                      {
-                        borderWidth: 1,
-                        borderRadius: Rounds.small,
-                        padding: Metrics.small,
-                      },
-                      styleBorderColor(colors.white),
-                    ]}
+                <View>
+                  <Text
+                    style={styleColor(colors.white)}
+                    variant="black_s_light"
                   >
-                    <Text>
-                      <Text
-                        style={styleColor(colors.white)}
-                        variant="black_l_bold"
-                      >
-                        {profile?.weight}
-                      </Text>
-                      <Text
-                        style={styleColor(colors.white)}
-                        variant="black_l_light"
-                      >
-                        {' '}
-                        KG
-                      </Text>
-                    </Text>
-
-                    <Text>
-                      <Text
-                        style={styleColor(colors.white)}
-                        variant="black_l_bold"
-                      >
-                        {profile?.height}
-                      </Text>
-                      <Text
-                        style={styleColor(colors.white)}
-                        variant="black_l_light"
-                      >
-                        {' '}
-                        CM
-                      </Text>
-                    </Text>
-                    <Text>
-                      <Text
-                        style={styleColor(colors.white)}
-                        variant="black_l_bold"
-                      >
-                        {waterToday}
-                      </Text>
-                      <Text
-                        style={styleColor(colors.white)}
-                        variant="black_l_light"
-                      >
-                        {' '}
-                        ML
-                      </Text>
-                    </Text>
-                    <Text>
-                      <Text
-                        style={styleColor(colors.white)}
-                        variant="black_l_bold"
-                      >
-                        {meals?.reduce((a, b) => a + b.calories, 0)}
-                      </Text>
-                      <Text
-                        style={styleColor(colors.white)}
-                        variant="black_l_light"
-                      >
-                        {' '}
-                        KCAL
-                      </Text>
-                    </Text>
-                  </View>
-                  <View style={{ flex: 2 }}>
-                    <TodayImage
-                      image={body?.path ?? ''}
-                      text="body"
-                      subText=""
-                    />
-                  </View>
+                    {profile?.name}
+                  </Text>
+                  <Text style={styleColor(colors.white)} variant="black_l_bold">
+                    {today.toDateString()}
+                  </Text>
                 </View>
-                <View style={{ flex: 1, gap: 10 }}>
-                  {meals?.map((item) => (
+                <Row
+                  style={{
+                    flex: 1,
+                    justifyContent: 'space-between',
+                    alignItems: 'stretch',
+                  }}
+                  gap={10}
+                >
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: isAddedMeals
+                        ? 'column'
+                        : isAddedFace
+                        ? 'column'
+                        : 'row',
+                      justifyContent: 'space-between',
+                      gap: 10,
+                    }}
+                  >
                     <View
-                      key={item.mealTime}
                       style={{
-                        flex: 1,
+                        flex: isAddedFace ? 1 : 0,
+
+                        gap: 10,
                       }}
                     >
+                      <View
+                        style={{
+                          display: isAddedFace ? 'flex' : 'none',
+                          flex: 1,
+                        }}
+                      >
+                        <TodayImage
+                          image={face?.path ?? ''}
+                          text="face"
+                          subText=""
+                        />
+                      </View>
+                      <BlurView
+                        intensity={80}
+                        tint="light"
+                        style={{
+                          borderRadius: 20,
+                          padding: Metrics.small,
+
+                          shadowColor: '#000',
+                          shadowOffset: {
+                            width: 0,
+                            height: 2,
+                          },
+                          shadowOpacity: 0.25,
+                          shadowRadius: 3.84,
+
+                          elevation: 5,
+                        }}
+                      >
+                        <Text
+                          style={{
+                            height: 30,
+                          }}
+                        >
+                          <Text variant="black_l_bold">{profile?.weight}</Text>
+                          <Text variant="black_l_light"> KG</Text>
+                        </Text>
+
+                        <Text
+                          style={{
+                            height: 30,
+                          }}
+                        >
+                          <Text variant="black_l_bold">{profile?.height}</Text>
+                          <Text variant="black_l_light"> CM</Text>
+                        </Text>
+                        {waterToday > 0 ? (
+                          <Text
+                            style={{
+                              height: 30,
+                            }}
+                          >
+                            <Text variant="black_l_bold">{waterToday}</Text>
+                            <Text variant="black_l_light"> ML</Text>
+                          </Text>
+                        ) : null}
+                        {totalMealKcal > 0 && (
+                          <Text
+                            style={{
+                              height: 30,
+                            }}
+                          >
+                            <Text variant="black_l_bold">{totalMealKcal}</Text>
+                            <Text variant="black_l_light"> KCAL</Text>
+                          </Text>
+                        )}
+                      </BlurView>
+                    </View>
+                    <View
+                      style={[
+                        {
+                          flex: isAddedFace ? 1 : 2,
+                        },
+                        {
+                          display: isAddedBody ? 'flex' : 'none',
+                        },
+                      ]}
+                    >
                       <TodayImage
-                        image={item.image}
-                        text={item.mealTime}
-                        subText={`${item.calories} kcal`}
+                        image={body?.path ?? ''}
+                        text="body"
+                        subText=""
                       />
                     </View>
-                  ))}
-                </View>
-              </Row>
-              <Row
-                style={{
-                  alignSelf: 'flex-end',
-                  gap: 10,
-                }}
-              >
-                <Logo size={20} />
-                <Text
-                  style={styleColor(colors.secondary)}
-                  variant="black_s_bold"
+                  </View>
+                  <View
+                    style={{
+                      flex: 1,
+                      gap: 10,
+                      display: isAddedMeals ? 'flex' : 'none',
+                    }}
+                  >
+                    {meals?.map((item) => (
+                      <View
+                        key={item.mealTime}
+                        style={{
+                          flex: 1,
+                        }}
+                      >
+                        <TodayImage
+                          image={item.image}
+                          text={item.mealTime}
+                          subText={`${item.calories} kcal`}
+                        />
+                      </View>
+                    ))}
+                  </View>
+                </Row>
+                <Row
+                  style={{
+                    alignSelf: 'flex-end',
+                    gap: 10,
+                  }}
                 >
-                  BeBest
-                </Text>
-              </Row>
+                  <Logo size={20} />
+                  <Text style={styleColor(colors.white)} variant="black_s_bold">
+                    BeBest
+                  </Text>
+                </Row>
+              </View>
             </View>
           </ViewShot>
         </ScrollView>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }

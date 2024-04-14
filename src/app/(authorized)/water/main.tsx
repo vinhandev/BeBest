@@ -21,6 +21,7 @@ import {
   useUpdateUserWater,
 } from '~/hooks';
 import { useSystemStore } from '~/stores';
+import { Background } from '~/components/molecules';
 
 export default function WaterRouter() {
   const { top, bottom } = useSafeAreaInsets();
@@ -69,10 +70,10 @@ export default function WaterRouter() {
   return (
     <View
       style={[
-        styleBackground(colors.primary),
         {
           flex: 1,
           paddingTop: top,
+          backgroundColor: colors.primary,
         },
       ]}
     >
@@ -154,7 +155,7 @@ export default function WaterRouter() {
           bottom: 0,
           left: 0,
           right: 0,
-          zIndex: -2,
+          zIndex: -1,
           justifyContent: 'flex-end',
         }}
       >

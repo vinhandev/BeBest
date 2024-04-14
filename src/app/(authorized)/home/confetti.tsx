@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import React, { useEffect, useRef } from 'react';
 import { Dimensions, View } from 'react-native';
 import { Image, Text } from '~/components/atoms';
-import { Button } from '~/components/molecules';
+import { Background, Button } from '~/components/molecules';
 import { HomeLinks } from '~/constants';
 import { useSystemStore, useUserStore } from '~/stores';
 import LottieView from 'lottie-react-native';
@@ -60,13 +60,13 @@ export default function Confetti() {
   return (
     <SafeAreaView
       style={{
-        backgroundColor: colors.primary,
         flex: 1,
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 40,
       }}
     >
+      <Background />
       <LottieView
         loop={false}
         ref={animation}

@@ -24,7 +24,6 @@ import { useSystemStore, useUserStore } from '~/stores';
 import { styles } from './Face.styles';
 import { Button } from '~/components/molecules';
 import { TouchableOpacity } from 'react-native-ui-lib';
-import { EditImageWrapper } from '~/components/HOCs';
 import ImageCropPicker from 'react-native-image-crop-picker';
 
 export default function FaceScreen() {
@@ -53,8 +52,29 @@ export default function FaceScreen() {
   const { create } = useCreateUserFace();
   const { uploadImage } = useSaveImage();
 
-  const handleViewPictures = () => {
-    router.push(HomeLinks.FACE_LIST);
+  const handleViewPictures = async () => {
+    setLoading(true);
+    try {
+      const file = await ImageCropPicker.openPicker({
+        width: 500,
+        height: 500,
+        cropping: true,
+        mediaType: 'photo',
+      });
+      setUrl(file.path);
+      console.log(file.path);
+      // const image = await ImageCropPicker.openCropper({
+      //   path: 'file://' + file.path,
+      //   width: 500,
+      //   height: 500,
+      //   cropping: true,
+      //   mediaType: 'photo',
+      // });
+      // await handleSubmitPhoto(image.path);
+    } catch (error) {
+      showToast((error as Error).message);
+    }
+    setLoading(false);
   };
 
   const handleFlipCamera = () => {
