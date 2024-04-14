@@ -22,6 +22,7 @@ import * as MediaLibrary from 'expo-media-library';
 import { router } from 'expo-router';
 
 export default function Home() {
+  const { colors } = useTheme();
   const { t } = useTranslation('home');
   const { get } = useGetUserTasks();
   const { body, face, meals, isUpdateWeight, isUpdateHeight } =
@@ -51,6 +52,7 @@ export default function Home() {
         insets.bottom -
         insets.top -
         FixedSizes.bottom_bar,
+      backgroundColor: colors.background,
     },
   });
 

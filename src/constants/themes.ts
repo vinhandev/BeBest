@@ -35,7 +35,8 @@ export const LightTheme: ReactNativePaper.Theme = {
     success: Colors.green,
     backdrop: Colors.grey_2,
     purple: Colors.purple,
-    water:Colors.light_blue
+    water: Colors.light_blue,
+    background: Colors.light_grey,
   },
 };
 export const DarkTheme: ReactNativePaper.Theme = {
@@ -52,6 +53,6 @@ export const DarkTheme: ReactNativePaper.Theme = {
     success: Colors.green,
     backdrop: Colors.grey_2,
     purple: Colors.purple,
-    water:Colors.light_blue
+    water: Colors.light_blue,
   },
 };
