@@ -1,3 +1,2 @@
-import { Weight } from '~/screens';
-
-export default Weight;
+import { AddWeight } from '~/screens';
+export default AddWeight;

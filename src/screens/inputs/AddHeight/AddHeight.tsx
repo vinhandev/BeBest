@@ -10,7 +10,7 @@ import {
   useUpdateUserWeight,
 } from '~/hooks';
 
-import { styles } from './Height.styles';
+import { styles } from './AddHeight.styles';
 import { Spacer, Text } from '~/components/atoms';
 import { useSystemStore, useUserStore } from '~/stores';
 import { TaskPropsType } from '~/types/task';

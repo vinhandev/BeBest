@@ -1,25 +1,23 @@
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Dimensions, View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { MotiView } from 'moti';
 
-import { SignInSchemaType, useSignIn, useSignInForm } from '~/hooks';
+import { useSignIn } from '~/hooks';
 
-import { Button, FormInput, Logo } from '~/components/molecules';
+import { Button, Logo } from '~/components/molecules';
 import PhoneInput from 'react-native-phone-number-input';
-import { styles } from './styles';
+import { styles } from './LoginScreen.styles';
 import { router } from 'expo-router';
 import { PublicLinks } from '~/constants';
-import { log } from '~/utils';
 import OTPTextInput from 'react-native-otp-textinput';
-import TextInput from '~/components/molecules/common/FormInput/TextInput/TextInput';
 import { useTheme } from 'react-native-paper';
 
-export default function SignInScreen() {
+export default function LoginScreen() {
   const { t } = useTranslation('loginScreen');
   const { colors } = useTheme();
   const [country, setCountry] = useState<string>('84');
-  const [phone, setPhone] = useState<string | undefined>();
+  const [phone, setPhone] = useState<string | undefined>('345678910');
   const [code, setCode] = useState<string>('');
   const { isLoading, signIn, verifyCode, isSended } = useSignIn();
   let otpInput = useRef<OTPTextInput>(null);

@@ -1,3 +1,2 @@
-import { MealsScreen } from '~/screens';
-
-export default MealsScreen;
+import { AddMealsScreen } from '~/screens';
+export default AddMealsScreen;

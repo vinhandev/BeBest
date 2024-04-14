@@ -6605,10 +6605,10 @@ modal-react-native-web@0.2.0:
   dependencies:
     warning "^4.0.1"
 
-moti@^0.27.2:
-  version "0.27.2"
-  resolved "https://registry.yarnpkg.com/moti/-/moti-0.27.2.tgz#617217500a45f3eca93a26a8adb4d7a47cf82843"
-  integrity sha512-QYH9Id14Zdjx9L75iMPyvxUN+GvHZ4lk6QhUyA63kWgXyqPT2yMnEIbk7hIeQ0WQDW2eLAXEi2/6FJkS7TEwsw==
+moti@^0.28.1:
+  version "0.28.1"
+  resolved "https://registry.yarnpkg.com/moti/-/moti-0.28.1.tgz#0dc9dc180d3f8b949b72bdb923813a9c7da75b6f"
+  integrity sha512-DRlb/3k5GMgb2HIgPsjsKS7k2TAIcCTSaV4KFb4/J+WqJtPgywTz0O2byPsxNqUHImvDkf04fKXW5PcpXvC9zA==
   dependencies:
     framer-motion "^6.5.1"
 

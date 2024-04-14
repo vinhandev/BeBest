@@ -1,3 +1,2 @@
-import { FaceScreen } from '~/screens';
-
-export default FaceScreen;
+import { AddFaceScreen } from '~/screens';
+export default AddFaceScreen;

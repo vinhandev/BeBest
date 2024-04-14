@@ -28,14 +28,14 @@ import { HomeLinks, Metrics, meals, today } from '~/constants';
 import { useTheme } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useSystemStore, useUserStore } from '~/stores';
-import { styles } from './Meals.styles';
+import { styles } from './AddMeals.styles';
 import { Button, SwipeSelector } from '~/components/molecules';
 import { Picker, TouchableOpacity } from 'react-native-ui-lib';
 import * as MediaLibrary from 'expo-media-library';
 import { MealTimeType } from '~/types/meals';
 import ImageCropPicker from 'react-native-image-crop-picker';
 
-export default function MealsScreen() {
+export default function AddMealsScreen() {
   const { colors } = useTheme();
   const uid = useUserStore((state) => state.user?.uid) ?? '';
   const dateString = getDateStringForImageFile(today);

@@ -1,3 +1,2 @@
-import { BodyScreen } from '~/screens';
-
-export default BodyScreen;
+import { AddBodyScreen } from '~/screens';
+export default AddBodyScreen;
