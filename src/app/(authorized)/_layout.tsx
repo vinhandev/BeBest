@@ -22,7 +22,10 @@ export const LogoutButton = () => {
   );
 };
 
-export default function HomeNavigator() {
+import * as NavigationBar from 'expo-navigation-bar';
+NavigationBar.setBackgroundColorAsync('#ffffff');
+
+export default function HomeTabNavigator() {
   const { colors } = useTheme();
   const user = useUserStore((state) => state.user);
 

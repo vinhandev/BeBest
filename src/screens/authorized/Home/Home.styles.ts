@@ -3,6 +3,7 @@ import { FontSizes, Metrics, Rounds } from '~/constants';
 
 export const styles = StyleSheet.create({
   container: {
-    padding: Metrics.medium,
+    paddingHorizontal: Metrics.medium,
+    paddingTop: 35,
   },
 });

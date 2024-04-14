@@ -15,6 +15,8 @@ import { BottomSheet, Loading } from '~/components/molecules';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { useWatchAuth } from '~/hooks';
 import { useUserStore } from '~/stores';
+import { StatusBar } from 'expo-status-bar';
+
 
 export default function App() {
   const colorScheme = useColorScheme();
@@ -37,9 +39,11 @@ export default function App() {
     }
   }, [initializing, user, profile]);
 
+
   return (
     <Provider theme={colorScheme === 'dark' ? DarkTheme : LightTheme}>
       <BottomSheetModalProvider>
+        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
         <Slot />
         <BottomSheet />
         <Loading />

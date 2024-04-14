@@ -1,8 +1,8 @@
 import { View } from 'moti';
 import React from 'react';
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import { useTheme } from 'react-native-paper';
-import { Icon, Spacer, Text } from '~/components/atoms';
+import { StyleSheet, Touchable, TouchableWithoutFeedback } from 'react-native';
+import { TouchableRipple, useTheme } from 'react-native-paper';
+import { Icon, Row, Spacer, Text } from '~/components/atoms';
 import { IconButtonPropsType } from '~/types';
 import { styles } from './IconButton.styles';
 import { styleBackground } from '~/utils';
@@ -12,6 +12,7 @@ type Props = IconButtonPropsType & {
   disabled?: boolean;
   color?: string;
   textColor?: string;
+  isChecked?: boolean;
 };
 export default function IconButton({
   icon,
@@ -20,6 +21,7 @@ export default function IconButton({
   color,
   textColor,
   disabled = false,
+  isChecked = false,
 }: Props) {
   const { colors } = useTheme();
 
@@ -29,29 +31,37 @@ export default function IconButton({
     },
   });
 
+  const buttonColor = color ? color : colors.quaternary;
+
   return (
     <View style={[styles.container, innerStyles.container]}>
-      <TouchableOpacity
-        disabled={disabled}
-        onPress={onPress}
-        style={[
-          styles.icon,
-          styleBackground(color ? color : colors.quaternary),
-        ]}
-      >
-        <Icon
-          variant={icon}
-          size={20}
-          color={textColor ? textColor : colors.black}
-        />
-      </TouchableOpacity>
+      <View>
+        <TouchableRipple
+          disabled={disabled}
+          onPress={onPress}
+          borderless
+          rippleColor={`${colors.black}20`}
+          style={[styles.icon, styleBackground(buttonColor)]}
+        >
+          <Icon
+            variant={icon}
+            size={20}
+            color={textColor ? textColor : colors.black}
+          />
+        </TouchableRipple>
+      </View>
 
       {title ? (
         <>
           <Spacer size={5} />
-          <Text variant="black_xs_light" center style={styles.title}>
-            {title}
-          </Text>
+          <Row gap={2}>
+            {isChecked ? (
+              <Icon variant="checked" size={10} color={colors.success} />
+            ) : null}
+            <Text variant="black_xs_light" center style={[styles.title]}>
+              {title}
+            </Text>
+          </Row>
         </>
       ) : null}
     </View>

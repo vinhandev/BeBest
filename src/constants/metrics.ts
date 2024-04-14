@@ -6,15 +6,15 @@ export const Metrics = {
   screenHeight: dimensionSizes.height,
   ex_small: 5,
   small: 10,
-  medium: 20,
+  medium: 25,
   large: 30,
   ex_large: 40,
 } as const;
 
 export const Rounds = {
-  small: 6,
+  small: 10,
   normal: 10,
-  large: 50,
+  large: 30,
   circle: 1000,
 } as const;
 

@@ -10,5 +10,9 @@ export const styles = StyleSheet.create({
     right: 0,
     borderBottomLeftRadius: Rounds.large,
     borderBottomRightRadius: Rounds.large,
+    overflow:'hidden'
+  },
+  gradient: {
+    flex: 1,
   },
 });

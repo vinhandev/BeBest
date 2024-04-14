@@ -4,7 +4,8 @@ import { FontSizes, FontWeight, Metrics, Rounds } from '~/constants';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent:'flex-end',
+    justifyContent: 'flex-start',
+    alignItems:'center'
   },
   camera: {
     width: '100%',
@@ -12,6 +13,10 @@ export const styles = StyleSheet.create({
   },
   actions: {
     padding: Metrics.large,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   outlineTakePhotoIcon: {
     borderWidth: 2,
@@ -19,8 +24,8 @@ export const styles = StyleSheet.create({
     borderRadius: Rounds.circle,
   },
   takePhotoIcon: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     borderRadius: Rounds.circle,
   },
   meals: {

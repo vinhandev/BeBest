@@ -148,7 +148,7 @@ export default function Home() {
             }
             time={time}
           />
-          <Spacer size={Metrics.small} />
+          <Spacer size={Metrics.medium} />
           <BounceWrapper>
             <HomeMenuAction
               waterToday={waterToday}
@@ -160,7 +160,7 @@ export default function Home() {
               actions={actions}
             />
           </BounceWrapper>
-          <Spacer size={Metrics.small} />
+          <Spacer size={Metrics.medium} />
           <HomeTasks />
         </View>
       </PullToScrollView>

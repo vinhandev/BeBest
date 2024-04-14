@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'moti';
 
 import { useCreateUserFace, useSaveImage } from '~/hooks';
@@ -17,7 +17,7 @@ import {
   useCameraFormat,
 } from 'react-native-vision-camera';
 import { router } from 'expo-router';
-import { HomeLinks, today } from '~/constants';
+import { HomeLinks, Metrics, today } from '~/constants';
 import { useTheme } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { useSystemStore, useUserStore } from '~/stores';
@@ -25,6 +25,11 @@ import { styles } from './AddFace.styles';
 import { Button } from '~/components/molecules';
 import { TouchableOpacity } from 'react-native-ui-lib';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import { StatusBar } from 'expo-status-bar';
+import * as NavigationBar from 'expo-navigation-bar';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { BlurView } from 'expo-blur';
+import Styles from '~/styles';
 
 export default function AddFaceScreen() {
   const [url, setUrl] = useState<string | null>(null);
@@ -131,58 +136,77 @@ export default function AddFaceScreen() {
       </View>
     );
 
+  useEffect(() => {
+    NavigationBar.setBackgroundColorAsync('#000000');
+  });
+
   return (
-    <View style={[styles.container, styleBackground(colors.black)]}>
-      <Row
-        style={{
-          paddingHorizontal: 20,
-          paddingVertical: 10,
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          zIndex: 100,
-        }}
-      >
-        <TouchableOpacity onPress={handleBack}>
-          <Icon variant="back" size={30} color={colors.white} />
-        </TouchableOpacity>
-      </Row>
+    <SafeAreaView style={[styles.container, styleBackground(colors.black)]}>
+      <StatusBar style="light" />
+
       <View
         style={{
-          flexGrow: 1,
+          width: Metrics.screenWidth - 20 * 2,
+          height: undefined,
+          aspectRatio: 9 / 16,
+          borderRadius: 20,
+          overflow: 'hidden',
+          margin: 20,
         }}
       >
+        <Row
+          style={{
+            paddingHorizontal: 20,
+            paddingVertical: 20,
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            zIndex: 100,
+          }}
+        >
+          <TouchableOpacity onPress={handleBack}>
+            <Icon variant="back" size={30} color={colors.white} />
+          </TouchableOpacity>
+        </Row>
         <Camera
-          style={styles.camera}
+          style={[{ backgroundColor: 'red' }, styles.camera]}
           ref={camera}
           device={device}
           format={format}
           photo
           isActive={!loading}
-          resizeMode="contain"
-          pixelFormat="native"
+          resizeMode="cover"
+          photoHdr
         />
-      </View>
-      <Row style={styles.actions}>
-        <TouchableOpacity onPress={handleFlipCamera}>
-          <Icon variant="camera-flip" size={30} color={colors.white} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleTakePicture}>
-          <View
+        <Row style={styles.actions}>
+          <TouchableOpacity onPress={handleFlipCamera}>
+            <Icon variant="camera-flip" size={30} color={colors.white} />
+          </TouchableOpacity>
+          <TouchableOpacity
             style={[
-              styles.outlineTakePhotoIcon,
-              styleBorderColor(colors.white),
-            ]}
+              {
+                borderRadius: 1000,
+                overflow: 'hidden',
+              }            ]}
+            onPress={handleTakePicture}
           >
-            <View
-              style={[styles.takePhotoIcon, styleBackground(colors.white)]}
-            />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleViewPictures}>
-          <Icon variant="album" size={30} color={colors.white} />
-        </TouchableOpacity>
-      </Row>
-    </View>
+            <BlurView
+              intensity={40}
+              // tint="dark"
+              style={{
+                padding: 5,
+              }}
+            >
+              <View
+                style={[styles.takePhotoIcon, styleBackground(colors.white)]}
+              />
+            </BlurView>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleViewPictures}>
+            <Icon variant="album" size={30} color={colors.white} />
+          </TouchableOpacity>
+        </Row>
+      </View>
+    </SafeAreaView>
   );
 }

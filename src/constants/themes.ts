@@ -35,7 +35,7 @@ export const LightTheme: ReactNativePaper.Theme = {
     success: Colors.green,
     backdrop: Colors.grey_2,
     purple: Colors.purple,
-    water: Colors.light_blue,
+    water: Colors.dark_blue,
     background: Colors.light_grey,
   },
 };
