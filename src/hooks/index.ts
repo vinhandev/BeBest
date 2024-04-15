@@ -35,3 +35,4 @@ export * from './firebase/firestore/useUpdateStreak';
 export * from './store/useGetHomeInformation';
 
 export * from './useInterval';
+export * from './useInitData';

@@ -70,7 +70,7 @@ export default function WaveAnimation({ waterPercent }: Props) {
           <LinearGradient
             start={gradientStart}
             end={gradientEnd}
-            colors={[colors.tertiary, colors.secondary]}
+            colors={[colors.water, colors.purple]}
           />
         </Path>
       </Canvas>

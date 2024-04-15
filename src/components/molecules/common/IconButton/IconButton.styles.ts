@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     height: undefined,
     aspectRatio: 1,
 
+
     justifyContent: 'center',
     alignItems: 'center',
 

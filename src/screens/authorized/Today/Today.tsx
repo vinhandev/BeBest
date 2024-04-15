@@ -19,6 +19,7 @@ import TodayImage from './TodayImage/TodayImage';
 import ViewShot from 'react-native-view-shot';
 import Share from 'react-native-share';
 import { BlurView } from 'expo-blur';
+import Styles from '~/styles';
 
 export default function TodayScreen() {
   const { colors } = useTheme();
@@ -149,7 +150,7 @@ export default function TodayScreen() {
                   >
                     <View
                       style={{
-                        flex: isAddedFace ? 1 : 0,
+                        flex: isAddedFace ? 3 : 0,
 
                         gap: 10,
                       }}
@@ -166,67 +167,72 @@ export default function TodayScreen() {
                           subText=""
                         />
                       </View>
-                      <BlurView
-                        intensity={80}
-                        tint="light"
-                        style={{
-                          borderRadius: 20,
-                          padding: Metrics.small,
-
-                          shadowColor: '#000',
-                          shadowOffset: {
-                            width: 0,
-                            height: 2,
+                      <View
+                        style={[
+                          {
+                            borderRadius: 10,
+                            overflow: 'hidden',
                           },
-                          shadowOpacity: 0.25,
-                          shadowRadius: 3.84,
-
-                          elevation: 5,
-                        }}
+                          Styles.shadow,
+                        ]}
                       >
-                        <Text
+                        <BlurView
+                          intensity={80}
+                          tint="light"
                           style={{
-                            height: 30,
+                            padding: Metrics.small,
                           }}
                         >
-                          <Text variant="black_l_bold">{profile?.weight}</Text>
-                          <Text variant="black_l_light"> KG</Text>
-                        </Text>
+                          <Text
+                            style={{
+                              height: 30,
+                            }}
+                          >
+                            <Text variant="black_l_bold">
+                              {profile?.weight}
+                            </Text>
+                            <Text variant="black_l_light"> KG</Text>
+                          </Text>
 
-                        <Text
-                          style={{
-                            height: 30,
-                          }}
-                        >
-                          <Text variant="black_l_bold">{profile?.height}</Text>
-                          <Text variant="black_l_light"> CM</Text>
-                        </Text>
-                        {waterToday > 0 ? (
                           <Text
                             style={{
                               height: 30,
                             }}
                           >
-                            <Text variant="black_l_bold">{waterToday}</Text>
-                            <Text variant="black_l_light"> ML</Text>
+                            <Text variant="black_l_bold">
+                              {profile?.height}
+                            </Text>
+                            <Text variant="black_l_light"> CM</Text>
                           </Text>
-                        ) : null}
-                        {totalMealKcal > 0 && (
-                          <Text
-                            style={{
-                              height: 30,
-                            }}
-                          >
-                            <Text variant="black_l_bold">{totalMealKcal}</Text>
-                            <Text variant="black_l_light"> KCAL</Text>
-                          </Text>
-                        )}
-                      </BlurView>
+                          {waterToday > 0 ? (
+                            <Text
+                              style={{
+                                height: 30,
+                              }}
+                            >
+                              <Text variant="black_l_bold">{waterToday}</Text>
+                              <Text variant="black_l_light"> ML</Text>
+                            </Text>
+                          ) : null}
+                          {totalMealKcal > 0 && (
+                            <Text
+                              style={{
+                                height: 30,
+                              }}
+                            >
+                              <Text variant="black_l_bold">
+                                {totalMealKcal}
+                              </Text>
+                              <Text variant="black_l_light"> KCAL</Text>
+                            </Text>
+                          )}
+                        </BlurView>
+                      </View>
                     </View>
                     <View
                       style={[
                         {
-                          flex: isAddedFace ? 1 : 2,
+                          flex: isAddedFace ? 2 : 6,
                         },
                         {
                           display: isAddedBody ? 'flex' : 'none',

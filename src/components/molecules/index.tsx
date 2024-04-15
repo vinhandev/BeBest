@@ -18,3 +18,4 @@ export { default as ProfileSettings } from './profile/ProfileSettings';
 export { default as HomeHeader } from './home/HomeHeader/HomeHeader';
 export { default as HomeMenuAction } from './home/HomeMenuAction/HomeMenuAction';
 export { default as HomeTasks } from './home/HomeTasks/HomeTasks';
+export { default as CameraLayout } from './common/CameraLayout/CameraLayout';

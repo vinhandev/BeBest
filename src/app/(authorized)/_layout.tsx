@@ -1,7 +1,7 @@
 import { Redirect } from 'expo-router';
 import { Tabs } from 'expo-router/tabs';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Pressable, Text } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { Icon } from '~/components/atoms';
@@ -23,11 +23,14 @@ export const LogoutButton = () => {
 };
 
 import * as NavigationBar from 'expo-navigation-bar';
-NavigationBar.setBackgroundColorAsync('#ffffff');
 
 export default function HomeTabNavigator() {
   const { colors } = useTheme();
   const user = useUserStore((state) => state.user);
+
+  useEffect(() => {
+    NavigationBar.setBackgroundColorAsync('#ffffff');
+  });
 
   return (
     <Tabs

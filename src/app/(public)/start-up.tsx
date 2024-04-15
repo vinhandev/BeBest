@@ -89,7 +89,7 @@ export default function StartUp() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.primary,
+        backgroundColor: colors.black,
       }}
     >
       <Image
@@ -105,7 +105,7 @@ export default function StartUp() {
         source={{ uri: shuffleImages[selectedImage].image }}
       />
       <LinearGradient
-        colors={['#00000000', colors.primary]}
+        colors={['#00000000', colors.black]}
         style={{
           position: 'absolute',
           left: 0,

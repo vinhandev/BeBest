@@ -47,7 +47,7 @@ export default function Calendar({ selectedDate, onPress }: Props) {
                   styles.day,
                   styleColor(isSelectedDate ? colors.white : colors.black),
                 ]}
-                variant="black_s_bold"
+                variant="black_xs_bold"
               >
                 {day.dayOfWeek}
               </Text>

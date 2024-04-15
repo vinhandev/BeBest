@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { BottomSheetType, SelectPropsType } from '~/types';
 
-type ConfettiVariantType =
+export type ConfettiVariantType =
   | 'face'
   | 'body'
   | 'weight'

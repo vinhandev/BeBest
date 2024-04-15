@@ -53,7 +53,7 @@ export default function HomeMenuAction({
         Styles.shadow,
       ]}
     >
-      <BlurView intensity={80} tint="light" style={[styles.container]}>
+      <BlurView intensity={80} style={[styles.container]}>
         <Text variant="black_l_bold">{name ?? ' '}</Text>
         <Row justifyContent="flex-start">
           <Text variant="black_s_light">{weight ?? 0} kg </Text>

@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
   camera: {
     width: '100%',
     height: '100%',
+    // transform: [{ scaleX: -1 }],
   },
   actions: {
     padding: Metrics.large,
@@ -30,11 +31,12 @@ export const styles = StyleSheet.create({
   },
   meals: {
     position: 'absolute',
-    top: Metrics.ex_large,
+    top: 20,
     right: 0,
     left: 0,
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 2,
   },
   picker: {
     padding: Metrics.small,

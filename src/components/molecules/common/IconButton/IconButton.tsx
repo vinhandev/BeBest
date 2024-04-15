@@ -7,6 +7,7 @@ import { IconButtonPropsType } from '~/types';
 import { styles } from './IconButton.styles';
 import { styleBackground } from '~/utils';
 import { TouchableOpacity } from 'react-native-ui-lib';
+import Styles from '~/styles';
 
 type Props = IconButtonPropsType & {
   disabled?: boolean;
@@ -58,7 +59,7 @@ export default function IconButton({
             {isChecked ? (
               <Icon variant="checked" size={10} color={colors.success} />
             ) : null}
-            <Text variant="black_xs_light" center style={[styles.title]}>
+            <Text variant="black_xs_bold" center style={[styles.title]}>
               {title}
             </Text>
           </Row>

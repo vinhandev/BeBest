@@ -9,11 +9,7 @@ export function Background() {
       colors={[
         colors.water,
         colors.purple,
-        colors.water,
-        colors.success,
       ]}
-      start={{ x: 0, y: 1 }}
-      end={{ x: 1, y: 0 }}
       style={{
         position: 'absolute',
         top: 0,
