@@ -14,9 +14,9 @@ Additional features:
 ## Screenshots
 
 <div style="display: flex; flex-direction: 'row';">
-<img src="./screenshots/1.png" width=20%>
-<img src="./screenshots/2.png" width=20%>
-<img src="./screenshots/3.png" width=20%>
+<img src="./screenshots/1.jpg" width=20%>
+<img src="./screenshots/2.jpg" width=20%>
+<img src="./screenshots/3.jpg" width=20%>
 </div>
 
 ## Demo
