@@ -1,5 +1,7 @@
 # Track and capture your body, face, meal images and anaylyst everyday
 
+<img src="./screenshots/header.png" width=100%>
+
 This is a React Native Tracker, help you track your lose weight process.
 Additional features:
 
