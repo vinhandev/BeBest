@@ -16,6 +16,7 @@ export default function Logo({ size = 50 }: Props) {
     container: {
       height: size,
       width: size,
+      borderRadius: size * 0.1,
     },
   });
 

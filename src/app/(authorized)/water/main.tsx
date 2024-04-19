@@ -21,7 +21,6 @@ import {
   useUpdateUserWater,
 } from '~/hooks';
 import { useSystemStore } from '~/stores';
-import { Background } from '~/components/molecules';
 
 export default function WaterRouter() {
   const { top, bottom } = useSafeAreaInsets();
@@ -73,7 +72,7 @@ export default function WaterRouter() {
         {
           flex: 1,
           paddingTop: top,
-          backgroundColor: colors.primary,
+          backgroundColor: colors.white,
         },
       ]}
     >

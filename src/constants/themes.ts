@@ -25,7 +25,7 @@ export const LightTheme: ReactNativePaper.Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: Colors.dark_blue,
+    primary: Colors.red2,
     secondary: Colors.dark_grey,
     tertiary: Colors.grey,
     quaternary: Colors.light_grey,

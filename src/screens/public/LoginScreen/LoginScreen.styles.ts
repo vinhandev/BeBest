@@ -6,17 +6,15 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: Metrics.medium,
+    gap: 90,
   },
   title: {
     fontSize: 40,
     fontWeight: 'bold',
   },
-  inputGroup: {
-    paddingVertical: Metrics.large,
-  },
+  inputGroup: {},
   buttonGroup: {
     gap: Metrics.small,
   },
-  button: {
-  },
+  button: {},
 });
