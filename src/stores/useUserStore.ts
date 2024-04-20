@@ -21,6 +21,7 @@ type paramType = {
   waterRecords: RecordPropsType[] | null;
   waterPerCup: number;
   waterToday: number;
+  confirmation: any;
 };
 type stateProps = paramType & {
   setUser: (user: FirebaseAuthTypes.User | null) => void;
@@ -36,6 +37,7 @@ type stateProps = paramType & {
   setWaterRecords: (records: RecordPropsType[]) => void;
   setWaterPerCup: (waterPerCup: number) => void;
   setWaterToday: (waterToday: number) => void;
+  setConfirmation: (confirmation: any) => void;
   reset: () => void;
 };
 
@@ -53,6 +55,7 @@ const initProps: paramType = {
   waterRecords: null,
   waterPerCup: 150,
   waterToday: 0,
+  confirmation: undefined,
 };
 
 export const useUserStore = create(
@@ -72,6 +75,7 @@ export const useUserStore = create(
       setWaterPerCup: (waterPerCup) => set(() => ({ waterPerCup })),
       setWaterRecords: (records) => set(() => ({ waterRecords: records })),
       setWaterToday: (waterToday) => set(() => ({ waterToday })),
+      setConfirmation: (confirmation) => set(() => ({ confirmation })),
       reset: () => set(() => initProps),
     }),
     {

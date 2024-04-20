@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { logError } from '~/utils';
 import auth from '@react-native-firebase/auth';
 import { UserCredential } from 'firebase/auth';
+import { useUserStore } from '~/stores';
 
 export const useSignIn = () => {
   const [isLoading, setLoading] = useState(false);
-  const [confirmation, setConfirmation] = useState<any>();
+
+  const confirmation = useUserStore((state) => state.confirmation);
+  const setConfirmation = useUserStore((state) => state.setConfirmation);
 
   async function signIn(phone: string) {
     setLoading(true);

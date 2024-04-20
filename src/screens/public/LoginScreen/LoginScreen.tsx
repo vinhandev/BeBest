@@ -9,7 +9,7 @@ import { Button, Logo } from '~/components/molecules';
 import PhoneInput from 'react-native-phone-number-input';
 import { styles } from './LoginScreen.styles';
 import { router } from 'expo-router';
-import { PublicLinks } from '~/constants';
+import { FontSizes, FontWeight, PublicLinks } from '~/constants';
 import OTPTextInput from 'react-native-otp-textinput';
 import { useTheme } from 'react-native-paper';
 
@@ -85,45 +85,50 @@ export default function LoginScreen() {
       transition={{ type: 'timing', duration: 1000 }}
       style={styles.container}
     >
-      <Logo size={150} />
-      <View style={styles.inputGroup}>
-        <PhoneInput
-          defaultCode={'VN'}
-          value={phone}
-          onChangeCountry={(value) => setCountry(value.callingCode[0])}
-          onChangeText={setPhone}
-          containerStyle={{
-            width: Dimensions.get('window').width - 40,
-            borderRadius: 10,
-            borderColor: colors.disabled,
-            backgroundColor: colors.white,
-            borderWidth: 0.5,
-          }}
-          textContainerStyle={{
-            borderTopRightRadius: 10,
-            borderBottomRightRadius: 10,
-            backgroundColor: colors.white,
-          }}
-          textInputStyle={{
-            fontSize: 15,
-            fontWeight: '400',
-          }}
-          codeTextStyle={{
-            fontSize: 15,
-            fontWeight: '700',
-          }}
-          autoFocus
-        />
-      </View>
-      <View style={styles.buttonGroup}>
-        <Button
-          onPress={handleLoginByPhone}
-          loading={isLoading}
-          mode="contained"
-          style={styles.button}
-        >
-          {t('login_button')}
-        </Button>
+      <Logo size={100} />
+      <View
+        style={{
+          gap: 20,
+        }}
+      >
+        <View style={styles.inputGroup}>
+          <PhoneInput
+            defaultCode={'VN'}
+            value={phone}
+            onChangeCountry={(value) => setCountry(value.callingCode[0])}
+            onChangeText={setPhone}
+            containerStyle={{
+              width: '100%',
+              borderRadius: 10,
+              borderColor: colors.disabled,
+              backgroundColor: colors.white,
+              // borderWidth: 0.5,
+            }}
+            textContainerStyle={{
+              borderTopRightRadius: 10,
+              borderBottomRightRadius: 10,
+              backgroundColor: colors.white,
+            }}
+            textInputStyle={{
+              fontSize: FontSizes.s,
+              fontWeight: FontWeight.regular,
+            }}
+            codeTextStyle={{
+              fontSize: FontSizes.s,
+              fontWeight: FontWeight.regular,
+            }}
+            autoFocus
+          />
+        </View>
+        <View style={styles.buttonGroup}>
+          <Button
+            mode="contained"
+            onPress={handleLoginByPhone}
+            loading={isLoading}
+          >
+            {t('login_button')}
+          </Button>
+        </View>
       </View>
     </MotiView>
   );

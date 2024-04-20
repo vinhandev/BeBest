@@ -176,6 +176,7 @@ export default function Confetti() {
         style={{
           gap: 10,
           width: Dimensions.get('window').width - 40,
+          zIndex: 3,
         }}
       >
         <Button

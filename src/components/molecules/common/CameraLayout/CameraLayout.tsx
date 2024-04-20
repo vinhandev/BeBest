@@ -23,7 +23,7 @@ import { useTheme } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 import { ConfettiVariantType, useSystemStore, useUserStore } from '~/stores';
 import { styles } from './CameraLayout.styles';
-import { Button, SwipeSelector } from '~/components/molecules';
+import { Background, Button, SwipeSelector } from '~/components/molecules';
 import { Picker, TouchableOpacity } from 'react-native-ui-lib';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { StatusBar } from 'expo-status-bar';
@@ -63,10 +63,12 @@ export default function CameraLayout(props: Props) {
   );
   const setTempImage = useSystemStore((state) => state.setTempImage);
   const dateString = getDateStringForImageFile(today);
-  const filename = `${uid}_${dateString}`;
-  const path = `images/${imageType}${
-    imageType === 'meals' ? props.mealTime : ''
-  }/${filename}_${imageType}.jpeg`;
+  const filename = `${uid}_${dateString}_${
+    imageType === 'meals' ? props.mealTime.toLowerCase() : ''
+  }`;
+  const path = `images/${imageType}/${
+    imageType === 'meals' ? `${props.mealTime}_` : ''
+  }${filename}_${imageType}.jpeg`;
 
   const setLoading = useSystemStore((state) => state.setLoading);
   const loading = useSystemStore((state) => state.loading);
@@ -130,7 +132,6 @@ export default function CameraLayout(props: Props) {
   };
 
   const handleViewPictures = async () => {
-    setLoading(true);
     try {
       const file = await ImageCropPicker.openPicker({
         width,
@@ -139,19 +140,13 @@ export default function CameraLayout(props: Props) {
         mediaType: 'photo',
       });
       setUrl(file.path);
-      console.log(file.path);
-      // const image = await ImageCropPicker.openCropper({
-      //   path: 'file://' + file.path,
-      //   width: 500,
-      //   height: 500,
-      //   cropping: true,
-      //   mediaType: 'photo',
-      // });
-      // await handleSubmitPhoto(image.path);
+      console.log('path', file.path);
+      if (file.path) {
+        await handleSubmitPhoto(file.path);
+      }
     } catch (error) {
       showToast((error as Error).message);
     }
-    setLoading(false);
   };
 
   const handleFlipCamera = () => {
@@ -159,7 +154,6 @@ export default function CameraLayout(props: Props) {
   };
 
   const handleTakePicture = async () => {
-    setLoading(true);
     try {
       if (camera.current) {
         const file = await camera.current.takePhoto({});
@@ -176,38 +170,31 @@ export default function CameraLayout(props: Props) {
     } catch (error) {
       showToast((error as Error).message);
     }
-    setLoading(false);
   };
 
   const handleSubmitPhoto = async (asset: string) => {
-    if (asset) {
-      const savedUrlInFirebase = await uploadImage(asset, path);
-      if (savedUrlInFirebase) {
-        await handleCreateImage(savedUrlInFirebase);
-        setTempImage(savedUrlInFirebase);
-        setConfettiVariant(confettiVariant);
-        router.push(HomeLinks.CONFETTI);
-        await init();
+    setLoading(true);
+    try {
+      console.log('path', path);
+      if (asset) {
+        const savedUrlInFirebase = await uploadImage(asset, path);
+        if (savedUrlInFirebase) {
+          await handleCreateImage(savedUrlInFirebase);
+          setTempImage(savedUrlInFirebase);
+          setConfettiVariant(confettiVariant);
+          router.push(HomeLinks.CONFETTI);
+          await init();
+        }
       }
+    } catch (error) {
+      showToast((error as Error).message);
     }
+    setLoading(false)
   };
 
   const handleBack = () => {
-    if (router.canGoBack()) {
-      router.back();
-    }
+    router.replace(HomeLinks.HOME);
   };
-
-  if (!device)
-    return (
-      <View>
-        <Text>No Device</Text>
-      </View>
-    );
-
-  useEffect(() => {
-    NavigationBar.setBackgroundColorAsync('#000000');
-  });
 
   return (
     <SafeAreaView style={[styles.container, styleBackground(colors.black)]}>
@@ -270,16 +257,44 @@ export default function CameraLayout(props: Props) {
             />
           </View>
         ) : null}
-        <Camera
-          style={styles.camera}
-          ref={camera}
-          device={device}
-          format={format}
-          photo
-          isActive={!loading}
-          resizeMode="cover"
-          photoHdr
-        />
+        {device ? (
+          <Camera
+            style={styles.camera}
+            ref={camera}
+            device={device}
+            format={format}
+            photo
+            isActive={!loading}
+            resizeMode="cover"
+            photoHdr
+          />
+        ) : (
+          <View
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+          >
+            <Background />
+            <Text
+              style={{
+                color: colors.white,
+                fontSize: 16,
+                fontWeight: '500',
+                textAlign: 'center',
+              }}
+            >
+              No Device
+            </Text>
+            <Text
+              style={{
+                color: colors.white,
+                fontSize: 16,
+                fontWeight: '300',
+                textAlign: 'center',
+              }}
+            >
+              Please select image from your album.
+            </Text>
+          </View>
+        )}
 
         <Row style={styles.actions}>
           <TouchableOpacity

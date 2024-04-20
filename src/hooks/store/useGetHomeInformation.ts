@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { today } from '~/constants';
 import { useUserStore } from '~/stores';
 import { checkNotSameDate, isToday, log } from '~/utils';
@@ -12,6 +13,7 @@ export function useGetHomeInformation() {
   const weightRecords = useUserStore((state) => state.weightRecords);
   const heightRecords = useUserStore((state) => state.heightRecords);
   const todayWater = useUserStore((state) => state.waterToday);
+  const setWaterToday = useUserStore((state) => state.setWaterToday);
   const updateWeightTime = useUserStore(
     (state) => state.profile?.updateWeightTime ?? 0
   );
@@ -48,7 +50,11 @@ export function useGetHomeInformation() {
   const totalProgress = 6 + todayTasks.length;
   const todayWaterRecords =
     water?.find((item) => isToday(item.time))?.value ?? 0;
-
+  useEffect(() => {
+    if(!todayWaterRecords){
+      setWaterToday(0)
+    }
+  },[])
   let done = 0;
   if (!!todayFace) {
     done += 1;

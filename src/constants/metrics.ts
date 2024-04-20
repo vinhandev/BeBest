@@ -33,7 +33,7 @@ export const FixedSizes = {
   circle_progress_bar: 50,
   radio: 20,
   bottom_bar: 67,
-  header: 80,
+  header: 100,
   day: 80,
 };
 

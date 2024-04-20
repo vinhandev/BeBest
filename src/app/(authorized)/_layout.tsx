@@ -28,16 +28,12 @@ export default function HomeTabNavigator() {
   const { colors } = useTheme();
   const user = useUserStore((state) => state.user);
 
-  useEffect(() => {
-    NavigationBar.setBackgroundColorAsync('#ffffff');
-  });
-
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.quaternary,
+        tabBarInactiveTintColor: colors.disabled,
       }}
     >
       <Tabs.Screen

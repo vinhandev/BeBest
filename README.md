@@ -16,19 +16,26 @@ Additional features:
 ## Screenshots
 
 <div style="display: flex; flex-direction: 'row';">
-<img src="./screenshots/1.jpg" width=20%>
-<img src="./screenshots/2.jpg" width=20%>
-<img src="./screenshots/3.jpg" width=20%>
+<img src="./screenshots/1.jpg" width=19%>
+<img src="./screenshots/2.jpg" width=19%>
+<img src="./screenshots/3.jpg" width=19%>
+<img src="./screenshots/4.jpg" width=19%>
+<img src="./screenshots/5.jpg" width=19%>
+<img src="./screenshots/6.jpg" width=19%>
+<img src="./screenshots/7.jpg" width=19%>
+<img src="./screenshots/8.jpg" width=19%>
+<img src="./screenshots/9.jpg" width=19%>
+<img src="./screenshots/10.jpg" width=19%>
 </div>
 
 ## Demo
 
 <div style="display: flex; flex-direction: 'row';">
-<img src="./screenshots/login.gif" width=30%>
-<img src="./screenshots/state.gif" width=30%>
-<img src="./screenshots/lockscreen.gif" width=30%>
-<img src="./screenshots/charts.gif" width=30%>
-<img src="./screenshots/icon.gif" width=30%>
+<img src="./screenshots/login.gif" width=32%>
+<img src="./screenshots/camera.gif" width=32%>
+<img src="./screenshots/water.gif" width=32%>
+<img src="./screenshots/tasks.gif" width=32%>
+<img src="./screenshots/analyst.gif" width=32%>
 
 
 </div>
