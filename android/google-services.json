@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "822744568403",
+    "project_id": "flashcard-49c5b",
+    "storage_bucket": "flashcard-49c5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822744568403:android:5a92e4d7ff0c137a68aca6",
+        "android_client_info": {
+          "package_name": "com.vinhan.dev.flashcardapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeBpQ5uqX8F2sTxbca9QP133eR36hH0aw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
